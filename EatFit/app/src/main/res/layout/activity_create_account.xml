@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccount">
+
+    <EditText
+        android:id="@+id/editTextFechaNacimiento"
+        android:layout_width="207dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.323"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <TextView
+        android:id="@+id/textViewFechaNacimiento"
+        android:layout_width="234dp"
+        android:layout_height="34dp"
+        android:text="Fecha de Nacimiento"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
+
+    <TextView
+        android:id="@+id/textViewPeso"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:text="Peso"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <TextView
+        android:id="@+id/textViewAltura"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:text="Altura"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <EditText
+        android:id="@+id/editTextPeso"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.664" />
+
+    <EditText
+        android:id="@+id/editTextAltura"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.574"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.664" />
+
+    <TextView
+        android:id="@+id/textViewDNI"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:text="DNI"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <EditText
+        android:id="@+id/editTextDNI"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCreateAccount"
+        android:layout_width="300dp"
+        android:layout_height="122dp"
+        android:text="Create Account"
+        android:textAllCaps="true"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <TextView
+        android:id="@+id/textViewUserCreate"
+        android:layout_width="137dp"
+        android:layout_height="43dp"
+        android:text="Usuario"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.303" />
+
+    <EditText
+        android:id="@+id/editTextUserCreate"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <TextView
+        android:id="@+id/textViewContrasenaCreate"
+        android:layout_width="137dp"
+        android:layout_height="43dp"
+        android:text="Contraseña"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.304" />
+
+    <EditText
+        android:id="@+id/editTextPwdCreate"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="97dp"
+        android:layout_height="51dp"
+        android:text="Email"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000000"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:scrollbarSize="4dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCrearCuenta"
+        android:layout_width="239dp"
+        android:layout_height="73dp"
+        android:text="Crear Cuenta"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="754dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
