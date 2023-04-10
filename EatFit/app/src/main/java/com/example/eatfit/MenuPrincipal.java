@@ -80,7 +80,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         TextView texto=(TextView) findViewById(R.id.textViewRutina);
 
-        texto.setText(textoACambiar[0]);
+        texto.setText(textoACambiar[0]+"a");
 
         ImageButton botonSalir=(ImageButton) findViewById(R.id.buttonSalir);
 
