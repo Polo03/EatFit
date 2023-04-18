@@ -2,94 +2,74 @@ package com.example.eatfit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Blob;
+
 public class MenuPrincipal extends AppCompatActivity {
+
+    private SharedPreferences preferences;
+    private EatFit eatFit;
+
+    private Logica logica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        Login l=new Login();
+        init();
 
-        EatFit eatFit=new EatFit(this);
+        //Por si el usuario ha decidido no cerrar sesión, recogemos el nick con
+        //las shared preferences.
+        String nick=preferences.getString("nick", null);
 
-        SQLiteDatabase db = eatFit.getReadableDatabase();
+        Login login=new Login();
 
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                Usuarios.Table.COLUMN_NAME_Nick,
-                Usuarios.Table.COLUMN_NAME_NumRutina
-        };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ?";
-        String[] selectionArgs = { l.dameNickLogeado() };
-
-
-        Cursor cursor = db.query(
-                Usuarios.Table.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
-        );
-
-        int[] numRutina={0};
-        if(cursor.moveToNext()) {
-            numRutina[0]=cursor.getInt(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_NumRutina));
+        TextView texto = (TextView) findViewById(R.id.textViewRutina);
+        if(nick!=null){
+            texto.setText(nick + "-->" + logica.getRutina(nick));
+        }else{
+            texto.setText(login.ultimoUsuarioLogeado() + "-->" + logica.getRutina(login.ultimoUsuarioLogeado()));
         }
 
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection2 = {
-                Rutinas.Table.COLUMN_NAME_DescripcionRutina
-        };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection2 = Rutinas.Table.COLUMN_NAME_NumRutina + " = ?";
-        String[] selectionArgs2 = { numRutina[0]+"" };
-
-
-        Cursor cursor2 = db.query(
-                Rutinas.Table.TABLE_NAME,   // The table to query
-                projection2,             // The array of columns to return (pass null to get all)
-                selection2,              // The columns for the WHERE clause
-                selectionArgs2,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
-        );
-
-        String[] textoACambiar={""};
-
-        if(cursor2.moveToNext()) {
-            textoACambiar[0]=cursor2.getString(cursor2.getColumnIndexOrThrow(Rutinas.Table.COLUMN_NAME_DescripcionRutina));
-        }
-
-        TextView texto=(TextView) findViewById(R.id.textViewRutina);
-
-        texto.setText(textoACambiar[0]);
-
-        ImageButton botonSalir=(ImageButton) findViewById(R.id.buttonSalir);
-
+        //Botón para cuando cerramos sesión
+        ImageButton botonSalir = (ImageButton) findViewById(R.id.buttonSalir);
         botonSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cerrarSesion();
+
                 Intent intent = new Intent(MenuPrincipal.this, Login.class);
                 startActivity(intent);
             }
         });
+
+        ImageView imagenRutina = (ImageView) findViewById(R.id.imageViewRutina);
     }
+
+    //Método para iniciar todas las variables
+    private void init(){
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        eatFit = new EatFit(this);
+        logica = new Logica(eatFit, preferences);
+    }
+
+    //Método para cerrar sesión, es decir, para limpiar las shared preferences.
+    private void cerrarSesion() {
+        preferences.edit().clear().apply();
+    }
+
 }
+

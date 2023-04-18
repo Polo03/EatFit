@@ -12,17 +12,17 @@ public class EatFit extends SQLiteOpenHelper {
                     Usuarios.Table.COLUMN_NAME_NumUsuario + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     Usuarios.Table.COLUMN_NAME_Nick + " TEXT," +
                     Usuarios.Table.COLUMN_NAME_Password + " TEXT," +
-                    Usuarios.Table.COLUMN_NAME_FechaNacimiento + " TEXT," +
+                    Usuarios.Table.COLUMN_NAME_FechaNacimiento + " DATE," +
                     Usuarios.Table.COLUMN_NAME_DNI+" TEXT,"+
                     Usuarios.Table.COLUMN_NAME_Email + " TEXT," +
                     Usuarios.Table.COLUMN_NAME_Peso+" DOUBLE,"+
                     Usuarios.Table.COLUMN_NAME_Altura+" DOUBLE,"+
                     Usuarios.Table.COLUMN_NAME_seHaLogeado + " INTEGER,"+
+                    Usuarios.Table.COLUMN_NAME_NumTelefono + " TEXT,"+
                     Usuarios.Table.COLUMN_NAME_NumRutina + " INTEGER,"+
                     "FOREIGN KEY ("+Usuarios.Table.COLUMN_NAME_NumRutina+") " +
                         "REFERENCES "+Rutinas.Table.TABLE_NAME+"("+Rutinas.Table.COLUMN_NAME_NumRutina+"))";
 
-            //FOREIGN KEY(clave_foranea) REFERENCES otra_tabla(campo_de_esa_tabla)
     private static final String SQL_CREATE_ENTRIES_Alimentos =
             "CREATE TABLE " + Alimentos.Table.TABLE_NAME + " (" +
                     Alimentos.Table.COLUMN_NAME_NumAlimento + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -33,7 +33,8 @@ public class EatFit extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES_Rutinas =
             "CREATE TABLE IF NOT EXISTS " + Rutinas.Table.TABLE_NAME + " (" +
                     Rutinas.Table.COLUMN_NAME_NumRutina + " INTEGER PRIMARY KEY," +
-                    Rutinas.Table.COLUMN_NAME_DescripcionRutina + " TEXT)";
+                    Rutinas.Table.COLUMN_NAME_DescripcionRutina + " TEXT,"+
+                    Rutinas.Table.COLUMN_NAME_ImagenRutina + " BLOB)";
 
 
     private static final String SQL_DELETE_ENTRIES_Usuarios =

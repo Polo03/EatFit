@@ -2,9 +2,8 @@ package com.example.eatfit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,21 +14,31 @@ import android.widget.Spinner;
 
 public class Cuestionario extends AppCompatActivity {
 
-    static EatFit eatFit;
+    static Logica logica;
+
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuestionario);
 
+        //Creamos arrays de longitud 1 para guardarnos lo seleccionado en las opciones.
         String[] respuesta1 = new String[1];
         String[] respuesta2 = new String[1];
         String[] respuesta3 = new String[1];
         String[] respuesta4 = new String[1];
         String[] respuesta5 = new String[1];
         Double[] respuesta6 = new Double[1];
-        eatFit =new EatFit(this);
-        Button botonSiguiente=(Button) findViewById(R.id.buttonSiguiente);
+
+        EatFit eatFit=new EatFit(this);
+
+        //Recogemos los preferences si ha decidido no cerrar sesión
+        preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
+
+        logica=new Logica(eatFit);
+
+
         //Primer Spinner
         Spinner primerDesplegable=findViewById(R.id.spinnerPrimeraPregunta);
 
@@ -130,22 +139,19 @@ public class Cuestionario extends AppCompatActivity {
             }
         });
 
-        EditText pesoAConseguir=(EditText) findViewById(R.id.editTextPesoAConseguir);
-        String pesoAConseguirString=pesoAConseguir.getText().toString();
-        if(!pesoAConseguirString.equals("")) {
-            double pesoAConseguirDouble = Double.parseDouble(pesoAConseguirString);
-            respuesta6[0] = pesoAConseguirDouble;
-                    /*Context context = getApplicationContext();
-                    CharSequence text = "Hola";
-                    int duration = Toast.LENGTH_LONG;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();*/
-        }
+        Button botonSiguiente=(Button) findViewById(R.id.buttonSiguiente);
 
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                EditText pesoAConseguir=(EditText) findViewById(R.id.editTextPesoAConseguir);
+                String pesoAConseguirString=pesoAConseguir.getText().toString();
+                if(!pesoAConseguirString.equals("")) {
+                    double pesoAConseguirDouble = Double.parseDouble(pesoAConseguirString);
+                    respuesta6[0] = pesoAConseguirDouble;
+                }
 
                 actualizarBD(respuesta1[0],respuesta2[0],respuesta3[0],respuesta4[0],respuesta5[0],respuesta6[0]);
 
@@ -155,104 +161,29 @@ public class Cuestionario extends AppCompatActivity {
         });
     }
 
-    public void actualizarBD(String respuesta1, String respuesta2, String respuesta3, String respuesta4, String respuesta5, double respuesta6) {
-        if (respuesta6<10) {
-            introduceRutina1();
-        } else {
-            introduceRutina2();
+    //Método para actualizar la base de datos según las opciones seleccionadas
+    private void actualizarBD(String respuesta1, String respuesta2, String respuesta3, String respuesta4, String respuesta5, double respuesta6) {
+        if(noCierraSesion()) {
+            if (respuesta6 < 10) {
+                logica.actualizaARutina1(preferences.getString("nick", null));
+            } else {
+                logica.actualizaARutina2(preferences.getString("nick", null));
+            }
+        }else{
+            Login login=new Login();
+            if (respuesta6 < 10) {
+                logica.actualizaARutina1(login.ultimoUsuarioLogeado());
+            } else {
+                logica.actualizaARutina2(login.ultimoUsuarioLogeado());
+            }
         }
     }
 
-    public static void introduceRutina1(){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 1);
-        Login l = new Login();
-
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {l.dameNickLogeado()};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
+    private boolean noCierraSesion(){
+        if(preferences.getString("nick",null)!=null){
+            return true;
+        }
+        return false;
     }
-    public static void introduceRutina2(){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 2);
-        Login l = new Login();
-
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {l.dameNickLogeado()};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-
-    }
-
-    public static void introduceRutina3(){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 3);
-        Login l = new Login();
-
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {l.dameNickLogeado()};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-    }
-
-    public static void introduceRutina4(){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 4);
-        Login l = new Login();
-
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {l.dameNickLogeado()};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-    }
-
-    public static void introduceRutina5(){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 5);
-        Login l = new Login();
-
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {l.dameNickLogeado()};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-    }
-
 
 }

@@ -11,6 +11,8 @@ public class Rutinas {
         public static final String COLUMN_NAME_NumRutina= "numRutina";
         public static final String COLUMN_NAME_DescripcionRutina = "descripcionRutina";
 
+        public static final String COLUMN_NAME_ImagenRutina = "imagenRutina";
+
     }
 
 }

@@ -20,6 +20,8 @@ public class Usuarios {
 
         public static final String COLUMN_NAME_seHaLogeado = "logeado";
 
+        public static final String COLUMN_NAME_NumTelefono = "numTelefono";
+
         public static final String COLUMN_NAME_NumRutina = "numRutina";
     }
 
