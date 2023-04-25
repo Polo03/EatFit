@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -38,7 +39,7 @@ public class Login extends AppCompatActivity {
         nick=(EditText) findViewById(R.id.editTextUsuario);
         EditText pwd=(EditText) findViewById(R.id.editTextPwd);
         RadioButton radioButtonSesion=(RadioButton)findViewById(R.id.radioButtonSesion);
-        Button buttonOlvidarPassword=(Button) findViewById(R.id.buttonOlvidarPwd);
+        TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewOlvidarPwd);
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         eatFit =new EatFit(this);
 
@@ -120,7 +121,7 @@ public class Login extends AppCompatActivity {
         }
 
         //Si ha olvidado la contraseña
-       buttonOlvidarPassword.setOnClickListener(new View.OnClickListener() {
+       /*buttonOlvidarPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -130,7 +131,7 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this,"MSJ Enviado",Toast.LENGTH_LONG).show();
 
             }
-        });
+        });*/
 
     }
 

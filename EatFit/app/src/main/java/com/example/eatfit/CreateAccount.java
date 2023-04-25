@@ -131,6 +131,8 @@ public class CreateAccount extends AppCompatActivity {
                         editTextFechaNacimiento.setText(day+"/"+(month+1)+"/"+year);
             }
         },2003,0,1);
+
+        d.setMessage("Seleccione su fecha de nacimiento");
         d.show();
     }
 
