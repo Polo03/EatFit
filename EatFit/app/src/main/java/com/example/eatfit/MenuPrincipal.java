@@ -2,6 +2,7 @@ package com.example.eatfit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private Logica logica;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
@@ -134,6 +135,9 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
 
-
+    public void abrirPopUpDatosPersonales(View v){
+        Intent intent = new Intent(MenuPrincipal.this, PopUpDatosPersonales.class);
+        startActivity(intent);
+    }
 
 }

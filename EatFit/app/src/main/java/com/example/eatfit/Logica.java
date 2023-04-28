@@ -59,20 +59,163 @@ public class Logica {
         return false;
     }
 
-    public boolean existeUsuarioPorNickYPassword(String usuario, String pwd){
+    public boolean existeUsuarioPorEmail(String email){
 
         SQLiteDatabase db = eatFit.getReadableDatabase();
 
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
-                Usuarios.Table.COLUMN_NAME_Nick,
-                Usuarios.Table.COLUMN_NAME_Password
+                Usuarios.Table.COLUMN_NAME_Nick
         };
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
-        String[] selectionArgs = { usuario , pwd };
+        String selection = Usuarios.Table.COLUMN_NAME_Email + " = ?";
+        String[] selectionArgs = { email };
+
+
+        Cursor cursor = db.query(
+                Usuarios.Table.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+        if(cursor.moveToNext()) {
+            return true;
+        }
+        cursor.close();
+        return false;
+    }
+
+    public boolean existeEmail(String email){
+        SQLiteDatabase db = eatFit.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                Usuarios.Table.COLUMN_NAME_Email
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = Usuarios.Table.COLUMN_NAME_Email + " = ?";
+        String[] selectionArgs = { email };
+
+
+        Cursor cursor = db.query(
+                Usuarios.Table.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+        if(cursor.moveToNext()) {
+            return true;
+        }
+        cursor.close();
+        return false;
+    }
+
+    public boolean existeDNI(String dni){
+        SQLiteDatabase db = eatFit.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                Usuarios.Table.COLUMN_NAME_DNI
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = Usuarios.Table.COLUMN_NAME_DNI + " = ?";
+        String[] selectionArgs = { dni };
+
+
+        Cursor cursor = db.query(
+                Usuarios.Table.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+        if(cursor.moveToNext()) {
+            return true;
+        }
+        cursor.close();
+        return false;
+    }
+
+    public boolean existeUsuarioPorNickYPassword(String nick, String pwd){
+
+        SQLiteDatabase db = eatFit.getReadableDatabase();
+
+        if(!nick.contains("@gmail.com")){
+            String[] projection = {
+                    Usuarios.Table.COLUMN_NAME_Nick,
+                    Usuarios.Table.COLUMN_NAME_Password
+            };
+
+            String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
+            String[] selectionArgs = { nick , pwd };
+
+
+            Cursor cursor = db.query(
+                    Usuarios.Table.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null                    // The sort order
+            );
+
+            if(cursor.moveToNext()) {
+                return true;
+            }
+        }else{
+            String[] projection = {
+                    Usuarios.Table.COLUMN_NAME_Email,
+                    Usuarios.Table.COLUMN_NAME_Password
+            };
+
+            String selection = Usuarios.Table.COLUMN_NAME_Email + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
+            String[] selectionArgs = { nick , pwd };
+
+
+            Cursor cursor = db.query(
+                    Usuarios.Table.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null                    // The sort order
+            );
+
+            if(cursor.moveToNext()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getNickByCorreo(String email){
+        SQLiteDatabase db = eatFit.getReadableDatabase();
+
+        String[] projection = {
+                Usuarios.Table.COLUMN_NAME_Nick
+        };
+
+        String selection = Usuarios.Table.COLUMN_NAME_Email + " = ?";
+        String[] selectionArgs = { email };
 
 
         Cursor cursor = db.query(
@@ -86,46 +229,106 @@ public class Logica {
         );
 
         if(cursor.moveToNext()) {
-            return true;
+            return cursor.getString(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_Nick));
         }
-        return false;
+        return null;
+
+    }
+
+    public String getPhoneByNick(String nick){
+        SQLiteDatabase db = eatFit.getReadableDatabase();
+
+        String[] projection = {
+                Usuarios.Table.COLUMN_NAME_NumTelefono
+        };
+
+        String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ?";
+        String[] selectionArgs = { nick };
+
+
+        Cursor cursor = db.query(
+                Usuarios.Table.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null                    // The sort order
+        );
+
+        if(cursor.moveToNext()) {
+            return cursor.getString(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_NumTelefono));
+        }
+        return null;
+
     }
 
     public boolean primeraVezLogeado(String usuario, String pwd){
         SQLiteDatabase db = eatFit.getReadableDatabase();
 
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                Usuarios.Table.COLUMN_NAME_Nick,
-                Usuarios.Table.COLUMN_NAME_Password,
-                Usuarios.Table.COLUMN_NAME_Email,
-                Usuarios.Table.COLUMN_NAME_seHaLogeado
-        };
-
-        // Filter results WHERE "title" = 'My Title'
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
-        String[] selectionArgs = { usuario , pwd };
+        if(!usuario.contains("@gmail.com")){
+            String[] projection = {
+                    Usuarios.Table.COLUMN_NAME_Nick,
+                    Usuarios.Table.COLUMN_NAME_Password,
+                    Usuarios.Table.COLUMN_NAME_Email,
+                    Usuarios.Table.COLUMN_NAME_seHaLogeado
+            };
 
 
-        Cursor cursor = db.query(
-                Usuarios.Table.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                selection,              // The columns for the WHERE clause
-                selectionArgs,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null                    // The sort order
-        );
+            String selection = Usuarios.Table.COLUMN_NAME_Nick + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
+            String[] selectionArgs = { usuario , pwd };
 
-        boolean existe=false;
-        int[] seHaLogeado={0};
-        if(cursor.moveToNext()) {
-            seHaLogeado[0]=cursor.getInt(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_seHaLogeado));
+
+            Cursor cursor = db.query(
+                    Usuarios.Table.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null                    // The sort order
+            );
+
+            boolean existe=false;
+            int[] seHaLogeado={0};
+            if(cursor.moveToNext()) {
+                seHaLogeado[0]=cursor.getInt(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_seHaLogeado));
+            }
+
+            if(seHaLogeado[0]==0)
+                return true;
+        }else{
+            String[] projection = {
+                    Usuarios.Table.COLUMN_NAME_Nick,
+                    Usuarios.Table.COLUMN_NAME_Password,
+                    Usuarios.Table.COLUMN_NAME_Email,
+                    Usuarios.Table.COLUMN_NAME_seHaLogeado
+            };
+
+
+            String selection = Usuarios.Table.COLUMN_NAME_Email + " = ? AND "+ Usuarios.Table.COLUMN_NAME_Password + " = ? ";
+            String[] selectionArgs = { usuario , pwd };
+
+
+            Cursor cursor = db.query(
+                    Usuarios.Table.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null                    // The sort order
+            );
+
+            boolean existe=false;
+            int[] seHaLogeado={0};
+            if(cursor.moveToNext()) {
+                seHaLogeado[0]=cursor.getInt(cursor.getColumnIndexOrThrow(Usuarios.Table.COLUMN_NAME_seHaLogeado));
+            }
+
+            if(seHaLogeado[0]==0)
+                return true;
         }
-
-        if(seHaLogeado[0]==0)
-            return true;
         return false;
     }
 
@@ -169,40 +372,70 @@ public class Logica {
     }
 
     public void actualizaARutina1(String nick){
-        SQLiteDatabase db = eatFit.getWritableDatabase();
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 1);
-        Login l = new Login();
 
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {nick};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
+        SQLiteDatabase db = eatFit.getWritableDatabase();
+
+        if(!nick.contains("@gmail.com")){
+            ContentValues values = new ContentValues();
+            values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
+            values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 1);
+            Login l = new Login();
+
+            String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
+            String[] selectionArgs = {nick};
+            int count = db.update(
+                    Usuarios.Table.TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs);
+        }else{
+            ContentValues values = new ContentValues();
+            values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
+            values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 1);
+            Login l = new Login();
+
+            String selection = Usuarios.Table.COLUMN_NAME_Email + " LIKE ?";
+            String[] selectionArgs = {nick};
+            int count = db.update(
+                    Usuarios.Table.TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs);
+        }
+
+
     }
 
     public void actualizaARutina2(String nick){
         SQLiteDatabase db = eatFit.getWritableDatabase();
 
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
-        values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 2);
-        Login l = new Login();
+        if(!nick.contains("@gmail.com")){
+            ContentValues values = new ContentValues();
+            values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
+            values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 2);
+            Login l = new Login();
 
-        // Which row to update, based on the title
-        String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
-        String[] selectionArgs = {nick};
-        int count = db.update(
-                Usuarios.Table.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
+            String selection = Usuarios.Table.COLUMN_NAME_Nick + " LIKE ?";
+            String[] selectionArgs = {nick};
+            int count = db.update(
+                    Usuarios.Table.TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs);
+        }else{
+            ContentValues values = new ContentValues();
+            values.put(Usuarios.Table.COLUMN_NAME_seHaLogeado, true);
+            values.put(Usuarios.Table.COLUMN_NAME_NumRutina, 2);
+            Login l = new Login();
+
+            String selection = Usuarios.Table.COLUMN_NAME_Email + " LIKE ?";
+            String[] selectionArgs = {nick};
+            int count = db.update(
+                    Usuarios.Table.TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs);
+        }
     }
 
     public void actualizaARutina3(String nick){

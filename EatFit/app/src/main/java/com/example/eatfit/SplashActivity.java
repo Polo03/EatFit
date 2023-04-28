@@ -5,6 +5,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.motion.widget.TransitionAdapter;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.transition.TransitionManager;
@@ -18,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 1000; // tiempo de duración de la pantalla de inicio en milisegundos
 
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 

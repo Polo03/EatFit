@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class CreateAccount extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
@@ -48,8 +50,44 @@ public class CreateAccount extends AppCompatActivity {
         botonCrearCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Si no existe el nick
-                if(!logica.existeNick(editTextUser.getText().toString())){
+                //Si el nick contiene la cadena "@gmail.com", mostramos mensaje de que no puede tener esa cadena
+                if(editTextUser.getText().toString().contains("@")){
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "El nick no puede contener carácteres especiales";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                //Si existe el nick, mostramos mensaje de que el nick ya esta en uso
+                }else if(logica.existeNick(editTextUser.getText().toString())){
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "El nick ya esta en uso";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                //Si existe el email, mostramos mensaje de que el email ya esta en uso
+                }else if(logica.existeEmail(editTextEmail.getText().toString())){
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "El email ya esta en uso";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                //Si DNI el email, mostramos mensaje de que el DNI ya esta en uso
+                }else if(logica.existeDNI(editTextDni.getText().toString())){
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "El DNI ya esta en uso";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                //Sino
+                }else{
 
                     String nickString=editTextUser.getText().toString();
                     String pwdString=editTextPwd.getText().toString();
@@ -76,7 +114,7 @@ public class CreateAccount extends AppCompatActivity {
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                    //Sino, insertamos en la base de datos el nuevo usuario, con todos sus datos
+                        //Sino, insertamos en la base de datos el nuevo usuario, con todos sus datos
                     }else{
                         // Gets the data repository in write mode
                         SQLiteDatabase db = eatFit.getWritableDatabase();
@@ -101,14 +139,6 @@ public class CreateAccount extends AppCompatActivity {
                         startActivity(intent);
                     }
 
-                //Sino, le decimos al usuario que introduzca otro nick
-                }else{
-                    Context context = getApplicationContext();
-                    CharSequence text = "Escoga otro nombre de usuario";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 }
             }
         });
@@ -131,7 +161,6 @@ public class CreateAccount extends AppCompatActivity {
                         editTextFechaNacimiento.setText(day+"/"+(month+1)+"/"+year);
             }
         },2003,0,1);
-
         d.setMessage("Seleccione su fecha de nacimiento");
         d.show();
     }

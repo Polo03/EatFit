@@ -79,6 +79,7 @@
         android:layout_width="56dp"
         android:layout_height="53dp"
         android:background="@drawable/datospersonales"
+        android:onClick="abrirPopUpDatosPersonales"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"

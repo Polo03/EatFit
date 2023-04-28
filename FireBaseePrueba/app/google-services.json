@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "1041317533024",
+    "project_id": "prueba-c50fb",
+    "storage_bucket": "prueba-c50fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041317533024:android:2a944c39fd40465558ba05",
+        "android_client_info": {
+          "package_name": "com.example.FireBaseePrueba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041317533024-tq3bk12l14s8qdh8ds1cdmqnh5ff1v2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPB29CBX6N5d466DAqCSZvhqa7H5tcZwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041317533024-tq3bk12l14s8qdh8ds1cdmqnh5ff1v2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1",
+
+
+}

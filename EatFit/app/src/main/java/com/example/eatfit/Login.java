@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,6 +22,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.File;
 import java.security.Permission;
 
@@ -31,8 +34,11 @@ public class Login extends AppCompatActivity {
     private boolean isActivateRadioButton;
     private SharedPreferences preferences;
 
+    private Logica logica;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
@@ -44,7 +50,7 @@ public class Login extends AppCompatActivity {
         eatFit =new EatFit(this);
 
         //Creamos un objeto Logica para llamar a métodos que necesitamos.
-        Logica logica=new Logica(eatFit, preferences);
+        logica=new Logica(eatFit, preferences);
 
         //Si hay base de datos existente que no se cree otra base de datos.
         if(!new File("/data/data/com.example.eatfit/databases/eatfit").exists()) {
@@ -78,16 +84,23 @@ public class Login extends AppCompatActivity {
                 if (logica.existeUsuarioPorNickYPassword(nick.getText().toString(),pwd.getText().toString())){
                     //Si esta activado el botón para no cerrar sesión, se guardan unas shared preferences
                     if(isActivateRadioButton) {
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("nick", nick.getText().toString());
-                        editor.putString("password", pwd.getText().toString());
-                        editor.commit();
+                        if(!nick.getText().toString().contains("@gmail.com")) {
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("nick", nick.getText().toString());
+                            editor.putString("password", pwd.getText().toString());
+                            editor.commit();
+                        }else{
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("nick", logica.getNickByCorreo(nick.getText().toString()));
+                            editor.putString("password", pwd.getText().toString());
+                            editor.commit();
+                        }
                     }
                     //Si es la primera vez que se logea, se muestra un cuestionario
                     if(logica.primeraVezLogeado(nick.getText().toString(),pwd.getText().toString())){
                         Intent intent = new Intent(Login.this, Cuestionario.class);
                         startActivity(intent);
-                    //Sino, se muestra el meenu principal
+                    //Sino, se muestra el menu principal
                     }else{
                         Intent intent = new Intent(Login.this, MenuPrincipal.class);
                         startActivity(intent);
@@ -112,26 +125,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, CreateAccount.class);
                 startActivity(intent);
+
+
             }
         });
-
-        //Pedimos permisos para mandar un sms desde android studio
-        if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(Login.this,new String[]{Manifest.permission.SEND_SMS},1);
-        }
-
-        //Si ha olvidado la contraseña
-       /*buttonOlvidarPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                SmsManager smsmanager=SmsManager.getDefault();
-                smsmanager.sendTextMessage("601 36 19 84",null,"Mensaje de prueba",null, null);
-
-                Toast.makeText(Login.this,"MSJ Enviado",Toast.LENGTH_LONG).show();
-
-            }
-        });*/
 
     }
 
@@ -157,6 +154,11 @@ public class Login extends AppCompatActivity {
     //Devuelve el ultimo usuario logeado
     public String ultimoUsuarioLogeado(){
         return nick.getText().toString();
+    }
+
+    public void mostrarVentanaOlvidarContrasena(View v){
+        Intent intent = new Intent(Login.this, OlvidoDeContrasena.class);
+        startActivity(intent);
     }
 
 }
