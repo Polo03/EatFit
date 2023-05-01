@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EatFit</string>
+    <string name="app_name">EatFitReal</string>
     <string-array name="primerDesplegable">
         <item>1</item>
         <item>2</item>

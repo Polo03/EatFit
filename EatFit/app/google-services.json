@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1041317533024",
-    "project_id": "prueba-c50fb",
-    "storage_bucket": "prueba-c50fb.appspot.com"
+    "project_number": "839255418580",
+    "project_id": "eatfit-137a8",
+    "storage_bucket": "eatfit-137a8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1041317533024:android:2a944c39fd40465558ba05",
+        "mobilesdk_app_id": "1:839255418580:android:9f562baeb4cbc7a8797d41",
         "android_client_info": {
-          "package_name": "com.example.eatfit"
+          "package_name": "com.example.eatfitreal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1041317533024-tq3bk12l14s8qdh8ds1cdmqnh5ff1v2f.apps.googleusercontent.com",
+          "client_id": "839255418580-7u2l5bpu06qdfc7pi6dsf0gqoi6fu9u5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPB29CBX6N5d466DAqCSZvhqa7H5tcZwo"
+          "current_key": "AIzaSyChB9SBEAkJkQG0eakEaJWy2b9h1isrKGU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1041317533024-tq3bk12l14s8qdh8ds1cdmqnh5ff1v2f.apps.googleusercontent.com",
+              "client_id": "839255418580-7u2l5bpu06qdfc7pi6dsf0gqoi6fu9u5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

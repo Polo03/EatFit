@@ -19,17 +19,6 @@
         app:srcCompat="@drawable/pngegg__3_" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="596dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pngegg__2_" />
-
-    <ImageView
         android:id="@+id/imageView7"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -189,5 +178,16 @@
         app:layout_constraintHorizontal_bias="0.729"
         app:layout_constraintStart_toStartOf="parent"
         app:useMaterialThemeColors="false" />
+
+    <ImageButton
+        android:id="@+id/imageButtonGoogle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="596dp"
+        android:background="@drawable/pngegg__2_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
