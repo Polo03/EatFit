@@ -7,12 +7,7 @@ import androidx.constraintlayout.motion.widget.TransitionAdapter;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.transition.TransitionManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 public class SplashActivity extends AppCompatActivity {
 
