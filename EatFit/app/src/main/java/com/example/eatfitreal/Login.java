@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +50,8 @@ public class Login extends AppCompatActivity {
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         //introduceRutinas();
-        //introduceUserRoot();
+        introduceUserRoot();
+        //eliminarRoot();
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logeado ha querido mantener su sesión abierta
         validarSesion();
@@ -139,9 +142,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
+                GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
 
-                //GoogleSign
             }
         });
 
@@ -213,6 +215,12 @@ public class Login extends AppCompatActivity {
         datosRoot.put("NumRutina",0);
         //EL .child es como una especie de ruta, en este caso, usuarios seria la tabla.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
+    }
+
+    public void eliminarRoot(){
+        DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        DatabaseReference currentUserBD = mDatabase.child("Root");
+        currentUserBD.removeValue();
     }
 
 }
