@@ -29,6 +29,7 @@ public class Foro extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
 
+        if(getPojo().size()!=0) {
             AdaptadorForo miAdaptador = new AdaptadorForo(this, getPojo());
             lista.setAdapter(miAdaptador);
             lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -37,6 +38,9 @@ public class Foro extends AppCompatActivity {
                     Toast.makeText(Foro.this, i + "", Toast.LENGTH_SHORT).show();
                 }
             });
+        }else{
+            Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
