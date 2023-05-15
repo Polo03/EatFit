@@ -28,15 +28,19 @@ public class Foro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
-        AdaptadorForo miAdaptador = new AdaptadorForo(this, getPojo());
-        lista.setAdapter(miAdaptador);
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(Foro.this, i + "", Toast.LENGTH_SHORT).show();
-            }
-        });
 
+        if(getPojo().size()!=0) {
+            AdaptadorForo miAdaptador = new AdaptadorForo(this, getPojo());
+            lista.setAdapter(miAdaptador);
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Toast.makeText(Foro.this, i + "", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
