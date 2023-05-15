@@ -83,6 +83,7 @@ public class MenuPrincipal extends AppCompatActivity {
                         count=1;
                         Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
                         intent.putExtra("count", getButtonvalor());
+                        intent.putExtra("item",item.getTitle());
                         startActivity(intent);
                         //  Toast.makeText(MenuPrincipal.this, "Seleccionastes " +item.getTitle(), Toast.LENGTH_LONG).show();
                         return true;

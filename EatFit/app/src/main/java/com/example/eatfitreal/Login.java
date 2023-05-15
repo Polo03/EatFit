@@ -47,8 +47,8 @@ public class Login extends AppCompatActivity {
         TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
-        //introduceRutinas();
-        introduceUserRoot();
+        introduceRutinas();
+        //introduceUserRoot();
         //introducePreguntas();
         //introduceRespuestas();
         //eliminarRoot();
@@ -177,26 +177,25 @@ public class Login extends AppCompatActivity {
 
         myRef = FirebaseDatabase.getInstance().getReference();
 
-        Map<String, Object> datosRutina1 = new HashMap<>();
-        Map<String, Object> datosRutina2 = new HashMap<>();
-        Map<String, Object> datosRutina3 = new HashMap<>();
-        Map<String, Object> datosRutina4 = new HashMap<>();
-        Map<String, Object> datosRutina5 = new HashMap<>();
-        datosRutina1.put("numRutina","1");
-        datosRutina1.put("descripción", "Rutina 1");
-        datosRutina2.put("numRutina","2");
-        datosRutina2.put("descripción", "Rutina 2");
-        datosRutina3.put("numRutina","3");
-        datosRutina3.put("descripción", "Rutina 3");
-        datosRutina4.put("numRutina","4");
-        datosRutina4.put("descripción", "Rutina 4");
-        datosRutina5.put("numRutina","5");
-        datosRutina5.put("descripción", "Rutina 5");
-        myRef.child("Rutinas").child("Rutina1").setValue(datosRutina1);
-        myRef.child("Rutinas").child("Rutina2").setValue(datosRutina2);
-        myRef.child("Rutinas").child("Rutina3").setValue(datosRutina3);
-        myRef.child("Rutinas").child("Rutina4").setValue(datosRutina4);
-        myRef.child("Rutinas").child("Rutina5").setValue(datosRutina5);
+        Map<String, Object> rutina1Definicion = new HashMap<>();
+        rutina1Definicion.put("id","1");
+        rutina1Definicion.put("ejercicio1","Flexiones de rodillas→ 3 series de 10 repeticiones.");
+        rutina1Definicion.put("ejercicio2","Press de mancuernas→ 3 series de 10 repeticiones.");
+        rutina1Definicion.put("ejercicio3","Elevaciones laterales con mancuernas→ 3 series de 10 repeticiones.");
+        rutina1Definicion.put("ejercicio4","Extensiones de tríceps con mancuernas→ 3 series de 10 repeticiones.");
+        rutina1Definicion.put("ejercicio5","Curl de bíceps con mancuernas→ 3 series de 10 repeticiones.");
+        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+        myRef.child("Rutinas").child("Definicion").child("BrazoYPecho").child("RutinaPrincipiante").setValue(rutina1Definicion);
+
+        Map<String, Object> rutina1Volumen = new HashMap<>();
+        rutina1Volumen.put("id","1");
+        rutina1Volumen.put("ejercicio1","Flexiones de pared → Haz 3 series de 10 repeticiones cada una.");
+        rutina1Volumen.put("ejercicio2","Flexiones de rodillas → Haz 3 series de 10 repeticiones cada una.");
+        rutina1Volumen.put("ejercicio3","Curl de bíceps con mancuernas → Haz 3 series de 12 repeticiones cada una.");
+        rutina1Volumen.put("ejercicio4","Press de banca con mancuernas → Haz 3 series de 12 repeticiones cada una.");
+        rutina1Volumen.put("ejercicio5","Flexiones diamante → Haz 3 series de 10 repeticiones cada una.");
+        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+        myRef.child("Rutinas").child("Volumen").child("BrazoYPecho").child("RutinaPrincipiante").setValue(rutina1Volumen);
 
     }
 
@@ -240,8 +239,9 @@ public class Login extends AppCompatActivity {
 
     public void eliminarRoot(){
         DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
-        DatabaseReference currentUserBD = mDatabase.child("Usuarios").child("root");
+        DatabaseReference currentUserBD = mDatabase.child("Rutinas");
         currentUserBD.removeValue();
     }
+
 
 }
