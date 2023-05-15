@@ -110,8 +110,8 @@ public class CreateAccount extends AppCompatActivity {
                                 String pwdString=editTextPwd.getText().toString();
                                 String emailString=editTextEmail.getText().toString();
                                 String dniString=editTextDni.getText().toString();
-                                Double pesoDouble=Double.parseDouble(editTextPeso.getText().toString());
-                                Double alturaDouble=Double.parseDouble(editTextAltura.getText().toString());
+                                String pesoDouble=editTextPeso.getText().toString();
+                                String alturaDouble=editTextAltura.getText().toString();
                                 String fechaNacString=editTextFechaNacimiento.getText().toString();
                                 String numTelefonoString=editTextNumTelefono.getText().toString();
 
@@ -139,12 +139,12 @@ public class CreateAccount extends AppCompatActivity {
                                     datosUser.put("password",pwdString);
                                     datosUser.put("email",emailString);
                                     datosUser.put("DNI",dniString);
-                                    datosUser.put("Peso",pesoDouble);
-                                    datosUser.put("Altura",alturaDouble);
-                                    datosUser.put("FechaNac",fechaNacString);
-                                    datosUser.put("Phone",numTelefonoString);
-                                    datosUser.put("VecesLogeado",0);
-                                    datosUser.put("NumRutina",0);
+                                    datosUser.put("peso",pesoDouble);
+                                    datosUser.put("altura",alturaDouble);
+                                    datosUser.put("fechaNac",fechaNacString);
+                                    datosUser.put("phone",numTelefonoString);
+                                    datosUser.put("vecesLogeado",0);
+                                    datosUser.put("numRutina",0);
                                     myRef.child("Usuarios").child(nickString).setValue(datosUser);
 
                                     Intent intent = new Intent(CreateAccount.this, Login.class);

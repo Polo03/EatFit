@@ -194,10 +194,10 @@ public class Cuestionario extends AppCompatActivity {
                                 pwd=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
                                 dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("Peso").getValue().toString();
-                                altura=dataSnapshot.child("Altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                                peso=dataSnapshot.child("peso").getValue().toString();
+                                altura=dataSnapshot.child("altura").getValue().toString();
+                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                                numTelefono=dataSnapshot.child("phone").getValue().toString();
                             }
                         }
 
@@ -206,12 +206,12 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("password",pwd);
                         datosUser.put("email",email);
                         datosUser.put("DNI",dni);
-                        datosUser.put("Peso",peso);
-                        datosUser.put("Altura",altura);
-                        datosUser.put("FechaNac",fechaNac);
-                        datosUser.put("Phone",numTelefono);
-                        datosUser.put("VecesLogeado",1);
-                        datosUser.put("NumRutina",1);
+                        datosUser.put("peso",peso);
+                        datosUser.put("altura",altura);
+                        datosUser.put("fechaNac",fechaNac);
+                        datosUser.put("phone",numTelefono);
+                        datosUser.put("vecesLogeado",1);
+                        datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
 
                     } else {
@@ -230,10 +230,10 @@ public class Cuestionario extends AppCompatActivity {
                                 pwd=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
                                 dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("Peso").getValue().toString();
-                                altura=dataSnapshot.child("Altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                                peso=dataSnapshot.child("peso").getValue().toString();
+                                altura=dataSnapshot.child("altura").getValue().toString();
+                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                                numTelefono=dataSnapshot.child("phone").getValue().toString();
                             }
                         }
 
@@ -242,12 +242,12 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("password",pwd);
                         datosUser.put("email",email);
                         datosUser.put("DNI",dni);
-                        datosUser.put("Peso",peso);
-                        datosUser.put("Altura",altura);
-                        datosUser.put("FechaNac",fechaNac);
-                        datosUser.put("Phone",numTelefono);
-                        datosUser.put("VecesLogeado",1);
-                        datosUser.put("NumRutina",2);
+                        datosUser.put("peso",peso);
+                        datosUser.put("altura",altura);
+                        datosUser.put("fechaNac",fechaNac);
+                        datosUser.put("phone",numTelefono);
+                        datosUser.put("vecesLogeado",1);
+                        datosUser.put("numRutina",2);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
                     }
                 }else{
@@ -269,10 +269,10 @@ public class Cuestionario extends AppCompatActivity {
                                 pwd=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
                                 dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("Peso").getValue().toString();
-                                altura=dataSnapshot.child("Altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                                peso=dataSnapshot.child("peso").getValue().toString();
+                                altura=dataSnapshot.child("altura").getValue().toString();
+                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                                numTelefono=dataSnapshot.child("phone").getValue().toString();
                             }
                         }
 
@@ -281,12 +281,12 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("password",pwd);
                         datosUser.put("email",email);
                         datosUser.put("DNI",dni);
-                        datosUser.put("Peso",peso);
-                        datosUser.put("Altura",altura);
-                        datosUser.put("FechaNac",fechaNac);
-                        datosUser.put("Phone",numTelefono);
-                        datosUser.put("VecesLogeado",1);
-                        datosUser.put("NumRutina",1);
+                        datosUser.put("peso",peso);
+                        datosUser.put("altura",altura);
+                        datosUser.put("fechaNac",fechaNac);
+                        datosUser.put("phone",numTelefono);
+                        datosUser.put("vecesLogeado",1);
+                        datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
                     } else {
                         String nick="";
@@ -304,7 +304,7 @@ public class Cuestionario extends AppCompatActivity {
                                 pwd=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
                                 dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("Peso").getValue().toString();
+                                peso=dataSnapshot.child("peso").getValue().toString();
                                 altura=dataSnapshot.child("Altura").getValue().toString();
                                 fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
                                 numTelefono=dataSnapshot.child("Phone").getValue().toString();
@@ -316,12 +316,12 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("password",pwd);
                         datosUser.put("email",email);
                         datosUser.put("DNI",dni);
-                        datosUser.put("Peso",peso);
-                        datosUser.put("Altura",altura);
-                        datosUser.put("FechaNac",fechaNac);
-                        datosUser.put("Phone",numTelefono);
-                        datosUser.put("VecesLogeado",1);
-                        datosUser.put("NumRutina",1);
+                        datosUser.put("peso",peso);
+                        datosUser.put("altura",altura);
+                        datosUser.put("fechaNac",fechaNac);
+                        datosUser.put("phone",numTelefono);
+                        datosUser.put("vecesLogeado",1);
+                        datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
                     }
                 }

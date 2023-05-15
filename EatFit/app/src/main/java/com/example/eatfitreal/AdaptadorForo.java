@@ -1,6 +1,9 @@
 package com.example.eatfitreal;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,23 +11,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 
-public class Adaptador extends ArrayAdapter {
+public class AdaptadorForo extends ArrayAdapter {
 
-    private POJO[] datos;
+    private ArrayList<POJOForo> datos;
 
-    public Adaptador(Context contexto, POJO[] datos){
+    public AdaptadorForo(Context contexto, ArrayList<POJOForo> datos){
         super(contexto, R.layout.activity_adaptador, datos);
         this.datos = datos;
     }
     public View getView(int posicion, View convertView, ViewGroup parent){
         LayoutInflater mostrado = LayoutInflater.from(getContext());
-        View elemento = mostrado.inflate(R.layout.activity_adaptador, parent, false);
-        ImageView imagen=elemento.findViewById(R.id.imagen);
-        imagen.setImageResource(datos[posicion].getImagen());
-        TextView texto1 = elemento.findViewById(R.id.textViewMostrarRutina);
-        texto1.setText(datos[posicion].getTexto1());
+        View elemento = mostrado.inflate(R.layout.activity_adaptador_foro, parent, false);
+        TextView texto1 = elemento.findViewById(R.id.textViewMostrarPregunta);
+        texto1.setText(datos.get(posicion).getTexto1());
         return elemento;
     }
-
 }

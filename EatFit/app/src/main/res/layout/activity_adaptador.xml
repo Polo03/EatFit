@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="24dp">
 
         <TextView
-            android:id="@+id/textViewOlvidarPwd"
+            android:id="@+id/textViewMostrarRutina"
             android:layout_width="281dp"
             android:layout_height="match_parent"
             android:text="TextView" />

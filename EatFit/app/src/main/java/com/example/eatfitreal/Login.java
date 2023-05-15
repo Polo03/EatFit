@@ -18,8 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,14 +44,16 @@ public class Login extends AppCompatActivity {
         nick=(EditText) findViewById(R.id.editTextUsuario);
         EditText pwd=(EditText) findViewById(R.id.editTextPwd);
         RadioButton radioButtonSesion=(RadioButton)findViewById(R.id.radioButtonSesion);
-        TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewOlvidarPwd);
+        TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         //introduceRutinas();
         introduceUserRoot();
+        //introducePreguntas();
+        //introduceRespuestas();
         //eliminarRoot();
 
-        //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logeado ha querido mantener su sesión abierta
+        //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
         validarSesion();
 
         isActivateRadioButton=radioButtonSesion.isChecked();
@@ -91,9 +91,10 @@ public class Login extends AppCompatActivity {
                                 nickString=dataSnapshot.child("nick").getValue().toString();
                                 password=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
-                                vecesLogeado=Integer.parseInt(dataSnapshot.child("VecesLogeado").getValue().toString());
+                                vecesLogeado=Integer.parseInt(dataSnapshot.child("vecesLogeado").getValue().toString());
                             }
                         }
+
                         if(password.equals(pwd.getText().toString())){
                             //Toast.makeText(Login.this, "Usuario Valido", Toast.LENGTH_SHORT).show();
                             if(isActivateRadioButton) {
@@ -137,12 +138,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Iniciar sesión con google
         ImageButton botonGoogle=(ImageButton) findViewById(R.id.imageButtonGoogle);
         botonGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
+                //GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
 
             }
         });
@@ -180,22 +182,41 @@ public class Login extends AppCompatActivity {
         Map<String, Object> datosRutina3 = new HashMap<>();
         Map<String, Object> datosRutina4 = new HashMap<>();
         Map<String, Object> datosRutina5 = new HashMap<>();
-        datosRutina1.put("NumRutina","1");
-        datosRutina1.put("Descripción", "Rutina 1");
-        datosRutina2.put("NumRutina","2");
-        datosRutina2.put("Descripción", "Rutina 2");
-        datosRutina3.put("NumRutina","3");
-        datosRutina3.put("Descripción", "Rutina 3");
-        datosRutina4.put("NumRutina","4");
-        datosRutina4.put("Descripción", "Rutina 4");
-        datosRutina5.put("NumRutina","5");
-        datosRutina5.put("Descripción", "Rutina 5");
+        datosRutina1.put("numRutina","1");
+        datosRutina1.put("descripción", "Rutina 1");
+        datosRutina2.put("numRutina","2");
+        datosRutina2.put("descripción", "Rutina 2");
+        datosRutina3.put("numRutina","3");
+        datosRutina3.put("descripción", "Rutina 3");
+        datosRutina4.put("numRutina","4");
+        datosRutina4.put("descripción", "Rutina 4");
+        datosRutina5.put("numRutina","5");
+        datosRutina5.put("descripción", "Rutina 5");
         myRef.child("Rutinas").child("Rutina1").setValue(datosRutina1);
         myRef.child("Rutinas").child("Rutina2").setValue(datosRutina2);
         myRef.child("Rutinas").child("Rutina3").setValue(datosRutina3);
         myRef.child("Rutinas").child("Rutina4").setValue(datosRutina4);
         myRef.child("Rutinas").child("Rutina5").setValue(datosRutina5);
 
+    }
+
+    public void introducePreguntas(){
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> mensajePrueba = new HashMap<>();
+        mensajePrueba.put("id",1);
+        mensajePrueba.put("pregunta","¿Pregunta1?");
+        myRef.child("Mensajes").child("Preguntas").child("Pregunta1").setValue(mensajePrueba);
+
+    }
+
+    public void introduceRespuestas(){
+        myRef = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> mensajePrueba = new HashMap<>();
+        mensajePrueba.put("id",1);
+        mensajePrueba.put("respuesta","Respuesta1");
+        mensajePrueba.put("idPregunta",1);
+        myRef.child("Mensajes").child("Respuestas").setValue(mensajePrueba);
     }
 
     public void introduceUserRoot(){
@@ -207,19 +228,19 @@ public class Login extends AppCompatActivity {
         datosRoot.put("password","Root");
         datosRoot.put("email","poloadrian3@gmail.com");
         datosRoot.put("DNI","47318093D");
-        datosRoot.put("Peso",90);
-        datosRoot.put("Altura",170);
-        datosRoot.put("FechaNac","17/10/2003");
-        datosRoot.put("Phone","601361984");
-        datosRoot.put("VecesLogeado",1);
-        datosRoot.put("NumRutina",0);
-        //EL .child es como una especie de ruta, en este caso, usuarios seria la tabla.
+        datosRoot.put("peso","90");
+        datosRoot.put("altura","170");
+        datosRoot.put("fechaNac","17/10/2003");
+        datosRoot.put("phone","601361984");
+        datosRoot.put("vecesLogeado",1);
+        datosRoot.put("numRutina",0);
+        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
     }
 
     public void eliminarRoot(){
-        DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        DatabaseReference currentUserBD = mDatabase.child("Root");
+        DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
+        DatabaseReference currentUserBD = mDatabase.child("Usuarios").child("root");
         currentUserBD.removeValue();
     }
 

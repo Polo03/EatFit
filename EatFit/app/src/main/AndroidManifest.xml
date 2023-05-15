@@ -15,7 +15,10 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".ventanaSMS"
+            android:name=".AdaptadorForo"
+            android:exported="false" />
+        <activity
+            android:name=".Foro"
             android:exported="false" />
         <activity
             android:name=".PopUpDatosPersonales"

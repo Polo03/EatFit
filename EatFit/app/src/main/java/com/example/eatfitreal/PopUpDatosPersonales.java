@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +44,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
         getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
 
-        TextView textViewNick=findViewById(R.id.textViewNick);
+        EditText textViewNick=findViewById(R.id.textViewNick);
         TextView textViewPwd=findViewById(R.id.textViewPwd);
         TextView textViewEmail=findViewById(R.id.textViewEmail);
         TextView textViewDNI=findViewById(R.id.textViewDNI);
@@ -48,6 +53,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         TextView textViewFechaNac=findViewById(R.id.textViewFechaNac);
         TextView textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
+        textViewNick.setEnabled(false);
         if(preferences.getString("nick", null)==null){
             //nick=l.ultimoUsuarioLogeado();
 
@@ -71,10 +77,10 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                             pwd=dataSnapshot.child("password").getValue().toString();
                             email=dataSnapshot.child("email").getValue().toString();
                             dni=dataSnapshot.child("DNI").getValue().toString();
-                            peso=dataSnapshot.child("Peso").getValue().toString();
-                            altura=dataSnapshot.child("Altura").getValue().toString();
-                            fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                            numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                            peso=dataSnapshot.child("peso").getValue().toString();
+                            altura=dataSnapshot.child("altura").getValue().toString();
+                            fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                            numTelefono=dataSnapshot.child("phone").getValue().toString();
                         }
                     }
                     textViewNick.setText(nick);
@@ -118,10 +124,10 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                             pwd=dataSnapshot.child("password").getValue().toString();
                             email=dataSnapshot.child("email").getValue().toString();
                             dni=dataSnapshot.child("DNI").getValue().toString();
-                            peso=dataSnapshot.child("Peso").getValue().toString();
-                            altura=dataSnapshot.child("Altura").getValue().toString();
-                            fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                            numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                            peso=dataSnapshot.child("peso").getValue().toString();
+                            altura=dataSnapshot.child("altura").getValue().toString();
+                            fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                            numTelefono=dataSnapshot.child("phone").getValue().toString();
                         }
                     }
                     textViewNick.setText(nick);
@@ -141,6 +147,28 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                 }
             });
         }
+        ImageButton botonConfig=(ImageButton) findViewById(R.id.imageButtonConfig);
+
+        Button botonSiguiente=(Button) findViewById(R.id.buttonNext);
+        botonSiguiente.setVisibility(View.INVISIBLE);
+        botonSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                botonConfig.setVisibility(View.VISIBLE);
+                botonSiguiente.setVisibility(View.INVISIBLE);
+                textViewNick.setEnabled(false);
+            }
+        });
+
+
+        botonConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                botonConfig.setVisibility(View.INVISIBLE);
+                textViewNick.setEnabled(true);
+                botonSiguiente.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 }

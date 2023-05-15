@@ -10,9 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -42,6 +54,16 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View view) {
                 cerrarSesion();
                 Intent intent = new Intent(MenuPrincipal.this, Login.class);
+                startActivity(intent);
+            }
+        });
+
+        //Cuando pulse el boton del foro
+        ImageButton botonForo=(ImageButton)findViewById(R.id.buttonForo);
+        botonForo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPrincipal.this, Foro.class);
                 startActivity(intent);
             }
         });
@@ -102,7 +124,6 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        // ImageView imagenRutina = (ImageView) findViewById(R.id.imageViewRutina);
     }
 
     //Método para cerrar sesión, es decir, para limpiar las shared preferences.
