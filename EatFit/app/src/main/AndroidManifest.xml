@@ -8,16 +8,19 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icono_eatfit"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Dietas"
+            android:exported="false" />
+        <activity
             android:name=".PopUpTerminosdePrivacidad"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".PopUpRespuesta"
             android:exported="false"
@@ -62,13 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

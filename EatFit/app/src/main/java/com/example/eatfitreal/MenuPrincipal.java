@@ -171,6 +171,15 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        ImageButton botonDietas=(ImageButton) findViewById(R.id.buttonDietas);
+        botonDietas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuPrincipal.this, Dietas.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     //Método para cerrar sesión, es decir, para limpiar las shared preferences.
