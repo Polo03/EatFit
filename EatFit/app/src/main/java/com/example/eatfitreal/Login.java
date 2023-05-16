@@ -48,9 +48,8 @@ public class Login extends AppCompatActivity {
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         //introduceRutinas();
-        introduceUserRoot();
-        //introducePreguntas();
-        //introduceRespuestas();
+        //introduceUserRoot();
+        introducePreguntas();
         //eliminarRoot();
         //cuestionarioRoot();
 
@@ -206,17 +205,9 @@ public class Login extends AppCompatActivity {
         Map<String, Object> mensajePrueba = new HashMap<>();
         mensajePrueba.put("id",1);
         mensajePrueba.put("pregunta","¿Pregunta1?");
-        myRef.child("Mensajes").child("Preguntas").child("Pregunta1").setValue(mensajePrueba);
-
-    }
-
-    public void introduceRespuestas(){
-        myRef = FirebaseDatabase.getInstance().getReference();
-        Map<String, Object> mensajePrueba = new HashMap<>();
-        mensajePrueba.put("id",1);
         mensajePrueba.put("respuesta","Respuesta1");
-        mensajePrueba.put("idPregunta",1);
-        myRef.child("Mensajes").child("Respuestas").setValue(mensajePrueba);
+        myRef.child("Mensajes").child("Preguntas").child("Mensaje1").setValue(mensajePrueba);
+
     }
 
     public void introduceUserRoot(){
@@ -241,7 +232,7 @@ public class Login extends AppCompatActivity {
 
     public void eliminarRoot(){
         DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
-        DatabaseReference currentUserBD = mDatabase.child("Rutinas");
+        DatabaseReference currentUserBD = mDatabase.child("Mensajes");
         currentUserBD.removeValue();
     }
 

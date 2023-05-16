@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,10 +30,7 @@ public class Ejercicios extends AppCompatActivity {
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         int i = getIntent().getIntExtra("count", 0);
         String item=getIntent().getStringExtra("item");
-        //ListView listView = findViewById(R.id.lista_ejercicios);
         menuPrincipal.setButtonvalor(0);
-        /*Adaptador miAdaptador = new Adaptador(this, getPojo(i,item));
-        listView.setAdapter(miAdaptador);*/
         rellenaListView(i,item);
     }
 
@@ -59,7 +57,7 @@ public class Ejercicios extends AppCompatActivity {
                             //Si quiere nivel principiante
                             if(item.equals("Principiante")){
                                 datos=new POJO[]{
-                                        new POJO(R.drawable.dietas, "Flexiones de rodillas: 3 series de 10 repeticiones."),
+                                        new POJO(R.drawable.foro, "Flexiones de rodillas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.calendario, "Press de mancuernas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.datospersonales, "Elevaciones laterales con mancuernas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.foro, "Extensiones de tríceps con mancuernas: 3 series de 10 repeticiones."),

@@ -30,20 +30,22 @@ public class Foro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
-        ArrayList<POJOForo> datos=getPojo();
-        AdaptadorForo miAdaptador = new AdaptadorForo(this, datos);
-        lista.setAdapter(miAdaptador);
+        rellenaLista(lista);
+
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(Foro.this, i + "", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Foro.this, PopUpRespuesta.class);
+                intent.putExtra("posicion",i);
+                startActivity(intent);
             }
         });
 
+
+
     }
 
-
-    public ArrayList<POJOForo> getPojo(){
+    public void rellenaLista(ListView lista){
         DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
         ArrayList<POJOForo> datos=new ArrayList<>();
         myRef.child("Mensajes").child("Preguntas").addValueEventListener(new ValueEventListener() {
@@ -52,6 +54,8 @@ public class Foro extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
                 }
+                AdaptadorForo miAdaptador = new AdaptadorForo(getApplicationContext(), datos);
+                lista.setAdapter(miAdaptador);
             }
 
             @Override
@@ -59,40 +63,6 @@ public class Foro extends AppCompatActivity {
 
             }
         });
-
-        //Toast.makeText(Foro.this, datos.toString(), Toast.LENGTH_SHORT).show();
-        return datos;
-    }
-
-    public ArrayList<POJOForo> getPojo2(){
-
-        ArrayList<POJOForo> datos=new ArrayList<>();
-
-        DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
-
-        myRef.child("Mensajes").child("Preguntas").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    datos.add(new POJOForo(dataSnapshot.getValue().toString()));
-                }
-
-                Toast.makeText(Foro.this, datos.get(0).toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
-
-        /*datos.add(new POJOForo("A"));
-        datos.add(new POJOForo("B"));
-        datos.add(new POJOForo("C"));*/
-
-        return datos;
 
     }
 }

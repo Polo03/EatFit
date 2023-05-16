@@ -15,6 +15,10 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".PopUpRespuesta"
+            android:exported="false"
+            android:theme="@style/AppTheme.TemaPopup"/>
+        <activity
             android:name=".AdaptadorForo"
             android:exported="false" />
         <activity
@@ -23,7 +27,7 @@
         <activity
             android:name=".PopUpDatosPersonales"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".Ejercicios"
             android:exported="false" />
@@ -42,7 +46,7 @@
         <activity
             android:name=".OlvidoDeContrasena"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".Cuestionario"
             android:exported="false" />
