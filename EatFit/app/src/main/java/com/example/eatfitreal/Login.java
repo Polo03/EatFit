@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -146,6 +148,15 @@ public class Login extends AppCompatActivity {
 
                 //GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
 
+            }
+        });
+
+        TextView terminos=(TextView) findViewById(R.id.textView2);
+        terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, PopUpTerminosdePrivacidad.class);
+                startActivity(intent);
             }
         });
 

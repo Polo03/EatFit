@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class Foro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
+
         rellenaLista(lista);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

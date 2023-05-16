@@ -15,9 +15,13 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".PopUpRespuesta"
+            android:name=".PopUpTerminosdePrivacidad"
             android:exported="false"
             android:theme="@style/AppTheme.TemaPopup"/>
+        <activity
+            android:name=".PopUpRespuesta"
+            android:exported="false"
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".AdaptadorForo"
             android:exported="false" />

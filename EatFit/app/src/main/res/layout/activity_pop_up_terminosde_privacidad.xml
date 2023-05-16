@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gris"
+    tools:context=".PopUpTerminosdePrivacidad">
+
+    <TextView
+        android:id="@+id/textView_terminos"
+        android:layout_width="304dp"
+        android:layout_height="66dp"
+        android:text="Terminos de Politica y Privacidad"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="283dp"
+        android:layout_height="130dp"
+        android:text="Por favor, lea detenidamente esta declaración de privacidad antes de usar este sitio. Conocerá la forma en que procesaremos sus datos personales. El uso de este sitio y el envío de sus datos implica la aceptación de nuestra política de privacidad. En caso contrario no use este sitio"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.382"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="186dp"
+        android:layout_height="32dp"
+        android:text="POLÍTICA DE PRIVACIDAD"
+        android:textAlignment="center"
+        android:textColor="@color/azul_oscuro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="286dp"
+        android:layout_height="120dp"
+        android:text="EatFit (en adelante, EatFit, la entidad, la página web o el sitio) informa a los USUARIOS que todos los datos de carácter personal que sean recogidos (1) son objeto de un tratamiento automatizado y se incorporan en el registro de actividades de tratamiento correspondiente a EatFit, entidad propietaria de este sitio web."
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="207dp"
+        android:layout_height="35dp"
+        android:text="FINALIDAD Y LEGITIMACION"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/azul_oscuro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="297dp"
+        android:layout_height="142dp"
+        android:text="La recogida y tratamiento automatizado de los datos de carácter personal tiene como finalidad el cumplimiento de las obligaciones legales y de la relación precontractual o contractual que en su caso se establezca con el USUARIO, así como facilitarle la información que este solicite sobre los productos o servicios."
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.429"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+</androidx.constraintlayout.widget.ConstraintLayout>
