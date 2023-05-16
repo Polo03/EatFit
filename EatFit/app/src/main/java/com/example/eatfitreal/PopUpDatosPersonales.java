@@ -138,7 +138,6 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                     textViewAltura.setText(altura);
                     textViewFechaNac.setText(fechaNac);
                     textViewNumTelefono.setText(numTelefono);
-
                 }
 
                 @Override

@@ -117,7 +117,7 @@ public class Cuestionario extends AppCompatActivity {
         cuartoDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                respuesta4[0] =tercerDesplegable.getItemAtPosition(i).toString();
+                respuesta4[0] =cuartoDesplegable.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -137,7 +137,7 @@ public class Cuestionario extends AppCompatActivity {
         quintoDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                respuesta5[0] =tercerDesplegable.getItemAtPosition(i).toString();
+                respuesta5[0] =quintoDesplegable.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -177,17 +177,16 @@ public class Cuestionario extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(noCierraSesion()) {
+                    String nick="";
+                    String pwd="";
+                    String email="";
+                    String dni="";
+                    String peso="";
+                    String altura="";
+                    String fechaNac="";
+                    String numTelefono="";
                     String nickPreferences=preferences.getString("nick",null);
-                    if (respuesta6 < 10) {
-                        String nick="";
-                        String pwd="";
-                        String email="";
-                        String dni="";
-                        String peso="";
-                        String altura="";
-                        String fechaNac="";
-                        String numTelefono="";
-
+                    if (respuesta4.equals("Adelgazar")) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if(dataSnapshot.child("nick").getValue().toString().equals(nickPreferences)){
                                 nick=dataSnapshot.child("nick").getValue().toString();
@@ -214,16 +213,9 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
 
-                    } else {
-                        String nick="";
-                        String pwd="";
-                        String email="";
-                        String dni="";
-                        String peso="";
-                        String altura="";
-                        String fechaNac="";
-                        String numTelefono="";
 
+
+                    } else {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if(dataSnapshot.child("nick").getValue().toString().equals(nickPreferences)){
                                 nick=dataSnapshot.child("nick").getValue().toString();
@@ -249,20 +241,29 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("vecesLogeado",1);
                         datosUser.put("numRutina",2);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
+
                     }
+                    Map<String, Object> datosUserCuest = new HashMap<>();
+                    datosUserCuest.put("nick",nick);
+                    datosUserCuest.put("objetivo1",respuesta1);
+                    datosUserCuest.put("objetivo2",respuesta2);
+                    datosUserCuest.put("objetivo3",respuesta3);
+                    datosUserCuest.put("objetivo4",respuesta4);
+                    datosUserCuest.put("objetivo5",respuesta5);
+                    datosUserCuest.put("objetivo6",respuesta6);
+                    myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
                 }else{
                     Login login=new Login();
                     String nickString=login.ultimoUsuarioLogeado();
-                    if (respuesta6 < 10) {
-                        String nick="";
-                        String pwd="";
-                        String email="";
-                        String dni="";
-                        String peso="";
-                        String altura="";
-                        String fechaNac="";
-                        String numTelefono="";
-
+                    String nick="";
+                    String pwd="";
+                    String email="";
+                    String dni="";
+                    String peso="";
+                    String altura="";
+                    String fechaNac="";
+                    String numTelefono="";
+                    if (respuesta4.equals("Adelgazar")) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if(dataSnapshot.child("nick").getValue().toString().equals(nickString)){
                                 nick=dataSnapshot.child("nick").getValue().toString();
@@ -288,16 +289,8 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("vecesLogeado",1);
                         datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
-                    } else {
-                        String nick="";
-                        String pwd="";
-                        String email="";
-                        String dni="";
-                        String peso="";
-                        String altura="";
-                        String fechaNac="";
-                        String numTelefono="";
 
+                    } else {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             if(dataSnapshot.child("nick").getValue().toString().equals(nickString)){
                                 nick=dataSnapshot.child("nick").getValue().toString();
@@ -305,9 +298,9 @@ public class Cuestionario extends AppCompatActivity {
                                 email=dataSnapshot.child("email").getValue().toString();
                                 dni=dataSnapshot.child("DNI").getValue().toString();
                                 peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("Altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("FechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("Phone").getValue().toString();
+                                altura=dataSnapshot.child("altura").getValue().toString();
+                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                                numTelefono=dataSnapshot.child("phone").getValue().toString();
                             }
                         }
 
@@ -323,7 +316,18 @@ public class Cuestionario extends AppCompatActivity {
                         datosUser.put("vecesLogeado",1);
                         datosUser.put("numRutina",1);
                         myRef.child("Usuarios").child(nick).setValue(datosUser);
+
+
                     }
+                    Map<String, Object> datosUserCuest = new HashMap<>();
+                    datosUserCuest.put("nick",nick);
+                    datosUserCuest.put("objetivo1",respuesta1);
+                    datosUserCuest.put("objetivo2",respuesta2);
+                    datosUserCuest.put("objetivo3",respuesta3);
+                    datosUserCuest.put("objetivo4",respuesta4);
+                    datosUserCuest.put("objetivo5",respuesta5);
+                    datosUserCuest.put("objetivo6",respuesta6);
+                    myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
                 }
             }
 

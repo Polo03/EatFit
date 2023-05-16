@@ -47,11 +47,12 @@ public class Login extends AppCompatActivity {
         TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
-        introduceRutinas();
-        //introduceUserRoot();
+        //introduceRutinas();
+        introduceUserRoot();
         //introducePreguntas();
         //introduceRespuestas();
         //eliminarRoot();
+        //cuestionarioRoot();
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
         validarSesion();
@@ -235,12 +236,27 @@ public class Login extends AppCompatActivity {
         datosRoot.put("numRutina",0);
         //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
+
     }
 
     public void eliminarRoot(){
         DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
         DatabaseReference currentUserBD = mDatabase.child("Rutinas");
         currentUserBD.removeValue();
+    }
+
+    public void cuestionarioRoot(){
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> datosUserCuest = new HashMap<>();
+        datosUserCuest.put("nick","Root");
+        datosUserCuest.put("objetivo1","1");
+        datosUserCuest.put("objetivo2","2");
+        datosUserCuest.put("objetivo3","3");
+        datosUserCuest.put("objetivo4","Adelgazar");
+        datosUserCuest.put("objetivo5","5");
+        datosUserCuest.put("objetivo6","6");
+        myRef.child("Cuestionario").child("Root").setValue(datosUserCuest);
     }
 
 

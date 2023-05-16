@@ -98,30 +98,76 @@ public class MenuPrincipal extends AppCompatActivity {
         button_abdomen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count=2;
-                Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
-                intent.putExtra("count", getButtonvalor());
-                startActivity(intent);
+
+                // Creamos la instancia del menu
+                PopupMenu popup= new PopupMenu(MenuPrincipal.this, button_abdomen);
+                // Dibujamos el xml que creamos
+                popup.getMenuInflater().inflate(R.menu.item_menu, popup.getMenu());
+                // Ponemos el escuchador del popup
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        count=2;
+                        Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
+                        intent.putExtra("count", getButtonvalor());
+                        intent.putExtra("item",item.getTitle());
+                        startActivity(intent);
+                        //  Toast.makeText(MenuPrincipal.this, "Seleccionastes " +item.getTitle(), Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                });
+                // Muestra el popup
+                popup.show();
             }
         });
         Button button_hombros_espalda=(Button)findViewById(R.id.button_hombros_espalda);
         button_hombros_espalda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count=3;
-                Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
-                intent.putExtra("count", getButtonvalor());
-                startActivity(intent);
+                // Creamos la instancia del menu
+                PopupMenu popup= new PopupMenu(MenuPrincipal.this, button_hombros_espalda);
+                // Dibujamos el xml que creamos
+                popup.getMenuInflater().inflate(R.menu.item_menu, popup.getMenu());
+                // Ponemos el escuchador del popup
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        count=3;
+                        Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
+                        intent.putExtra("count", getButtonvalor());
+                        intent.putExtra("item",item.getTitle());
+                        startActivity(intent);
+                        //  Toast.makeText(MenuPrincipal.this, "Seleccionastes " +item.getTitle(), Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                });
+                // Muestra el popup
+                popup.show();
             }
         });
         Button button_piernas=(Button)findViewById(R.id.button_piernas);
         button_piernas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count=4;
-                Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
-                intent.putExtra("count", getButtonvalor());
-                startActivity(intent);
+                // Creamos la instancia del menu
+                PopupMenu popup= new PopupMenu(MenuPrincipal.this, button_piernas);
+                // Dibujamos el xml que creamos
+                popup.getMenuInflater().inflate(R.menu.item_menu, popup.getMenu());
+                // Ponemos el escuchador del popup
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        count=4;
+                        Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
+                        intent.putExtra("count", getButtonvalor());
+                        intent.putExtra("item",item.getTitle());
+                        startActivity(intent);
+                        //  Toast.makeText(MenuPrincipal.this, "Seleccionastes " +item.getTitle(), Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                });
+                // Muestra el popup
+                popup.show();
             }
         });
 

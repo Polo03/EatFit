@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +26,7 @@ public class Foro extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
@@ -77,7 +79,6 @@ public class Foro extends AppCompatActivity {
                 }
 
                 Toast.makeText(Foro.this, datos.get(0).toString(), Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

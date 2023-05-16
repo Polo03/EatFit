@@ -121,8 +121,6 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                             unaVez[0]=true;
                         }
 
-
-
                     }
 
                     @Override
