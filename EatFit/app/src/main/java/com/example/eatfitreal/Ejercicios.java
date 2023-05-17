@@ -57,7 +57,7 @@ public class Ejercicios extends AppCompatActivity {
                             //Si quiere nivel principiante
                             if(item.equals("Principiante")){
                                 datos=new POJO[]{
-                                        new POJO(R.drawable.foro, "Flexiones de rodillas: 3 series de 10 repeticiones."),
+                                        new POJO(R.drawable.curlbiceps, "Flexiones de rodillas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.calendario, "Press de mancuernas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.datospersonales, "Elevaciones laterales con mancuernas: 3 series de 10 repeticiones."),
                                         new POJO(R.drawable.foro, "Extensiones de tríceps con mancuernas: 3 series de 10 repeticiones."),
@@ -202,8 +202,8 @@ public class Ejercicios extends AppCompatActivity {
                                 datos=new POJO[]{
                                         new POJO(R.drawable.dietas, "Flexiones de mano estrecha → Haz 4 series de 12 repeticiones cada una."),
                                         new POJO(R.drawable.calendario, "Curl de bíceps con barra → Haz 4 series de 10 repeticiones cada una."),
-                                        new POJO(R.drawable.datospersonales, "Press de banca con barra →Haz 4 series de 10 repeticiones cada una."),
-                                        new POJO(R.drawable.foro, "Pull-ups →Haz 4 series de 8 repeticiones cada una."),
+                                        new POJO(R.drawable.datospersonales, "Press de banca con barra → Haz 4 series de 10 repeticiones cada una."),
+                                        new POJO(R.drawable.foro, "Pull-ups →  Haz 4 series de 8 repeticiones cada una."),
                                         new POJO(R.drawable.foro, "Dips → Haz 4 series de 10 repeticiones cada una.")
                                 };
                             }
