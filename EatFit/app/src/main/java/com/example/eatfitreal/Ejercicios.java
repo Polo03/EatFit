@@ -35,6 +35,7 @@ public class Ejercicios extends AppCompatActivity {
     }
 
     public void rellenaListView(int i, String item){
+
         ListView listView = findViewById(R.id.lista_ejercicios);
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
         //Si ha decidido no cerrar sesión
