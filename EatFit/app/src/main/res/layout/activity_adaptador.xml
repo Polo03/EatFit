@@ -6,24 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Adaptador">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="24dp">
+    <TextView
+        android:id="@+id/textView_series"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.685" />
 
-        <TextView
-            android:id="@+id/textViewMostrarRutina"
-            android:layout_width="281dp"
-            android:layout_height="match_parent"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/textViewMostrarRutina"
+        android:layout_width="220dp"
+        android:layout_height="84dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
 
-        <ImageView
-            android:id="@+id/imagen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/dietas" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="131dp"
+        android:layout_height="148dp"
+        android:layout_weight="1"
+        android:src="@drawable/dietas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

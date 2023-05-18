@@ -49,10 +49,10 @@ public class Login extends AppCompatActivity {
         TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
-        //introduceRutinas();
-        //introduceUserRoot();
-        introducePreguntas();
         //eliminarRoot();
+        //introduceRutinas();
+        introduceUserRoot();
+        //introducePreguntas();
         //cuestionarioRoot();
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
@@ -110,7 +110,7 @@ public class Login extends AppCompatActivity {
                             if(vecesLogeado==0){
                                 Intent intent = new Intent(Login.this, Cuestionario.class);
                                 startActivity(intent);
-                            //Sino, se muestra el menu principal
+                                //Sino, se muestra el menu principal
                             }else{
                                 Intent intent = new Intent(Login.this, MenuPrincipal.class);
                                 startActivity(intent);
@@ -235,7 +235,6 @@ public class Login extends AppCompatActivity {
         datosRoot.put("fechaNac","17/10/2003");
         datosRoot.put("phone","601361984");
         datosRoot.put("vecesLogeado",1);
-        datosRoot.put("numRutina",0);
         //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
 
@@ -243,7 +242,7 @@ public class Login extends AppCompatActivity {
 
     public void eliminarRoot(){
         DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
-        DatabaseReference currentUserBD = mDatabase.child("Mensajes");
+        DatabaseReference currentUserBD = mDatabase.child("Usuarios");
         currentUserBD.removeValue();
     }
 

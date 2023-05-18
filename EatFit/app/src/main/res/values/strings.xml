@@ -32,5 +32,4 @@
     </string-array>
 
     <string name="textoInfoOP">Le enviaremos un sms al número de telefono asignado a su nick o dirección de correo.</string>
-    <string name="textoPrivacidad"></string>
 </resources>

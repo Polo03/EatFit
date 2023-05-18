@@ -176,159 +176,49 @@ public class Cuestionario extends AppCompatActivity {
         myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(noCierraSesion()) {
-                    String nick="";
-                    String pwd="";
-                    String email="";
-                    String dni="";
-                    String peso="";
-                    String altura="";
-                    String fechaNac="";
-                    String numTelefono="";
-                    String nickPreferences=preferences.getString("nick",null);
-                    if (respuesta4.equals("Adelgazar")) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nickPreferences)){
-                                nick=dataSnapshot.child("nick").getValue().toString();
-                                pwd=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("phone").getValue().toString();
-                            }
-                        }
-
-                        Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nick);
-                        datosUser.put("password",pwd);
-                        datosUser.put("email",email);
-                        datosUser.put("DNI",dni);
-                        datosUser.put("peso",peso);
-                        datosUser.put("altura",altura);
-                        datosUser.put("fechaNac",fechaNac);
-                        datosUser.put("phone",numTelefono);
-                        datosUser.put("vecesLogeado",1);
-                        datosUser.put("numRutina",1);
-                        myRef.child("Usuarios").child(nick).setValue(datosUser);
-
-
-
-                    } else {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nickPreferences)){
-                                nick=dataSnapshot.child("nick").getValue().toString();
-                                pwd=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("phone").getValue().toString();
-                            }
-                        }
-
-                        Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nick);
-                        datosUser.put("password",pwd);
-                        datosUser.put("email",email);
-                        datosUser.put("DNI",dni);
-                        datosUser.put("peso",peso);
-                        datosUser.put("altura",altura);
-                        datosUser.put("fechaNac",fechaNac);
-                        datosUser.put("phone",numTelefono);
-                        datosUser.put("vecesLogeado",1);
-                        datosUser.put("numRutina",2);
-                        myRef.child("Usuarios").child(nick).setValue(datosUser);
-
+                Login l=new Login();
+                String nick="";
+                String pwd="";
+                String email="";
+                String dni="";
+                String peso="";
+                String altura="";
+                String fechaNac="";
+                String numTelefono="";
+                String nickStr=l.ultimoUsuarioLogeado();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
+                        nick=dataSnapshot.child("nick").getValue().toString();
+                        pwd=dataSnapshot.child("password").getValue().toString();
+                        email=dataSnapshot.child("email").getValue().toString();
+                        dni=dataSnapshot.child("DNI").getValue().toString();
+                        peso=dataSnapshot.child("peso").getValue().toString();
+                        altura=dataSnapshot.child("altura").getValue().toString();
+                        fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                        numTelefono=dataSnapshot.child("phone").getValue().toString();
                     }
-                    Map<String, Object> datosUserCuest = new HashMap<>();
-                    datosUserCuest.put("nick",nick);
-                    datosUserCuest.put("objetivo1",respuesta1);
-                    datosUserCuest.put("objetivo2",respuesta2);
-                    datosUserCuest.put("objetivo3",respuesta3);
-                    datosUserCuest.put("objetivo4",respuesta4);
-                    datosUserCuest.put("objetivo5",respuesta5);
-                    datosUserCuest.put("objetivo6",respuesta6);
-                    myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
-                }else{
-                    Login login=new Login();
-                    String nickString=login.ultimoUsuarioLogeado();
-                    String nick="";
-                    String pwd="";
-                    String email="";
-                    String dni="";
-                    String peso="";
-                    String altura="";
-                    String fechaNac="";
-                    String numTelefono="";
-                    if (respuesta4.equals("Adelgazar")) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nickString)){
-                                nick=dataSnapshot.child("nick").getValue().toString();
-                                pwd=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("phone").getValue().toString();
-                            }
-                        }
-
-                        Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nick);
-                        datosUser.put("password",pwd);
-                        datosUser.put("email",email);
-                        datosUser.put("DNI",dni);
-                        datosUser.put("peso",peso);
-                        datosUser.put("altura",altura);
-                        datosUser.put("fechaNac",fechaNac);
-                        datosUser.put("phone",numTelefono);
-                        datosUser.put("vecesLogeado",1);
-                        datosUser.put("numRutina",1);
-                        myRef.child("Usuarios").child(nick).setValue(datosUser);
-
-                    } else {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nickString)){
-                                nick=dataSnapshot.child("nick").getValue().toString();
-                                pwd=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                dni=dataSnapshot.child("DNI").getValue().toString();
-                                peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("altura").getValue().toString();
-                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                numTelefono=dataSnapshot.child("phone").getValue().toString();
-                            }
-                        }
-
-                        Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nick);
-                        datosUser.put("password",pwd);
-                        datosUser.put("email",email);
-                        datosUser.put("DNI",dni);
-                        datosUser.put("peso",peso);
-                        datosUser.put("altura",altura);
-                        datosUser.put("fechaNac",fechaNac);
-                        datosUser.put("phone",numTelefono);
-                        datosUser.put("vecesLogeado",1);
-                        datosUser.put("numRutina",1);
-                        myRef.child("Usuarios").child(nick).setValue(datosUser);
-
-
-                    }
-                    Map<String, Object> datosUserCuest = new HashMap<>();
-                    datosUserCuest.put("nick",nick);
-                    datosUserCuest.put("objetivo1",respuesta1);
-                    datosUserCuest.put("objetivo2",respuesta2);
-                    datosUserCuest.put("objetivo3",respuesta3);
-                    datosUserCuest.put("objetivo4",respuesta4);
-                    datosUserCuest.put("objetivo5",respuesta5);
-                    datosUserCuest.put("objetivo6",respuesta6);
-                    myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
                 }
+                Map<String, Object> datosUser = new HashMap<>();
+                datosUser.put("nick",nick);
+                datosUser.put("password",pwd);
+                datosUser.put("email",email);
+                datosUser.put("DNI",dni);
+                datosUser.put("peso",peso);
+                datosUser.put("altura",altura);
+                datosUser.put("fechaNac",fechaNac);
+                datosUser.put("phone",numTelefono);
+                datosUser.put("vecesLogeado",1);
+                myRef.child("Usuarios").child(nick).setValue(datosUser);
+
+                Map<String, Object> datosUserCuest = new HashMap<>();
+                datosUserCuest.put("nick",nick);
+                datosUserCuest.put("objetivo1",respuesta1);
+                datosUserCuest.put("objetivo2",respuesta2);
+                datosUserCuest.put("objetivo3",respuesta3);
+                datosUserCuest.put("objetivo4",respuesta4);
+                datosUserCuest.put("objetivo5",respuesta5);
+                datosUserCuest.put("objetivo6",respuesta6);
+                myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
             }
 
             @Override

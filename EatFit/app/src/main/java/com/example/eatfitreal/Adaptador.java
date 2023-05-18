@@ -22,8 +22,10 @@ public class Adaptador extends ArrayAdapter {
         View elemento = mostrado.inflate(R.layout.activity_adaptador, parent, false);
         ImageView imagen=elemento.findViewById(R.id.imagen);
         imagen.setImageResource(datos[posicion].getImagen());
+        TextView texto2 = elemento.findViewById(R.id.textView_series);
         TextView texto1 = elemento.findViewById(R.id.textViewMostrarRutina);
         texto1.setText(datos[posicion].getTexto1());
+        texto2.setText(datos[posicion].getTexto2());
         return elemento;
     }
 

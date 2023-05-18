@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,98 +55,54 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         TextView textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
         textViewNick.setEnabled(false);
-        if(preferences.getString("nick", null)==null){
-            //nick=l.ultimoUsuarioLogeado();
+        String nickStr="";
+        if(preferences.getString("nick", null)==null)
+            nickStr=l.ultimoUsuarioLogeado();
+        else
+            nickStr=preferences.getString("nick", null);
+        DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
+        String finalNickStr = nickStr;
+        myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nick="";
+                String pwd="";
+                String email="";
+                String dni="";
+                String peso="";
+                String altura="";
+                String fechaNac="";
+                String numTelefono="";
+                String nickStr2= finalNickStr;
 
-            DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
-            myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    String nick="";
-                    String pwd="";
-                    String email="";
-                    String dni="";
-                    String peso="";
-                    String altura="";
-                    String fechaNac="";
-                    String numTelefono="";
-
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        if(dataSnapshot.child("nick").getValue().toString().equals(l.ultimoUsuarioLogeado()) || dataSnapshot.child("email").getValue().toString().equals(l.ultimoUsuarioLogeado())){
-                            nick=dataSnapshot.child("nick").getValue().toString();
-                            pwd=dataSnapshot.child("password").getValue().toString();
-                            email=dataSnapshot.child("email").getValue().toString();
-                            dni=dataSnapshot.child("DNI").getValue().toString();
-                            peso=dataSnapshot.child("peso").getValue().toString();
-                            altura=dataSnapshot.child("altura").getValue().toString();
-                            fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                            numTelefono=dataSnapshot.child("phone").getValue().toString();
-                        }
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    if(dataSnapshot.child("nick").getValue().toString().equals(finalNickStr) || dataSnapshot.child("email").getValue().toString().equals(finalNickStr)){
+                        nick=dataSnapshot.child("nick").getValue().toString();
+                        pwd=dataSnapshot.child("password").getValue().toString();
+                        email=dataSnapshot.child("email").getValue().toString();
+                        dni=dataSnapshot.child("DNI").getValue().toString();
+                        peso=dataSnapshot.child("peso").getValue().toString();
+                        altura=dataSnapshot.child("altura").getValue().toString();
+                        fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                        numTelefono=dataSnapshot.child("phone").getValue().toString();
                     }
-                    textViewNick.setText(nick);
-                    textViewPwd.setText(pwd);
-                    textViewEmail.setText(email);
-                    textViewDNI.setText(dni);
-                    textViewPeso.setText(peso);
-                    textViewAltura.setText(altura);
-                    textViewFechaNac.setText(fechaNac);
-                    textViewNumTelefono.setText(numTelefono);
-
                 }
+                textViewNick.setText(nick);
+                textViewPwd.setText(pwd);
+                textViewEmail.setText(email);
+                textViewDNI.setText(dni);
+                textViewPeso.setText(peso);
+                textViewAltura.setText(altura);
+                textViewFechaNac.setText(fechaNac);
+                textViewNumTelefono.setText(numTelefono);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+            }
+        });
 
-        }else{
-            //nick=preferences.getString("nick", null);
-
-            DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
-            myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    String nickString=preferences.getString("nick",null);
-                    String nick="";
-                    String pwd="";
-                    String email="";
-                    String dni="";
-                    String peso="";
-                    String altura="";
-                    String fechaNac="";
-                    String numTelefono="";
-
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        if(dataSnapshot.child("nick").getValue().toString().equals(nickString)){
-                            nick=dataSnapshot.child("nick").getValue().toString();
-                            pwd=dataSnapshot.child("password").getValue().toString();
-                            email=dataSnapshot.child("email").getValue().toString();
-                            dni=dataSnapshot.child("DNI").getValue().toString();
-                            peso=dataSnapshot.child("peso").getValue().toString();
-                            altura=dataSnapshot.child("altura").getValue().toString();
-                            fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                            numTelefono=dataSnapshot.child("phone").getValue().toString();
-                        }
-                    }
-                    textViewNick.setText(nick);
-                    textViewPwd.setText(pwd);
-                    textViewEmail.setText(email);
-                    textViewDNI.setText(dni);
-                    textViewPeso.setText(peso);
-                    textViewAltura.setText(altura);
-                    textViewFechaNac.setText(fechaNac);
-                    textViewNumTelefono.setText(numTelefono);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
         ImageButton botonConfig=(ImageButton) findViewById(R.id.imageButtonConfig);
 
         Button botonSiguiente=(Button) findViewById(R.id.buttonNext);

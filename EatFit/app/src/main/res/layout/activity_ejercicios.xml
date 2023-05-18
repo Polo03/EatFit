@@ -8,12 +8,47 @@
 
     <ListView
         android:id="@+id/lista_ejercicios"
-        android:layout_width="395dp"
-        android:layout_height="627dp"
+        android:layout_width="404dp"
+        android:layout_height="567dp"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintVertical_bias="0.365" />
+
+    <TextView
+        android:id="@+id/textView_titulo_ejercicios"
+        android:layout_width="384dp"
+        android:layout_height="67dp"
+        android:text="Ejercicios"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/button_salir_ejercicios"
+        android:layout_width="103dp"
+        android:layout_height="57dp"
+        android:background="@drawable/rectangle_text"
+        android:backgroundTint="@color/yellow"
+        android:text="Atras"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
 </androidx.constraintlayout.widget.ConstraintLayout>
