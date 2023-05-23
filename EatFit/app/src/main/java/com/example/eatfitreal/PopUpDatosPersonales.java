@@ -65,6 +65,13 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         EditText textViewFechaNac=findViewById(R.id.textViewFechaNac);
         EditText textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
+
+        textViewEmail.setEnabled(false);
+        textViewDNI.setEnabled(false);
+        textViewPeso.setEnabled(false);
+        textViewAltura.setEnabled(false);
+        textViewFechaNac.setEnabled(false);
+        textViewNumTelefono.setEnabled(false);
         textViewNick.setTextColor(Color.WHITE);
         textViewPwd.setTextColor(Color.WHITE);
         textViewEmail.setTextColor(Color.WHITE);
@@ -146,6 +153,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                         datosRoot.put("vecesLogeado",1);
                         //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
                         myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
+                        //Para terminar la actividad en la cual introduces el comando
                         finish();
                     }
                 });

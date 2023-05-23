@@ -60,6 +60,7 @@ public class Ejercicios extends AppCompatActivity {
             nickStr=preferences.getString("nick", null);
         String finalNickStr = nickStr;
         ListView listView = findViewById(R.id.lista_ejercicios);
+        listView.setDivider(null);
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
         myRef.child("Cuestionario").addValueEventListener(new ValueEventListener() {
             String funcion="";
