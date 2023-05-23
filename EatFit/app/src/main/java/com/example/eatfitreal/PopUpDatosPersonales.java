@@ -1,12 +1,18 @@
 package com.example.eatfitreal;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PopUpDatosPersonales extends AppCompatActivity {
 
     private SharedPreferences preferences;
+    private DatabaseReference myRef;
+    private boolean esVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +44,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
         Login l=new Login();
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-
+        ImageButton vision=(ImageButton) findViewById(R.id.imageButtonVisionDP);
 
         //Para las medidas de la ventana del pop up
         DisplayMetrics medidasVentana=new DisplayMetrics();
@@ -45,22 +56,29 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
         getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
 
-        EditText textViewNick=findViewById(R.id.textViewNick);
+        TextView textViewNick=findViewById(R.id.textViewNick);
         TextView textViewPwd=findViewById(R.id.textViewPwd);
-        TextView textViewEmail=findViewById(R.id.textViewEmail);
-        TextView textViewDNI=findViewById(R.id.textViewDNI);
-        TextView textViewPeso=findViewById(R.id.textViewPeso);
-        TextView textViewAltura=findViewById(R.id.textViewAltura);
-        TextView textViewFechaNac=findViewById(R.id.textViewFechaNac);
-        TextView textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
+        EditText textViewEmail=findViewById(R.id.textViewEmail);
+        EditText textViewDNI=findViewById(R.id.textViewDNI);
+        EditText textViewPeso=findViewById(R.id.textViewPeso);
+        EditText textViewAltura=findViewById(R.id.textViewAltura);
+        EditText textViewFechaNac=findViewById(R.id.textViewFechaNac);
+        EditText textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
-        textViewNick.setEnabled(false);
+        textViewNick.setTextColor(Color.WHITE);
+        textViewPwd.setTextColor(Color.WHITE);
+        textViewEmail.setTextColor(Color.WHITE);
+        textViewDNI.setTextColor(Color.WHITE);
+        textViewPeso.setTextColor(Color.WHITE);
+        textViewAltura.setTextColor(Color.WHITE);
+        textViewFechaNac.setTextColor(Color.WHITE);
+        textViewNumTelefono.setTextColor(Color.WHITE);
         String nickStr="";
         if(preferences.getString("nick", null)==null)
             nickStr=l.ultimoUsuarioLogeado();
         else
             nickStr=preferences.getString("nick", null);
-        DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
+        myRef= FirebaseDatabase.getInstance().getReference();
         String finalNickStr = nickStr;
         myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,26 +121,78 @@ public class PopUpDatosPersonales extends AppCompatActivity {
             }
         });
 
-        ImageButton botonConfig=(ImageButton) findViewById(R.id.imageButtonConfig);
+
 
         Button botonSiguiente=(Button) findViewById(R.id.buttonNext);
         botonSiguiente.setVisibility(View.INVISIBLE);
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                botonConfig.setVisibility(View.VISIBLE);
-                botonSiguiente.setVisibility(View.INVISIBLE);
-                textViewNick.setEnabled(false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                builder.setTitle("ALERTA");
+                builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Map<String, Object> datosRoot = new HashMap<>();
+                        datosRoot.put("nick",textViewNick.getText().toString());
+                        datosRoot.put("password",textViewPwd.getText().toString());
+                        datosRoot.put("email",textViewEmail.getText().toString());
+                        datosRoot.put("DNI",textViewDNI.getText().toString());
+                        datosRoot.put("peso",textViewPeso.getText().toString());
+                        datosRoot.put("altura",textViewAltura.getText().toString());
+                        datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
+                        datosRoot.put("phone",textViewNumTelefono.getText().toString());
+                        datosRoot.put("vecesLogeado",1);
+                        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+                        myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
+        esVisible=true;
+        vision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!esVisible) {
+                    textViewPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    esVisible = true;
+                }
+                else {
+                    textViewPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    esVisible = false;
+                }
+            }
+        });
 
+        ImageButton botonConfig=(ImageButton) findViewById(R.id.imageButtonConfig);
         botonConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 botonConfig.setVisibility(View.INVISIBLE);
-                textViewNick.setEnabled(true);
+                textViewEmail.setEnabled(true);
+                textViewDNI.setEnabled(true);
+                textViewPeso.setEnabled(true);
+                textViewAltura.setEnabled(true);
+                textViewFechaNac.setEnabled(true);
+                textViewNumTelefono.setEnabled(true);
                 botonSiguiente.setVisibility(View.VISIBLE);
+                textViewEmail.getBackground().setTint(Color.WHITE);
+                textViewDNI.getBackground().setTint(Color.WHITE);
+                textViewPeso.getBackground().setTint(Color.WHITE);
+                textViewAltura.getBackground().setTint(Color.WHITE);
+                textViewFechaNac.getBackground().setTint(Color.WHITE);
+                textViewNumTelefono.getBackground().setTint(Color.WHITE);
             }
         });
 

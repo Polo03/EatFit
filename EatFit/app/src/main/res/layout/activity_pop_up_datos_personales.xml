@@ -9,14 +9,13 @@
     android:padding="16dp"
     tools:context=".PopUpDatosPersonales">
 
-    <EditText
+    <TextView
         android:id="@+id/textViewNick"
         android:layout_width="262dp"
         android:layout_height="43dp"
-        android:backgroundTint="#FFFFFF"
-        android:drawableTint="#FFFFFF"
-        android:singleLine="false"
+        android:singleLine="true"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.212"
@@ -29,6 +28,8 @@
         android:layout_width="253dp"
         android:layout_height="38dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.208"
@@ -36,22 +37,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.294" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewEmail"
         android:layout_width="248dp"
         android:layout_height="47dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewDNI"
         android:layout_width="252dp"
         android:layout_height="43dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.207"
@@ -59,11 +62,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.39" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewPeso"
         android:layout_width="252dp"
         android:layout_height="43dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.207"
@@ -71,11 +75,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.597" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewAltura"
         android:layout_width="253dp"
         android:layout_height="50dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.208"
@@ -83,11 +88,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.69" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewFechaNac"
         android:layout_width="257dp"
         android:layout_height="52dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.214"
@@ -95,11 +101,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.792" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewNumTelefono"
         android:layout_width="241dp"
         android:layout_height="58dp"
         android:textSize="16sp"
+        android:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
@@ -135,6 +142,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/imageButtonVisionDP"
+        android:layout_width="41dp"
+        android:layout_height="33dp"
+        android:background="@drawable/eye"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.303"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <Button

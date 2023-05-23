@@ -3,11 +3,17 @@ package com.example.eatfitreal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,10 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class Ejercicios extends AppCompatActivity {
 
     private SharedPreferences preferences;
-
+    private TextView titulo_ejercicios;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -32,9 +40,18 @@ public class Ejercicios extends AppCompatActivity {
         String item=getIntent().getStringExtra("item");
         menuPrincipal.setButtonvalor(0);
         rellenaListView(i,item);
+
+        ImageButton botonSalir = (ImageButton) findViewById(R.id.button_salir_ejercicios);
+        botonSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Ejercicios.this, MenuPrincipal.class));
+            }
+        });
     }
 
     public void rellenaListView(int i, String item){
+        titulo_ejercicios=(TextView)findViewById(R.id.textView_titulo_ejercicios);
         Login l=new Login();
         String nickStr="";
         if(preferences.getString("nick", null)==null)
@@ -58,6 +75,7 @@ public class Ejercicios extends AppCompatActivity {
                 if (funcion.equals("Adelgazar")) {
                     //Si quiere rutina de pecho y brazos
                     if (i == 1) {
+                        titulo_ejercicios.setText("Ejercicios de Pecho y Brazo");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
@@ -91,6 +109,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de abdominales
                     if (i == 2) {
+                        titulo_ejercicios.setText("Ejercicios de Abdominales");
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
                                     new POJO(R.drawable.dietas, "Crunches", "3 series de 15 repeticiones"),
@@ -123,6 +142,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de hombros y espalda
                     if (i == 3) {
+                        titulo_ejercicios.setText("Ejercicios de Hombros y Espalda");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
@@ -156,6 +176,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de piernas
                     if (i == 4) {
+                        titulo_ejercicios.setText("Ejercicios de Piernas");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
@@ -191,6 +212,7 @@ public class Ejercicios extends AppCompatActivity {
                 } else {
                     //Si quiere rutina de pecho y brazos
                     if (i == 1) {
+                        titulo_ejercicios.setText("Ejercicios de Pecho y Brazo");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
@@ -224,6 +246,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de abdominales
                     if (i == 2) {
+                        titulo_ejercicios.setText("Ejercicios de Abdominales");
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
                                     new POJO(R.drawable.dietas, "Crunches con peso", "3 series de 12 repeticiones"),
@@ -256,6 +279,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de hombros y espalda
                     if (i == 3) {
+                        titulo_ejercicios.setText("Ejercicios de Hombros y Espalda");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{
@@ -289,6 +313,7 @@ public class Ejercicios extends AppCompatActivity {
                     }
                     //Si quiere rutina de piernas
                     if (i == 4) {
+                        titulo_ejercicios.setText("Ejercicios de Piernas");
                         //Si quiere nivel principiante
                         if (item.equals("Principiante")) {
                             datos = new POJO[]{

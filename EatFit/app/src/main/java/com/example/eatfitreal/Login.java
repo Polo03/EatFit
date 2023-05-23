@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +34,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     static EditText nick;
-    private boolean isActivateRadioButton;
+    private boolean isActivateRadioButton,esVisible;
     private SharedPreferences preferences;
 
     private DatabaseReference myRef;
@@ -47,11 +49,13 @@ public class Login extends AppCompatActivity {
         EditText pwd=(EditText) findViewById(R.id.editTextPwd);
         RadioButton radioButtonSesion=(RadioButton)findViewById(R.id.radioButtonSesion);
         TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
+        ImageButton vision=(ImageButton) findViewById(R.id.imageButtonVision);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         //eliminarRoot();
         //introduceRutinas();
-        introduceUserRoot();
+        //introduceUserRoot();
+        introduceDietas();
         //introducePreguntas();
         //cuestionarioRoot();
 
@@ -67,6 +71,22 @@ public class Login extends AppCompatActivity {
                 if(isActivateRadioButton)
                     radioButtonSesion.setChecked(false);
                 isActivateRadioButton=radioButtonSesion.isChecked();
+            }
+        });
+
+
+        esVisible=true;
+        vision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!esVisible) {
+                    pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    esVisible = true;
+                }
+                else {
+                    pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    esVisible = false;
+                }
             }
         });
 
@@ -97,7 +117,7 @@ public class Login extends AppCompatActivity {
                             }
                         }
 
-                        if(password.equals(pwd.getText().toString())){
+                        if(password.equals(pwd.getText().toString()) && !password.replaceAll("  ", " ").trim().equals("") && !nickString.replaceAll("  " , " ").trim().equals("")){
                             //Toast.makeText(Login.this, "Usuario Valido", Toast.LENGTH_SHORT).show();
                             if(isActivateRadioButton) {
                                 SharedPreferences.Editor editor = preferences.edit();
@@ -242,7 +262,7 @@ public class Login extends AppCompatActivity {
 
     public void eliminarRoot(){
         DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
-        DatabaseReference currentUserBD = mDatabase.child("Usuarios");
+        DatabaseReference currentUserBD = mDatabase.child("Dietas");
         currentUserBD.removeValue();
     }
 
@@ -258,6 +278,20 @@ public class Login extends AppCompatActivity {
         datosUserCuest.put("objetivo5","5");
         datosUserCuest.put("objetivo6","6");
         myRef.child("Cuestionario").child("Root").setValue(datosUserCuest);
+    }
+    public void introduceDietas(){
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> dietas = new HashMap<>();
+        dietas.put("desayuno","Batido de proteínas hecho con leche descremada, proteína en polvo y una cucharada de mantequilla de maní.|Una porción de fruta (por ejemplo, bayas).");
+        dietas.put("media_mañana","Palitos de zanahoria con hummus.");
+        dietas.put("comida","Ensalada de camarones con hojas verdes, tomate cherry, aguacate y vinagreta ligera.|Una porción de pan integral.");
+        dietas.put("merienda","Un yogur griego bajo en grasa.|Un puñado de uvas.");
+        dietas.put("cena","Pechuga de pollo a la plancha con brócoli y champiñones salteados.|Una porción de batata asada.");
+
+        myRef.child("Dietas").child("Definicion").child("Domingo").setValue(dietas);
+
     }
 
 
