@@ -63,8 +63,6 @@ public class CreateAccount extends AppCompatActivity {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 if(dataSnapshot.child("nick").getValue().toString().equals(editTextUser.getText().toString()))
                                     nick[0]=dataSnapshot.child("nick").getValue().toString();
-                                if(dataSnapshot.child("email").getValue().toString().equals(editTextEmail.getText().toString()))
-                                    email[0]=dataSnapshot.child("email").getValue().toString();
                                 if(dataSnapshot.child("DNI").getValue().toString().equals(editTextDni.getText().toString()))
                                     dni[0]=dataSnapshot.child("DNI").getValue().toString();
                             }
@@ -86,15 +84,6 @@ public class CreateAccount extends AppCompatActivity {
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
                                 //Si existe el email, mostramos mensaje de que el email ya esta en uso
-                            }else if(!email[0].equals("")){
-
-                                Context context = getApplicationContext();
-                                CharSequence text = "El email ya esta en uso";
-                                int duration = Toast.LENGTH_LONG;
-
-                                Toast toast = Toast.makeText(context, text, duration);
-                                toast.show();
-                                //Si DNI el email, mostramos mensaje de que el DNI ya esta en uso
                             }else if(!dni[0].equals("")){
 
                                 Context context = getApplicationContext();
@@ -105,7 +94,6 @@ public class CreateAccount extends AppCompatActivity {
                                 toast.show();
                                 //Sino
                             }else{
-
                                 String nickString=editTextUser.getText().toString();
                                 String pwdString=editTextPwd.getText().toString();
                                 String emailString=editTextEmail.getText().toString();

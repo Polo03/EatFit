@@ -1,5 +1,6 @@
 package com.example.eatfitreal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -52,9 +56,26 @@ public class MenuPrincipal extends AppCompatActivity {
         botonSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cerrarSesion();
-                Intent intent = new Intent(MenuPrincipal.this, Login.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
+                builder.setTitle("ALERTA");
+                builder.setMessage("¿Desea cerrar sesión?");        // add the buttons
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cerrarSesion();
+                        Intent intent = new Intent(MenuPrincipal.this, Login.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 

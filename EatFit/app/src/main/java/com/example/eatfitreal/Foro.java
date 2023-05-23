@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -32,6 +33,16 @@ public class Foro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
+
+        //Para las medidas de la ventana del pop up
+        DisplayMetrics medidasVentana=new DisplayMetrics();
+
+        getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
+
+        int ancho=medidasVentana.widthPixels;
+        int alto=medidasVentana.heightPixels;
+
+        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
 
         rellenaLista(lista);
 
