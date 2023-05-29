@@ -1,39 +1,37 @@
 package com.example.eatfitreal;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.MenuInflater;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Calendar;
 
 public class MenuPrincipal extends AppCompatActivity {
 
     private SharedPreferences preferences;
     public int count=0;
+    int index=1;
+
+    String[] niveles={"Principiante","Intermedio","Avanzado"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -41,6 +39,14 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        ImageButton buttonBefore=findViewById(R.id.imageButtonBefore1);
+        buttonBefore.setVisibility(View.INVISIBLE);
+        ImageButton buttonAfter=findViewById(R.id.imageButtonAfter1);
+        buttonAfter.setVisibility(View.INVISIBLE);
+        TextView t1=findViewById(R.id.textViewBrazoYPecho);
+        t1.setVisibility(View.INVISIBLE);
+        t1.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        t1.setText(niveles[index]);
 
         //Por si el usuario ha decidido no cerrar sesión, recogemos el nick con
         //las shared preferences.
@@ -50,6 +56,26 @@ public class MenuPrincipal extends AppCompatActivity {
         Login login=new Login();
 
         TextView texto = (TextView) findViewById(R.id.textViewRutina_Brazo_Pecho);
+        ImageButton graficos=findViewById(R.id.buttonCalendario);
+        graficos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                /*Calendar c=Calendar.getInstance();
+                int year=c.get(Calendar.YEAR);
+                int month=c.get(Calendar.MONTH);
+                int day=c.get(Calendar.DAY_OF_MONTH);
+               DatePickerDialog d=new DatePickerDialog(MenuPrincipal.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+                    }
+                },year,month,day);
+                d.show();*/
+                //CalendarView c=new CalendarView(MenuPrincipal.this);
+            }
+        });
 
         //Botón para cuando cerramos sesión
         ImageButton botonSalir = (ImageButton) findViewById(R.id.buttonSalir);
@@ -112,6 +138,73 @@ public class MenuPrincipal extends AppCompatActivity {
                 });
                 // Muestra el popup
                 popup.show();
+                /*button_brazo_pecho.setVisibility(View.INVISIBLE);
+                texto.setVisibility(View.INVISIBLE);
+                if(index==1){
+                    buttonBefore.setVisibility(View.VISIBLE);
+                    buttonAfter.setVisibility(View.VISIBLE);
+                }else if(index==2){
+                    buttonBefore.setVisibility(View.VISIBLE);
+                    buttonAfter.setVisibility(View.INVISIBLE);
+                }else{
+                    buttonBefore.setVisibility(View.INVISIBLE);
+                    buttonAfter.setVisibility(View.VISIBLE);
+                }
+
+                buttonBefore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        index--;
+                        if(index<0)
+                            index=2;
+                        t1.setText(niveles[index]);
+                        if(index==1){
+                            buttonBefore.setVisibility(View.VISIBLE);
+                            buttonAfter.setVisibility(View.VISIBLE);
+                        }else if(index==2){
+                            buttonBefore.setVisibility(View.VISIBLE);
+                            buttonAfter.setVisibility(View.INVISIBLE);
+                        }else{
+                            buttonBefore.setVisibility(View.INVISIBLE);
+                            buttonAfter.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+                buttonAfter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        index++;
+                        if(index>2)
+                            index=0;
+                        t1.setText(niveles[index]);
+                        if(index==1){
+                            buttonBefore.setVisibility(View.VISIBLE);
+                            buttonAfter.setVisibility(View.VISIBLE);
+                        }else if(index==2){
+                            buttonBefore.setVisibility(View.VISIBLE);
+                            buttonAfter.setVisibility(View.INVISIBLE);
+                        }else{
+                            buttonBefore.setVisibility(View.INVISIBLE);
+                            buttonAfter.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+                t1.setVisibility(View.VISIBLE);
+                t1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        count=1;
+                        Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
+                        intent.putExtra("count", getButtonvalor());
+                        intent.putExtra("item",t1.getText().toString());
+                        startActivity(intent);
+                        button_brazo_pecho.setVisibility(View.VISIBLE);
+                        texto.setVisibility(View.VISIBLE);
+                        buttonBefore.setVisibility(View.INVISIBLE);
+                        buttonAfter.setVisibility(View.INVISIBLE);
+                        t1.setVisibility(View.INVISIBLE);
+                    }
+                });*/
 
             }
         });
@@ -221,5 +314,10 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent intent = new Intent(MenuPrincipal.this, PopUpDatosPersonales.class);
         startActivity(intent);
     }
+
+    public void mostrarNiveles(ImageButton before, ImageButton after, TextView t1){
+
+    }
+
 
 }

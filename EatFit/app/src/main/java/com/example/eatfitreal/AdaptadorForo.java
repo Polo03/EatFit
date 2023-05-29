@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class AdaptadorForo extends ArrayAdapter {
         View elemento = mostrado.inflate(R.layout.activity_adaptador_foro, parent, false);
         TextView texto1 = elemento.findViewById(R.id.textViewMostrarPregunta);
         texto1.setText(datos.get(posicion).getTexto1());
+        texto1.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         return elemento;
     }
 }

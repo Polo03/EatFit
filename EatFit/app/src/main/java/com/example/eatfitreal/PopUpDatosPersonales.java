@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PopUpDatosPersonales extends AppCompatActivity {
 
@@ -156,40 +158,47 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                             if(allDNIS.get(i).equals(textViewDNI.getText().toString()))
                                 existeDNI=true;
                         }
-                        if(!existeDNI){
-                            AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
-                            builder.setTitle("ALERTA");
-                            builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
-                            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Map<String, Object> datosRoot = new HashMap<>();
-                                    datosRoot.put("nick",textViewNick.getText().toString());
-                                    datosRoot.put("password",textViewPwd.getText().toString());
-                                    datosRoot.put("email",textViewEmail.getText().toString());
-                                    datosRoot.put("DNI",textViewDNI.getText().toString());
-                                    datosRoot.put("peso",textViewPeso.getText().toString());
-                                    datosRoot.put("altura",textViewAltura.getText().toString());
-                                    datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
-                                    datosRoot.put("phone",textViewNumTelefono.getText().toString());
-                                    datosRoot.put("vecesLogeado",1);
-                                    //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
-                                    myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
-                                    //Para terminar la actividad en la cual introduces el comando
-                                    finish();
-                                }
-                            });
-                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                        Pattern patronDNI=Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]");
+                        Matcher matcherDNI=patronDNI.matcher(textViewDNI.getText().toString());
+                        if(matcherDNI.matches()){
+                            if(!existeDNI){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                                builder.setTitle("ALERTA");
+                                builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
+                                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Map<String, Object> datosRoot = new HashMap<>();
+                                        datosRoot.put("nick",textViewNick.getText().toString());
+                                        datosRoot.put("password",textViewPwd.getText().toString());
+                                        datosRoot.put("email",textViewEmail.getText().toString());
+                                        datosRoot.put("DNI",textViewDNI.getText().toString());
+                                        datosRoot.put("peso",textViewPeso.getText().toString());
+                                        datosRoot.put("altura",textViewAltura.getText().toString());
+                                        datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
+                                        datosRoot.put("phone",textViewNumTelefono.getText().toString());
+                                        datosRoot.put("vecesLogeado",1);
+                                        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+                                        myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
+                                        //Para terminar la actividad en la cual introduces el comando
+                                        finish();
+                                    }
+                                });
+                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }else{
+                                Toast.makeText(PopUpDatosPersonales.this, "Ese DNI ya existe", Toast.LENGTH_SHORT).show();
+                            } 
                         }else{
-                            Toast.makeText(PopUpDatosPersonales.this, "Ese DNI ya existe", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PopUpDatosPersonales.this, "Revise el formato de su nuevo DNI", Toast.LENGTH_SHORT).show();
                         }
+                        
 
                     }
                 });

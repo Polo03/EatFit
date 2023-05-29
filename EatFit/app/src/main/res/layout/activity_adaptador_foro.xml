@@ -9,6 +9,8 @@
     <TextView
         android:id="@+id/textViewMostrarPregunta"
         android:layout_width="406dp"
-        android:layout_height="78dp" />
+        android:layout_height="78dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

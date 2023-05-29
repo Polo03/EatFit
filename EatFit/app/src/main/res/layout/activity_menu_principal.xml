@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     tools:context=".MenuPrincipal">
 
 
@@ -64,8 +64,8 @@
 
     <TextView
         android:id="@+id/textViewRutina_Brazo_Pecho"
-        android:layout_width="415dp"
-        android:layout_height="167dp"
+        android:layout_width="418dp"
+        android:layout_height="186dp"
         android:background="@drawable/rutina_brazo_pecho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,76 +74,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
-        android:id="@+id/buttonDatosPersonales"
-        android:layout_width="56dp"
-        android:layout_height="53dp"
-        android:background="@drawable/datospersonales"
-        android:onClick="abrirPopUpDatosPersonales"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <ImageButton
-        android:id="@+id/buttonForo"
-        android:layout_width="53dp"
-        android:layout_height="46dp"
-        android:background="@drawable/foro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.726"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <ImageButton
-        android:id="@+id/buttonCalendario"
-        android:layout_width="50dp"
-        android:layout_height="47dp"
-        android:background="@drawable/calendario"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <ImageButton
-        android:id="@+id/buttonDietas"
-        android:layout_width="59dp"
-        android:layout_height="55dp"
-        android:background="@drawable/dietas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.269"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <ImageButton
-        android:id="@+id/buttonSalir"
-        android:layout_width="61dp"
-        android:layout_height="50dp"
-        android:background="@drawable/botonsalir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/textViewRutina_Abdomen"
-        android:layout_width="410dp"
-        android:layout_height="163dp"
+        android:layout_width="418dp"
+        android:layout_height="186dp"
         android:background="@drawable/rutina_abdomen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,8 +90,8 @@
 
     <TextView
         android:id="@+id/textViewRutina_Hombros_Espalda"
-        android:layout_width="415dp"
-        android:layout_height="189dp"
+        android:layout_width="418dp"
+        android:layout_height="186dp"
         android:background="@drawable/rutina_hombros_espalda"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,8 +101,8 @@
 
     <TextView
         android:id="@+id/textViewRutina_Piernas"
-        android:layout_width="415dp"
-        android:layout_height="169dp"
+        android:layout_width="418dp"
+        android:layout_height="186dp"
         android:background="@drawable/rutina_piernas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,5 +128,118 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.146" />
+
+    <TextView
+        android:id="@+id/textView_transparente"
+        android:layout_width="393dp"
+        android:layout_height="83dp"
+        android:background="@drawable/bordeactivityredondomenuprincipal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/buttonDatosPersonales"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:background="@drawable/datospersonales"
+        android:onClick="abrirPopUpDatosPersonales"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.036"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/buttonForo"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:background="@drawable/foro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/buttonCalendario"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:background="@drawable/calendario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/buttonDietas"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:background="@drawable/dietas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/buttonSalir"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:background="@drawable/botonsalir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/textViewBrazoYPecho"
+        android:layout_width="248dp"
+        android:layout_height="129dp"
+        android:background="@drawable/bordetextviewredondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021" />
+
+    <ImageButton
+        android:id="@+id/imageButtonBefore1"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
+        android:background="@drawable/flechabefore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAfter1"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
+        android:background="@drawable/flechaafter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.986"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

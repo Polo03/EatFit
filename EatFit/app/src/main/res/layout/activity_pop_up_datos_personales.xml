@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bordeactivityredondo"
+    android:background="@drawable/fondocuestionario"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".PopUpDatosPersonales">
@@ -29,6 +29,7 @@
         android:layout_height="38dp"
         android:textSize="16sp"
         android:backgroundTint="@android:color/transparent"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.208"
@@ -104,14 +105,14 @@
         android:id="@+id/textViewNumTelefono"
         android:layout_width="241dp"
         android:layout_height="58dp"
-        android:textSize="16sp"
         android:backgroundTint="@android:color/transparent"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.888" />
 
     <TextView
         android:id="@+id/textView_titulo_datos"
@@ -147,6 +148,7 @@
         android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
         android:text="Confirmar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,17 +1,16 @@
 package com.example.eatfitreal;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,28 +20,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Foro extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foro);
+
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
-
-        //Para las medidas de la ventana del pop up
-        DisplayMetrics medidasVentana=new DisplayMetrics();
-
-        getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
-
-        int ancho=medidasVentana.widthPixels;
-        int alto=medidasVentana.heightPixels;
-
-        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
+        ImageButton botonAdd=findViewById(R.id.imageButtonAdd);
 
         rellenaLista(lista);
 
@@ -55,14 +44,19 @@ public class Foro extends AppCompatActivity {
             }
         });
 
-
-
+        botonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(Foro.this, "PULSADO", Toast.LENGTH_SHORT).show();
+                addPregunta(lista);
+            }
+        });
     }
 
     public void rellenaLista(ListView lista){
-        DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
+        DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
         ArrayList<POJOForo> datos=new ArrayList<>();
-        myRef.child("Mensajes").child("Preguntas").addValueEventListener(new ValueEventListener() {
+        myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
@@ -77,6 +71,49 @@ public class Foro extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void addPregunta(ListView lista){
+        EditText editText=findViewById(R.id.editTextAddPregunta);
+        if(editText.getText().toString().equals("")){
+            Toast.makeText(this, "La pregunta debe tener algo", Toast.LENGTH_SHORT).show();
+        }else{
+            DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
+            ArrayList<POJOForo> datos=new ArrayList<>();
+            myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
+                boolean existe=false;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String id="0";
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
+                        id=dataSnapshot.child("id").getValue().toString();
+                    }
+                    for(POJOForo dato: datos){
+                        if(dato.getTexto1().equals(editText.getText().toString()))
+                            existe=true;
+                    }
+
+                    if(existe)
+                        Toast.makeText(Foro.this, "La pregunta ya existe, vaya a ver su respuesta", Toast.LENGTH_SHORT).show();
+                    else{
+                        int cont=Integer.parseInt(id)+1;
+                        HashMap<String,Object> pregunta=new HashMap<>();
+                        pregunta.put("id",cont);
+                        pregunta.put("pregunta",editText.getText().toString());
+                        pregunta.put("respuesta","");
+
+                        myRef.child("Mensajes").child("Mensaje"+cont).setValue(pregunta);
+                        lista.setAdapter(null);
+                        rellenaLista(lista);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 }

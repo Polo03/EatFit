@@ -55,8 +55,8 @@ public class Login extends AppCompatActivity {
         //eliminarRoot();
         //introduceRutinas();
         //introduceUserRoot();
-        introduceDietas();
-        //introducePreguntas();
+        //introduceDietas();
+        introducePreguntas();
         //cuestionarioRoot();
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
@@ -237,7 +237,7 @@ public class Login extends AppCompatActivity {
         mensajePrueba.put("id",1);
         mensajePrueba.put("pregunta","¿Pregunta1?");
         mensajePrueba.put("respuesta","Respuesta1");
-        myRef.child("Mensajes").child("Preguntas").child("Mensaje1").setValue(mensajePrueba);
+        myRef.child("Mensajes").child("Mensaje1").setValue(mensajePrueba);
 
     }
 

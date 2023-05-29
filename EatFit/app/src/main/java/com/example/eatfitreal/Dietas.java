@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Dietas extends AppCompatActivity {
@@ -53,15 +54,28 @@ public class Dietas extends AppCompatActivity {
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.70));
 
+        Calendar calendario = Calendar.getInstance();
         long ahora = System.currentTimeMillis();
         Date fecha = new Date(ahora);
         int dia=fecha.getDay();
+        int hora = fecha.getHours();
+        if(hora>=4 && hora<10)
+            index=0;
+        else if(hora>=10 && hora<12)
+            index=1;
+        else if(hora>=12 && hora<17)
+            index=2;
+        else if(hora>=17 && hora<19)
+            index=3;
+        else
+            index=4;
+
         ImageView imagenDia=findViewById(R.id.imageViewDia);
         imagenDia.setImageResource(galeria[dia-1]);
 
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
 
-        TextSwitcher textSwitcher=findViewById(R.id.textSwitcher);
+        TextView textSwitcher=findViewById(R.id.textSwitcher);
         ImageButton beforeButton=findViewById(R.id.imageButtonBefore);
         ImageButton afterButton=findViewById(R.id.imageButtonAfter);
         TextView textViewHora=findViewById(R.id.textView8);
@@ -74,6 +88,7 @@ public class Dietas extends AppCompatActivity {
 
         String finalNickStr = nickStr;
         String[] funcion={""};
+        textSwitcher.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
         myRef.child("Cuestionario").addValueEventListener(new ValueEventListener() {
 
@@ -87,7 +102,6 @@ public class Dietas extends AppCompatActivity {
                 textViewHora.setText(horas[index]);
                 if(funcion[0].equals("Adelgazar")){
                     myRef.child("Dietas").child("Definicion").addValueEventListener(new ValueEventListener() {
-                        ArrayList<String> a=new ArrayList<>();
                         int cont=0;
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,21 +120,24 @@ public class Dietas extends AppCompatActivity {
                                     if(galeriaTexto[6][index].charAt(i)=='_') {
                                         cadena += c + "\n";
                                         c="";
-                                    }else
-                                        c+=galeriaTexto[6][index].charAt(i);
-                                    if(c.length()==galeriaTexto[6][index].length())
-                                        cadena=c;
+                                    }else{
+                                        c += galeriaTexto[6][index].charAt(i);
+                                    }
+
                                 }
+                                if(c.length()==galeriaTexto[6][index].length())
+                                    cadena=c;
                             }else{
-                                for(int i=0;i<galeriaTexto[6][index].length();i++){
-                                    if(galeriaTexto[6][index].charAt(i)=='_') {
+                                for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
+                                    if(galeriaTexto[dia-1][index].charAt(i)=='_') {
                                         cadena += c + "\n";
                                         c="";
-                                    }else
-                                        c+=galeriaTexto[6][index].charAt(i);
-                                    if(c.length()==galeriaTexto[6][index].length())
-                                        cadena=c;
+                                    }else {
+                                        c += galeriaTexto[dia - 1][index].charAt(i);
+                                    }
                                 }
+                                if(c.length()==galeriaTexto[dia-1][index].length())
+                                    cadena=c;
 
                             }
                             textSwitcher.setText(cadena);
@@ -149,8 +166,16 @@ public class Dietas extends AppCompatActivity {
                             String cadena="";
                             String c="";
                             if(dia==0){
-                                textSwitcher.setText(galeriaTexto[6][index]);
-                                textViewHora.setText(horas[index]);
+                                for(int i=0;i<galeriaTexto[6][index].length();i++){
+                                    if(galeriaTexto[6][index].charAt(i)=='_') {
+                                        cadena += c + "\n";
+                                        c="";
+                                    }else
+                                        c+=galeriaTexto[6][index].charAt(i);
+
+                                }
+                                if(c.length()==galeriaTexto[6][index].length())
+                                    cadena=c;
                             }else{
                                 for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
                                     if(galeriaTexto[dia-1][index].charAt(i)=='_') {
@@ -159,9 +184,12 @@ public class Dietas extends AppCompatActivity {
                                     }else
                                         c+=galeriaTexto[dia-1][index].charAt(i);
                                 }
-                                textViewHora.setText(horas[index]);
-                                textSwitcher.setText(cadena);
+                                if(c.length()==galeriaTexto[dia-1][index].length())
+                                    cadena=c;
+
                             }
+                            textSwitcher.setText(cadena);
+                            textViewHora.setText(horas[index]);
 
 
                         }
@@ -182,6 +210,7 @@ public class Dietas extends AppCompatActivity {
 
 
         beforeButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 myRef.child("Cuestionario").addValueEventListener(new ValueEventListener() {
@@ -220,22 +249,24 @@ public class Dietas extends AppCompatActivity {
                                                 c="";
                                             }else
                                                 c+=galeriaTexto[6][index].charAt(i);
-                                            if(c.length()==galeriaTexto[6][index].length())
-                                                cadena=c;
+
                                         }
+                                        if(c.length()==galeriaTexto[6][index].length())
+                                            cadena=c;
                                     }else{
                                         if(index<0){
-                                            index=galeriaTexto[6].length-1;
+                                            index=galeriaTexto[dia-1].length-1;
                                         }
-                                        for(int i=0;i<galeriaTexto[6][index].length();i++){
-                                            if(galeriaTexto[6][index].charAt(i)=='_') {
+                                        for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
+                                            if(galeriaTexto[dia-1][index].charAt(i)=='_') {
                                                 cadena += c + "\n";
                                                 c="";
                                             }else
-                                                c+=galeriaTexto[6][index].charAt(i);
-                                            if(c.length()==galeriaTexto[6][index].length())
-                                                cadena=c;
+                                                c+=galeriaTexto[dia-1][index].charAt(i);
+
                                         }
+                                        if(c.length()==galeriaTexto[dia-1][index].length())
+                                            cadena=c;
 
                                     }
                                     textViewHora.setText(horas[index]);
@@ -273,12 +304,13 @@ public class Dietas extends AppCompatActivity {
                                                 c="";
                                             }else
                                                 c+=galeriaTexto[6][index].charAt(i);
-                                            if(c.length()==galeriaTexto[6][index].length())
-                                                cadena=c;
+
                                         }
+                                        if(c.length()==galeriaTexto[6][index].length())
+                                            cadena=c;
                                     }else{
                                         if(index<0){
-                                            index=galeriaTexto[6].length-1;
+                                            index=galeriaTexto[dia-1].length-1;
                                         }
                                         for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
                                             if(galeriaTexto[dia-1][index].charAt(i)=='_') {
@@ -286,9 +318,10 @@ public class Dietas extends AppCompatActivity {
                                                 c="";
                                             }else
                                                 c+=galeriaTexto[dia-1][index].charAt(i);
-                                            if(c.length()==galeriaTexto[dia-1][index].length())
-                                                cadena=c;
+
                                         }
+                                        if(c.length()==galeriaTexto[dia-1][index].length())
+                                            cadena=c;
                                     }
                                     textViewHora.setText(horas[index]);
                                     textSwitcher.setText(cadena);
@@ -344,17 +377,17 @@ public class Dietas extends AppCompatActivity {
                                         if(index==galeriaTexto[6].length){
                                             index=0;
                                         }
-                                        for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
-                                            if(galeriaTexto[dia-1][index].charAt(i)=='_') {
+                                        for(int i=0;i<galeriaTexto[6][index].length();i++){
+                                            if(galeriaTexto[6][index].charAt(i)=='_') {
                                                 cadena += c + "\n";
                                                 c="";
                                             }else
-                                                c+=galeriaTexto[dia-1][index].charAt(i);
-                                            if(c.length()==galeriaTexto[dia-1][index].length())
+                                                c+=galeriaTexto[6][index].charAt(i);
+                                            if(c.length()==galeriaTexto[6][index].length())
                                                 cadena=c;
                                         }
                                     }else{
-                                        if(index==galeriaTexto[6].length){
+                                        if(index==galeriaTexto[dia-1].length){
                                             index=0;
                                         }
                                         for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
@@ -396,17 +429,17 @@ public class Dietas extends AppCompatActivity {
                                         if(index==galeriaTexto[6].length){
                                             index=0;
                                         }
-                                        for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
-                                            if(galeriaTexto[dia-1][index].charAt(i)=='_') {
+                                        for(int i=0;i<galeriaTexto[6][index].length();i++){
+                                            if(galeriaTexto[6][index].charAt(i)=='_') {
                                                 cadena += c + "\n";
                                                 c="";
                                             }else
-                                                c+=galeriaTexto[dia-1][index].charAt(i);
-                                            if(c.length()==galeriaTexto[dia-1][index].length())
+                                                c+=galeriaTexto[6][index].charAt(i);
+                                            if(c.length()==galeriaTexto[6][index].length())
                                                 cadena=c;
                                         }
                                     }else{
-                                        if(index==galeriaTexto[6].length){
+                                        if(index==galeriaTexto[dia-1].length){
                                             index=0;
                                         }
                                         for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
@@ -440,19 +473,6 @@ public class Dietas extends AppCompatActivity {
 
             }
         });
-
-
-        textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
-            @Override
-            public View makeView() {
-                TextView t=new TextView(getApplicationContext());
-                t.setGravity(Gravity.CENTER_HORIZONTAL);
-                t.setTextColor(Color.WHITE);
-                t.setTextSize(16);
-                return t;
-            }
-        });
-
 
     }
 }

@@ -4,20 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/movil"
     tools:context=".Ejercicios">
-
-    <ListView
-        android:id="@+id/lista_ejercicios"
-        android:layout_width="392dp"
-        android:layout_height="598dp"
-        android:animateLayoutChanges="false"
-        android:animationCache="false"
-        android:clickable="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
 
     <TextView
         android:id="@+id/textView_titulo_ejercicios"
@@ -25,29 +13,28 @@
         android:layout_height="67dp"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="28sp"
+        android:textColor="@color/yellow"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.024" />
 
-    <ImageButton
-        android:id="@+id/button_salir_ejercicios"
-        android:layout_width="36dp"
-        android:layout_height="21dp"
-        android:background="@drawable/atras"
-        android:backgroundTint="@color/yellow"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textStyle="bold"
+    <ListView
+        android:id="@+id/lista_ejercicios"
+        android:layout_width="328dp"
+        android:layout_height="557dp"
+        android:animateLayoutChanges="false"
+        android:animationCache="false"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.7" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

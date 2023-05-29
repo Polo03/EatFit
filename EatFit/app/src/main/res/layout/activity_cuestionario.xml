@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondocuestionario"
     tools:context=".Cuestionario">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="¿Cuál es su nivel de compromiso?"
+        android:background="@drawable/round_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -24,7 +26,7 @@
     <Spinner
         android:id="@+id/spinnerTerceraPregunta"
         android:layout_width="350dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +40,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="¿Cuál es tu objetivo?"
+        android:background="@drawable/round_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -53,6 +56,7 @@
         android:layout_width="346dp"
         android:layout_height="31dp"
         android:text="¿Cuál es su peso a conseguir?"
+        android:background="@drawable/round_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -68,7 +72,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,23 +81,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.864" />
 
-    <Spinner
-        android:id="@+id/spinnerQuintaPregunta"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
+
+    <EditText
+        android:id="@+id/editTextQuitapregunta"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="phone"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.718" />
 
     <TextView
         android:id="@+id/textViewTerceraPregunta3"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="¿Cuantas comidas realizas al día?"
+        android:background="@drawable/round_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -106,21 +114,22 @@
 
     <Spinner
         android:id="@+id/spinnerCuartaPregunta"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
+        android:layout_width="348dp"
+        android:layout_height="51dp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        app:layout_constraintVertical_bias="0.558" />
 
     <TextView
         android:id="@+id/textViewSegundaPregunta"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="¿Cuánto tiempo te gustaría entrenar al día?"
+        android:background="@drawable/round_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -131,23 +140,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.194" />
 
-    <Spinner
-        android:id="@+id/spinnerSegundaPregunta"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
+    <EditText
+        android:id="@+id/editTextsegunda"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="phone"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintVertical_bias="0.271" />
 
     <TextView
         android:id="@+id/textViewPrimeraPregunta"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:text="¿Con qué frecuencia realiza ejercicio físico?"
+        android:background="@drawable/round_button"
+        android:text="¿Con qué frecuencia realiza ejercicio físico a la semana?"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="21sp"
@@ -158,30 +170,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <Spinner
-        android:id="@+id/spinnerPrimeraPregunta"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
+    <EditText
+        android:id="@+id/editextprimerapregunta"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="phone"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintVertical_bias="0.095" />
 
     <Button
         android:id="@+id/buttonSiguiente"
-        android:layout_width="418dp"
-        android:layout_height="49dp"
+        android:layout_width="363dp"
+        android:layout_height="58dp"
+        android:background="@drawable/botonredondo"
         android:text="Insertar Preferencias"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.962" />
+        app:layout_constraintVertical_bias="0.963" />
 </androidx.constraintlayout.widget.ConstraintLayout>

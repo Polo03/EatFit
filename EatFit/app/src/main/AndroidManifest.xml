@@ -15,9 +15,22 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Dietas"
+            android:name=".PopupCronometro"
             android:exported="false"
             android:theme="@style/AppTheme.TemaPopup"/>
+        <activity
+            android:name=".MCalendar"
+            android:exported="false" />
+        <activity
+            android:name=".Foro"
+            android:exported="false" />
+        <activity
+            android:name=".AddPregunta"
+            android:exported="false" />
+        <activity
+            android:name=".Dietas"
+            android:exported="false"
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".PopUpTerminosdePrivacidad"
             android:exported="false"
@@ -29,10 +42,6 @@
         <activity
             android:name=".AdaptadorForo"
             android:exported="false" />
-        <activity
-            android:name=".Foro"
-            android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
         <activity
             android:name=".PopUpDatosPersonales"
             android:exported="false"
@@ -67,7 +76,7 @@
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

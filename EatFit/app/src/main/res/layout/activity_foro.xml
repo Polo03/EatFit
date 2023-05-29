@@ -6,10 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".Foro">
 
+    <ImageButton
+        android:id="@+id/imageButtonAdd"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:background="@drawable/enviarpregunta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <EditText
+        android:id="@+id/editTextAddPregunta"
+        android:layout_width="326dp"
+        android:layout_height="71dp"
+        android:ems="10"
+        android:hint="Add Question"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ListView
         android:id="@+id/listaPreguntas"
         android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_height="657dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

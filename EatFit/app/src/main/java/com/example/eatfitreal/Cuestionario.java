@@ -46,51 +46,12 @@ public class Cuestionario extends AppCompatActivity {
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         myRef = FirebaseDatabase.getInstance().getReference();
 
-        //Primer Spinner
-        Spinner primerDesplegable=findViewById(R.id.spinnerPrimeraPregunta);
-
-        ArrayAdapter<CharSequence> adapterPrimeraPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.primerDesplegable, android.R.layout.simple_spinner_item);
-        adapterPrimeraPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        primerDesplegable.setAdapter(adapterPrimeraPregunta);
-
-        primerDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                respuesta1[0] =primerDesplegable.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        //Segundo spinner
-        Spinner segundoDesplegable=findViewById(R.id.spinnerSegundaPregunta);
-
-        ArrayAdapter<CharSequence> adapterSegundaPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.segundoDesplegable, android.R.layout.simple_spinner_item);
-        adapterSegundaPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        segundoDesplegable.setAdapter(adapterSegundaPregunta);
-
-        segundoDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                respuesta2[0] =segundoDesplegable.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         //Tercer Spinner
         Spinner tercerDesplegable=findViewById(R.id.spinnerTerceraPregunta);
 
         ArrayAdapter<CharSequence> adapterTerceraPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.tercerDesplegable, android.R.layout.simple_spinner_item);
-        adapterSegundaPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapterTerceraPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
         tercerDesplegable.setAdapter(adapterTerceraPregunta);
 
@@ -110,7 +71,7 @@ public class Cuestionario extends AppCompatActivity {
         Spinner cuartoDesplegable=findViewById(R.id.spinnerCuartaPregunta);
 
         ArrayAdapter<CharSequence> adapterCuartaPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.cuartoDesplegable, android.R.layout.simple_spinner_item);
-        adapterSegundaPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapterCuartaPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
         cuartoDesplegable.setAdapter(adapterCuartaPregunta);
 
@@ -126,25 +87,7 @@ public class Cuestionario extends AppCompatActivity {
             }
         });
 
-        //Quinto Spinner
-        Spinner quintoDesplegable=findViewById(R.id.spinnerQuintaPregunta);
 
-        ArrayAdapter<CharSequence> adapterQuintaPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.quintaDesplegable, android.R.layout.simple_spinner_item);
-        adapterSegundaPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        quintoDesplegable.setAdapter(adapterQuintaPregunta);
-
-        quintoDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                respuesta5[0] =quintoDesplegable.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         Button botonSiguiente=(Button) findViewById(R.id.buttonSiguiente);
@@ -154,12 +97,17 @@ public class Cuestionario extends AppCompatActivity {
             public void onClick(View view) {
 
                 EditText pesoAConseguir=(EditText) findViewById(R.id.editTextPesoAConseguir);
+                EditText primerapregunta=(EditText) findViewById(R.id.editextprimerapregunta);
+                EditText segundapregunta=(EditText) findViewById(R.id.editTextsegunda);
+                EditText quintapregunta=(EditText) findViewById(R.id.editTextQuitapregunta);
                 String pesoAConseguirString=pesoAConseguir.getText().toString();
                 if(!pesoAConseguirString.equals("")) {
                     double pesoAConseguirDouble = Double.parseDouble(pesoAConseguirString);
                     respuesta6[0] = pesoAConseguirDouble;
                 }
-
+                respuesta1[0]=primerapregunta.getText().toString();
+                respuesta2[0]=segundapregunta.getText().toString();
+                respuesta5[0]=quintapregunta.getText().toString();
                 actualizarBD(respuesta1[0],respuesta2[0],respuesta3[0],respuesta4[0],respuesta5[0],respuesta6[0]);
 
                 Intent intent = new Intent(Cuestionario.this, MenuPrincipal.class);

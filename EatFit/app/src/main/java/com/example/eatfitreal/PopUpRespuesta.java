@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,21 +33,25 @@ public class PopUpRespuesta extends AppCompatActivity {
         int ancho=medidasVentana.widthPixels;
         int alto=medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.4));
+        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.35));
 
         int i=getIntent().getIntExtra("posicion",0);
 
         TextView respuesta=(TextView) findViewById(R.id.textViewRespuesta);
+        respuesta.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
         ArrayList<String> respuestas=new ArrayList<>();
-        myRef.child("Mensajes").child("Preguntas").addValueEventListener(new ValueEventListener() {
+        myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     respuestas.add(dataSnapshot.child("respuesta").getValue().toString());
                     //Toast.makeText(PopUpRespuesta.this, dataSnapshot.child("respuesta").getValue().toString(), Toast.LENGTH_SHORT).show();
                 }
-                respuesta.setText(respuestas.get(i));
+                if(respuestas.get(i).equals(""))
+                    respuesta.setText("Estamos deliverando si está pregunta es válida para nuestro foro, si es válida, la respuesta será plasmada con las otras preguntas válidas, sino, la pregunta será eliminada de nuestro foro");
+                else
+                    respuesta.setText(respuestas.get(i));
             }
 
             @Override
