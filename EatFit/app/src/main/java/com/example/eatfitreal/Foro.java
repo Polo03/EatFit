@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -31,7 +32,7 @@ public class Foro extends AppCompatActivity {
         setContentView(R.layout.activity_foro);
 
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
-        ImageButton botonAdd=findViewById(R.id.imageButtonAdd);
+        Button botonAdd=findViewById(R.id.button_add);
 
         rellenaLista(lista);
 

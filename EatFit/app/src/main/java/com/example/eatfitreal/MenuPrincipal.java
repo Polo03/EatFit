@@ -1,37 +1,35 @@
 package com.example.eatfitreal;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.Calendar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class MenuPrincipal extends AppCompatActivity {
 
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICATION_ID = 0;
     private SharedPreferences preferences;
-    public int count=0;
-    int index=1;
+    public int count = 0;
+    int index = 1;
 
-    String[] niveles={"Principiante","Intermedio","Avanzado"};
+    String[] niveles = {"Principiante", "Intermedio", "Avanzado"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -39,24 +37,24 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
 
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        ImageButton buttonBefore=findViewById(R.id.imageButtonBefore1);
+        ImageButton buttonBefore = findViewById(R.id.imageButtonBefore1);
         buttonBefore.setVisibility(View.INVISIBLE);
-        ImageButton buttonAfter=findViewById(R.id.imageButtonAfter1);
+        ImageButton buttonAfter = findViewById(R.id.imageButtonAfter1);
         buttonAfter.setVisibility(View.INVISIBLE);
-        TextView t1=findViewById(R.id.textViewBrazoYPecho);
+        TextView t1 = findViewById(R.id.textViewBrazoYPecho);
         t1.setVisibility(View.INVISIBLE);
         t1.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         t1.setText(niveles[index]);
 
         //Por si el usuario ha decidido no cerrar sesión, recogemos el nick con
         //las shared preferences.
-        String nickPreferences=preferences.getString("nick", null);
-        String pwdPreferences=preferences.getString("password",null);
+        String nickPreferences = preferences.getString("nick", null);
+        String pwdPreferences = preferences.getString("password", null);
 
-        Login login=new Login();
+        Login login = new Login();
 
         TextView texto = (TextView) findViewById(R.id.textViewRutina_Brazo_Pecho);
-        ImageButton graficos=findViewById(R.id.buttonCalendario);
+        ImageButton graficos = findViewById(R.id.buttonCalendario);
         graficos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +72,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 },year,month,day);
                 d.show();*/
                 //CalendarView c=new CalendarView(MenuPrincipal.this);
+
+                Intent intent = new Intent(MenuPrincipal.this, ConteoCalorias.class);
+                startActivity(intent);
             }
         });
 

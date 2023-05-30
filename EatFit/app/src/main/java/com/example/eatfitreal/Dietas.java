@@ -4,18 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,9 +70,9 @@ public class Dietas extends AppCompatActivity {
 
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
 
-        TextView textSwitcher=findViewById(R.id.textSwitcher);
-        ImageButton beforeButton=findViewById(R.id.imageButtonBefore);
-        ImageButton afterButton=findViewById(R.id.imageButtonAfter);
+        TextView textSwitcher=findViewById(R.id.textSwitcherConteo);
+        ImageButton beforeButton=findViewById(R.id.imageButtonBeforeConteo);
+        ImageButton afterButton=findViewById(R.id.imageButtonAfterConteo);
         TextView textViewHora=findViewById(R.id.textView8);
 
         String nickStr="";

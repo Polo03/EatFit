@@ -26,8 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
 
         nick=(EditText) findViewById(R.id.editTextUsuario);
         EditText pwd=(EditText) findViewById(R.id.editTextPwd);
@@ -56,8 +56,24 @@ public class Login extends AppCompatActivity {
         //introduceRutinas();
         //introduceUserRoot();
         //introduceDietas();
-        introducePreguntas();
+        //introducePreguntas();
+        //introduceAlimentosyCalorias();
         //cuestionarioRoot();
+
+        Calendar calendario = Calendar.getInstance();
+        long ahora = System.currentTimeMillis();
+        Date fecha = new Date(ahora);
+        int hora = fecha.getHours();
+        int min=fecha.getMinutes();
+        int seg=fecha.getSeconds();
+
+        //if(hora==14){
+            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                    .setContentTitle("Conteo")
+                    .setContentText("Es hora de que haga su conteo diario de calorias")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);*/
+            //Toast.makeText(this, "a", Toast.LENGTH_SHORT).show();
+        //}
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
         validarSesion();
@@ -291,6 +307,18 @@ public class Login extends AppCompatActivity {
         dietas.put("cena","Pechuga de pollo a la plancha con brócoli y champiñones salteados.|Una porción de batata asada.");
 
         myRef.child("Dietas").child("Definicion").child("Domingo").setValue(dietas);
+
+    }
+
+    public void introduceAlimentosyCalorias(){
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> dietas = new HashMap<>();
+        dietas.put("nick","c");
+        dietas.put("caloriasDeseadas",4500);
+        dietas.put("caloriasConsumidas",1500);
+        myRef.child("Calorias").child("c").setValue(dietas);
 
     }
 
