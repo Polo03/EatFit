@@ -15,14 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
+
         <activity
             android:name=".PopupCronometro"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".ConteoCalorias"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup"/>
+            android:theme="@style/AppTheme.TemaPopup" />
         <activity
             android:name=".Foro"
             android:exported="false" />

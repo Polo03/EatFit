@@ -8,9 +8,16 @@
 
     <TextView
         android:id="@+id/textViewMostrarPregunta"
-        android:layout_width="406dp"
+        android:layout_width="375dp"
         android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

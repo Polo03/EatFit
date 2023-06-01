@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_foro1"
+    android:background="@drawable/fondo_foro2"
     tools:context=".Foro">
 
     <EditText
@@ -26,11 +25,11 @@
 
     <ListView
         android:id="@+id/listaPreguntas"
-        android:layout_width="303dp"
-        android:layout_height="379dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="328dp"
+        android:layout_height="398dp"
+        android:layout_marginTop="116dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -40,7 +39,7 @@
         android:id="@+id/button_add"
         android:layout_width="131dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/botonredondo"
         android:text="Add Question"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -58,7 +57,7 @@
         android:layout_height="51dp"
         android:text="Foro"
         android:textAlignment="center"
-        android:textColor="@color/yellow"
+        android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

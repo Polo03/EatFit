@@ -24,7 +24,6 @@
         android:id="@+id/textView_pregunta"
         android:layout_width="177dp"
         android:layout_height="54dp"
-        android:text="Pregunta 1"
         android:textColor="@color/yellow"
         android:textSize="20sp"
         android:textStyle="bold"

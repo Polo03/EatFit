@@ -159,12 +159,8 @@ public class ConteoCalorias extends AppCompatActivity {
                         }
                         if(unaVez==0){
                             unaVez++;
-                            //int cal=calorias.get(index);
-
                             actualizaCalorias(finalNickStr,caloriasTotales,caloriasConsumidas,calorias.get(index));
                         }
-
-                        //Toast.makeText(ConteoCalorias.this, +"", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

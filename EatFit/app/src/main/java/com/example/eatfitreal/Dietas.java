@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,13 +55,17 @@ public class Dietas extends AppCompatActivity {
         Date fecha = new Date(ahora);
         int dia=fecha.getDay();
         int hora = fecha.getHours();
-        if(hora>=4 && hora<10)
+        hora=hora+2;
+        int min= fecha.getMinutes();
+        int seg= fecha.getSeconds();
+        //Toast.makeText(this, hora+":"+min+":"+seg, Toast.LENGTH_SHORT).show();
+        if(hora>=4 && hora<=10)
             index=0;
-        else if(hora>=10 && hora<12)
+        else if(hora>10 && hora<=12)
             index=1;
-        else if(hora>=12 && hora<17)
+        else if(hora>12 && hora<=17)
             index=2;
-        else if(hora>=17 && hora<19)
+        else if(hora>17 && hora<=19)
             index=3;
         else
             index=4;
@@ -70,9 +75,9 @@ public class Dietas extends AppCompatActivity {
 
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
 
-        TextView textSwitcher=findViewById(R.id.textSwitcherConteo);
-        ImageButton beforeButton=findViewById(R.id.imageButtonBeforeConteo);
-        ImageButton afterButton=findViewById(R.id.imageButtonAfterConteo);
+        TextView textSwitcher=findViewById(R.id.textSwitcher);
+        ImageButton beforeButton=findViewById(R.id.imageButtonBefore);
+        ImageButton afterButton=findViewById(R.id.imageButtonAfter);
         TextView textViewHora=findViewById(R.id.textView8);
 
         String nickStr="";

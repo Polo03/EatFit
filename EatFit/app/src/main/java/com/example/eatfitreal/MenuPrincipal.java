@@ -1,11 +1,15 @@
 package com.example.eatfitreal;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +25,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MenuPrincipal extends AppCompatActivity {
 
     private final static String CHANNEL_ID = "NOTIFICACION";
@@ -28,6 +40,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private SharedPreferences preferences;
     public int count = 0;
     int index = 1;
+    static String nickStr="";
 
     String[] niveles = {"Principiante", "Intermedio", "Avanzado"};
 
@@ -37,7 +50,15 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
+        Login l=new Login();
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        if(preferences.getString("nick", null)==null)
+            nickStr=l.ultimoUsuarioLogeado();
+        else
+            nickStr=preferences.getString("nick", null);
+
+
+
         ImageButton buttonBefore = findViewById(R.id.imageButtonBefore1);
         buttonBefore.setVisibility(View.INVISIBLE);
         ImageButton buttonAfter = findViewById(R.id.imageButtonAfter1);
@@ -59,21 +80,6 @@ public class MenuPrincipal extends AppCompatActivity {
         graficos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                /*Calendar c=Calendar.getInstance();
-                int year=c.get(Calendar.YEAR);
-                int month=c.get(Calendar.MONTH);
-                int day=c.get(Calendar.DAY_OF_MONTH);
-               DatePickerDialog d=new DatePickerDialog(MenuPrincipal.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
-                    }
-                },year,month,day);
-                d.show();*/
-                //CalendarView c=new CalendarView(MenuPrincipal.this);
-
                 Intent intent = new Intent(MenuPrincipal.this, ConteoCalorias.class);
                 startActivity(intent);
             }
@@ -140,74 +146,6 @@ public class MenuPrincipal extends AppCompatActivity {
                 });
                 // Muestra el popup
                 popup.show();
-                /*button_brazo_pecho.setVisibility(View.INVISIBLE);
-                texto.setVisibility(View.INVISIBLE);
-                if(index==1){
-                    buttonBefore.setVisibility(View.VISIBLE);
-                    buttonAfter.setVisibility(View.VISIBLE);
-                }else if(index==2){
-                    buttonBefore.setVisibility(View.VISIBLE);
-                    buttonAfter.setVisibility(View.INVISIBLE);
-                }else{
-                    buttonBefore.setVisibility(View.INVISIBLE);
-                    buttonAfter.setVisibility(View.VISIBLE);
-                }
-
-                buttonBefore.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        index--;
-                        if(index<0)
-                            index=2;
-                        t1.setText(niveles[index]);
-                        if(index==1){
-                            buttonBefore.setVisibility(View.VISIBLE);
-                            buttonAfter.setVisibility(View.VISIBLE);
-                        }else if(index==2){
-                            buttonBefore.setVisibility(View.VISIBLE);
-                            buttonAfter.setVisibility(View.INVISIBLE);
-                        }else{
-                            buttonBefore.setVisibility(View.INVISIBLE);
-                            buttonAfter.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-                buttonAfter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        index++;
-                        if(index>2)
-                            index=0;
-                        t1.setText(niveles[index]);
-                        if(index==1){
-                            buttonBefore.setVisibility(View.VISIBLE);
-                            buttonAfter.setVisibility(View.VISIBLE);
-                        }else if(index==2){
-                            buttonBefore.setVisibility(View.VISIBLE);
-                            buttonAfter.setVisibility(View.INVISIBLE);
-                        }else{
-                            buttonBefore.setVisibility(View.INVISIBLE);
-                            buttonAfter.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-                t1.setVisibility(View.VISIBLE);
-                t1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        count=1;
-                        Intent intent = new Intent(MenuPrincipal.this, Ejercicios.class);
-                        intent.putExtra("count", getButtonvalor());
-                        intent.putExtra("item",t1.getText().toString());
-                        startActivity(intent);
-                        button_brazo_pecho.setVisibility(View.VISIBLE);
-                        texto.setVisibility(View.VISIBLE);
-                        buttonBefore.setVisibility(View.INVISIBLE);
-                        buttonAfter.setVisibility(View.INVISIBLE);
-                        t1.setVisibility(View.INVISIBLE);
-                    }
-                });*/
-
             }
         });
         Button button_abdomen=(Button)findViewById(R.id.button_abdomen);

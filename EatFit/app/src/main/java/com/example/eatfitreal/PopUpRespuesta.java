@@ -37,6 +37,7 @@ public class PopUpRespuesta extends AppCompatActivity {
 
         int i=getIntent().getIntExtra("posicion",0);
 
+        TextView textViewPregunta=findViewById(R.id.textView_pregunta);
         TextView respuesta=(TextView) findViewById(R.id.textViewRespuesta);
         respuesta.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
@@ -48,6 +49,7 @@ public class PopUpRespuesta extends AppCompatActivity {
                     respuestas.add(dataSnapshot.child("respuesta").getValue().toString());
                     //Toast.makeText(PopUpRespuesta.this, dataSnapshot.child("respuesta").getValue().toString(), Toast.LENGTH_SHORT).show();
                 }
+                textViewPregunta.setText("Pregunta "+(i+1));
                 if(respuestas.get(i).equals(""))
                     respuesta.setText("Estamos deliverando si está pregunta es válida para nuestro foro, si es válida, la respuesta será plasmada con las otras preguntas válidas, sino, la pregunta será eliminada de nuestro foro");
                 else
