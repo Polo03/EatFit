@@ -52,12 +52,14 @@ public class Login extends AppCompatActivity {
         ImageButton vision=(ImageButton) findViewById(R.id.imageButtonVision);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         //eliminarRoot();
         //introduceRutinas();
         //introduceUserRoot();
         //introduceDietas();
         //introducePreguntas();
-        //introduceAlimentosyCalorias();
+        //introduceCaloriasPersonales();
+        //introduceAlimentos();
         //cuestionarioRoot();
 
         Calendar calendario = Calendar.getInstance();
@@ -136,7 +138,6 @@ public class Login extends AppCompatActivity {
                         if(password.equals(pwd.getText().toString()) && !password.replaceAll("  ", " ").trim().equals("") && !nickString.replaceAll("  " , " ").trim().equals("")){
                             //Toast.makeText(Login.this, "Usuario Valido", Toast.LENGTH_SHORT).show();
                             if(isActivateRadioButton) {
-                                SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString("nick", nickString);
                                 editor.putString("password", pwd.getText().toString());
                                 editor.commit();
@@ -310,15 +311,27 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void introduceAlimentosyCalorias(){
+    public void introduceCaloriasPersonales(){
 
         myRef = FirebaseDatabase.getInstance().getReference();
 
-        Map<String, Object> dietas = new HashMap<>();
-        dietas.put("nick","c");
-        dietas.put("caloriasDeseadas",4500);
-        dietas.put("caloriasConsumidas",1500);
-        myRef.child("Calorias").child("c").setValue(dietas);
+        Map<String, Object> calorias = new HashMap<>();
+        calorias.put("nick","b");
+        calorias.put("caloriasDeseadas",3500);
+        calorias.put("caloriasConsumidas",500);
+        calorias.put("caloriasEstablecidas",0);
+        myRef.child("Calorias").child("b").setValue(calorias);
+
+    }
+    public void introduceAlimentos(){
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> calorias = new HashMap<>();
+        calorias.put("nombreAlimento","Queso cottage bajo en grasa");
+        calorias.put("cantidad","1/2 taza");
+        calorias.put("calorias",82);
+        myRef.child("Alimentos").child("Queso cottage bajo en grasa").setValue(calorias);
 
     }
 
