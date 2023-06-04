@@ -19,14 +19,18 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +45,8 @@ public class MenuPrincipal extends AppCompatActivity {
     public int count = 0;
     int index = 1;
     static String nickStr="";
+
+    private int version=0;
 
     String[] niveles = {"Principiante", "Intermedio", "Avanzado"};
 
@@ -57,7 +63,23 @@ public class MenuPrincipal extends AppCompatActivity {
         else
             nickStr=preferences.getString("nick", null);
 
-
+        Calendar calendario = Calendar.getInstance();
+        long ahora = System.currentTimeMillis();
+        calendario.setTimeInMillis(ahora);
+        Date fecha = new Date(ahora);
+        int dia=calendario.get(Calendar.DAY_OF_MONTH);
+        String diaStr=dia+"";
+        if(diaStr.length()==1)
+            diaStr="0"+dia;
+        int month=calendario.get(Calendar.MONTH)+1;
+        String monthStr=month+"";
+        if(monthStr.length()==1)
+            monthStr="0"+month;
+        int year=calendario.get(Calendar.YEAR);
+        int hora = fecha.getHours();
+        hora=hora+2;
+        int min= fecha.getMinutes();
+        int seg= fecha.getSeconds();
 
         ImageButton buttonBefore = findViewById(R.id.imageButtonBefore1);
         buttonBefore.setVisibility(View.INVISIBLE);
@@ -70,18 +92,89 @@ public class MenuPrincipal extends AppCompatActivity {
 
         //Por si el usuario ha decidido no cerrar sesión, recogemos el nick con
         //las shared preferences.
-        String nickPreferences = preferences.getString("nick", null);
+        String nickStr="";
+        if(preferences.getString("nick", null)==null)
+            nickStr=l.ultimoUsuarioLogeado();
+        else
+            nickStr=preferences.getString("nick", null);
         String pwdPreferences = preferences.getString("password", null);
 
         Login login = new Login();
 
         TextView texto = (TextView) findViewById(R.id.textViewRutina_Brazo_Pecho);
-        ImageButton graficos = findViewById(R.id.buttonCalendario);
-        graficos.setOnClickListener(new View.OnClickListener() {
+        ImageButton conteoCalorico = findViewById(R.id.buttonCalendario);
+        String finalNickStr = nickStr;
+        int finalHora = hora;
+
+
+
+        DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
+        myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
+            int unaVez=0;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("nick").getValue().toString().equals(finalNickStr)){
+                        version= Integer.parseInt(dataSnapshot.child("version").getValue().toString());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        conteoCalorico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuPrincipal.this, ConteoCalorias.class);
-                startActivity(intent);
+                if(version>=2){
+                    DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
+                    myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
+                        int unaVez=0;
+
+                        int caloriasEstablecidas=0;
+                        int caloriasTotales=0;
+                        int caloriasConsumidas=0;
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                if(dataSnapshot.child("nick").getValue().toString().equals(finalNickStr)){
+                                    caloriasEstablecidas=Integer.parseInt(dataSnapshot.child("caloriasEstablecidas").getValue().toString());
+                                    caloriasTotales=Integer.parseInt(dataSnapshot.child("caloriasDeseadas").getValue().toString());
+                                    caloriasConsumidas=Integer.parseInt(dataSnapshot.child("caloriasConsumidas").getValue().toString());
+                                }
+                            }
+                            if(unaVez==0){
+                                if(caloriasConsumidas>=caloriasTotales){
+                                    Toast.makeText(MenuPrincipal.this, "Ya ha consumido todas las calorias que se propuso, las cuales eran "+caloriasTotales+" calorias.", Toast.LENGTH_SHORT).show();
+                                /*if(finalHora >0){
+
+                                    Map<String, Object> calorias = new HashMap<>();
+                                    calorias.put("nick",finalNickStr);
+                                    calorias.put("caloriasDeseadas",0);
+                                    calorias.put("caloriasConsumidas",-1);
+                                    calorias.put("caloriasEstablecidas",0);
+                                    myRef.child("Calorias").child(finalNickStr).setValue(calorias);
+
+                                }
+                                Toast.makeText(MenuPrincipal.this, finalHora+"", Toast.LENGTH_SHORT).show();*/
+                                }else{
+                                    Intent intent = new Intent(MenuPrincipal.this, ConteoCalorias.class);
+                                    startActivity(intent);
+                                }
+                                unaVez++;
+                            }
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }else
+                    Toast.makeText(MenuPrincipal.this, "No tiene la version correspondiente", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -229,8 +322,12 @@ public class MenuPrincipal extends AppCompatActivity {
         botonDietas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuPrincipal.this, Dietas.class);
-                startActivity(intent);
+                if(version>=1){
+                    Intent intent = new Intent(MenuPrincipal.this, Dietas.class);
+                    startActivity(intent);
+                }else
+                    Toast.makeText(MenuPrincipal.this, "No tiene la version correspondiente", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -255,9 +352,6 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void mostrarNiveles(ImageButton before, ImageButton after, TextView t1){
-
-    }
 
 
 }

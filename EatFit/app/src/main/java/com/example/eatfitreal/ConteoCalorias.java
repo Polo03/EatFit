@@ -3,21 +3,16 @@ package com.example.eatfitreal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +39,7 @@ public class ConteoCalorias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conteo_calorias);
-        TextView textView=findViewById(R.id.textViewCalorias);
+        TextView textView=findViewById(R.id.textViewCaloriasTotales);
 
         Login l=new Login();
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
@@ -60,6 +55,8 @@ public class ConteoCalorias extends AppCompatActivity {
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.70));
 
         TextView textSwitcher=findViewById(R.id.textSwitcherConteo);
+        ImageView imageSwitcher=findViewById(R.id.imageViewConteo);
+        TextView textView2=findViewById(R.id.textViewCaloriasTotales3);
 
         String nickStr="";
         if(preferences.getString("nick", null)==null)
@@ -122,8 +119,9 @@ public class ConteoCalorias extends AppCompatActivity {
                             dialog.show();
                         }
                         int caloriasRestantes=caloriasTotales-caloriasConsumidas;
-                        textView.setText("Las calorias totales que quiere consumir son "+caloriasTotales+", las calorias consumidas actualmente son "+caloriasConsumidas+", las calorias restantes actualmente son "+caloriasRestantes);
-
+                        //textView.setText("Las calorias totales que quiere consumir son "+caloriasTotales+", las calorias consumidas actualmente son "+caloriasConsumidas+", las calorias restantes actualmente son "+caloriasRestantes);
+                        textView.setText("Calorias deseadas:"+caloriasTotales+"");
+                        textView2.setText("Calorias consumidas:"+caloriasConsumidas+"");
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -138,8 +136,7 @@ public class ConteoCalorias extends AppCompatActivity {
             }
         });
 
-
-        textSwitcher.setOnClickListener(new View.OnClickListener() {
+        imageSwitcher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
@@ -160,6 +157,10 @@ public class ConteoCalorias extends AppCompatActivity {
                         if(unaVez==0){
                             unaVez++;
                             actualizaCalorias(finalNickStr,caloriasTotales,caloriasConsumidas,calorias.get(index));
+                            if(caloriasConsumidas+calorias.get(index)>=caloriasTotales){
+                                finish();
+                            }
+
                         }
                     }
                     @Override
@@ -177,7 +178,7 @@ public class ConteoCalorias extends AppCompatActivity {
                 index--;
                 if(index<0)
                     index=alimentos.size()-1;
-                textSwitcher.setText(alimentos.get(index));
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index));
             }
         });
 
@@ -188,7 +189,7 @@ public class ConteoCalorias extends AppCompatActivity {
                 index++;
                 if(index>=alimentos.size())
                     index=0;
-                textSwitcher.setText(alimentos.get(index));
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index));
             }
         });
 

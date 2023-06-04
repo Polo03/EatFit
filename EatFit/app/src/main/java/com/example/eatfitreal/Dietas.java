@@ -9,9 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,8 +50,17 @@ public class Dietas extends AppCompatActivity {
 
         Calendar calendario = Calendar.getInstance();
         long ahora = System.currentTimeMillis();
+        calendario.setTimeInMillis(ahora);
         Date fecha = new Date(ahora);
-        int dia=fecha.getDay();
+        int dia=calendario.get(Calendar.DAY_OF_MONTH);
+        String diaStr=dia+"";
+        if(diaStr.length()==1)
+            diaStr="0"+dia;
+        int month=calendario.get(Calendar.MONTH)+1;
+        String monthStr=month+"";
+        if(monthStr.length()==1)
+            monthStr="0"+month;
+        int year=calendario.get(Calendar.YEAR);
         int hora = fecha.getHours();
         hora=hora+2;
         int min= fecha.getMinutes();
@@ -70,8 +77,11 @@ public class Dietas extends AppCompatActivity {
         else
             index=4;
 
-        ImageView imagenDia=findViewById(R.id.imageViewDia);
-        imagenDia.setImageResource(galeria[dia-1]);
+        //ImageView imagenDia=findViewById(R.id.imageViewDia);
+        //imagenDia.setImageResource(galeria[dia-1]);
+
+        TextView textViewDia=findViewById(R.id.textViewDiaDietas);
+        textViewDia.setText((diaStr)+"/"+(monthStr)+"/"+(year));
 
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
 

@@ -272,6 +272,7 @@ public class Login extends AppCompatActivity {
         datosRoot.put("fechaNac","17/10/2003");
         datosRoot.put("phone","601361984");
         datosRoot.put("vecesLogeado",1);
+        datosRoot.put("version",2);
         //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
 

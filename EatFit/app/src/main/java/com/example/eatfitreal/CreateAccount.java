@@ -132,6 +132,7 @@ public class CreateAccount extends AppCompatActivity {
                                     datosUser.put("fechaNac",fechaNacString);
                                     datosUser.put("phone",numTelefonoString);
                                     datosUser.put("vecesLogeado",0);
+                                    datosUser.put("version",1);
                                     myRef.child("Usuarios").child(nickString).setValue(datosUser);
 
                                     Intent intent = new Intent(CreateAccount.this, Login.class);
