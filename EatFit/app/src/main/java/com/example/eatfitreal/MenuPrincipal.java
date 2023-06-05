@@ -58,26 +58,14 @@ public class MenuPrincipal extends AppCompatActivity {
 
         Login l=new Login();
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        if(preferences.getString("nick", null)==null)
-            nickStr=l.ultimoUsuarioLogeado();
-        else
-            nickStr=preferences.getString("nick", null);
 
         Calendar calendario = Calendar.getInstance();
         long ahora = System.currentTimeMillis();
         calendario.setTimeInMillis(ahora);
         Date fecha = new Date(ahora);
         int dia=calendario.get(Calendar.DAY_OF_MONTH);
-        String diaStr=dia+"";
-        if(diaStr.length()==1)
-            diaStr="0"+dia;
-        int month=calendario.get(Calendar.MONTH)+1;
-        String monthStr=month+"";
-        if(monthStr.length()==1)
-            monthStr="0"+month;
         int year=calendario.get(Calendar.YEAR);
-        int hora = fecha.getHours();
-        hora=hora+2;
+        int hora = fecha.getHours()+2;
         int min= fecha.getMinutes();
         int seg= fecha.getSeconds();
 

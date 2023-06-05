@@ -42,7 +42,6 @@ public class ConteoCalorias extends AppCompatActivity {
         TextView textView=findViewById(R.id.textViewCaloriasTotales);
 
         Login l=new Login();
-        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
 
         //Para las medidas de la ventana del pop up
         DisplayMetrics medidasVentana=new DisplayMetrics();
