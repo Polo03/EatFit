@@ -78,11 +78,9 @@ public class ConteoCalorias extends AppCompatActivity {
                 textSwitcher.setText(alimentos.get(index));
                 myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                     int unaVez=0;
-
                     int caloriasEstablecidas=0;
                     int caloriasTotales=0;
                     int caloriasConsumidas=0;
-
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){

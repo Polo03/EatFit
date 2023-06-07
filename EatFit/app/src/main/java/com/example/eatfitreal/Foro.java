@@ -33,6 +33,7 @@ public class Foro extends AppCompatActivity {
 
         ListView lista=(ListView) findViewById(R.id.listaPreguntas);
         Button botonAdd=findViewById(R.id.button_add);
+        EditText editText=findViewById(R.id.editTextAddPregunta);
 
         rellenaLista(lista);
 
@@ -50,6 +51,7 @@ public class Foro extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(Foro.this, "PULSADO", Toast.LENGTH_SHORT).show();
                 addPregunta(lista);
+                editText.setText("");
             }
         });
     }
@@ -82,31 +84,35 @@ public class Foro extends AppCompatActivity {
             DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
             ArrayList<POJOForo> datos=new ArrayList<>();
             myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
+                int unaVez=0;
                 boolean existe=false;
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String id="0";
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
-                        id=dataSnapshot.child("id").getValue().toString();
-                    }
-                    for(POJOForo dato: datos){
-                        if(dato.getTexto1().equals(editText.getText().toString()))
-                            existe=true;
-                    }
+                    if(unaVez==0){
+                        String id="0";
+                        for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                            datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
+                            id=dataSnapshot.child("id").getValue().toString();
+                        }
+                        for(POJOForo dato: datos){
+                            if(dato.getTexto1().equals(editText.getText().toString()))
+                                existe=true;
+                        }
 
-                    if(existe)
-                        Toast.makeText(Foro.this, "La pregunta ya existe, vaya a ver su respuesta", Toast.LENGTH_SHORT).show();
-                    else{
-                        int cont=Integer.parseInt(id)+1;
-                        HashMap<String,Object> pregunta=new HashMap<>();
-                        pregunta.put("id",cont);
-                        pregunta.put("pregunta",editText.getText().toString());
-                        pregunta.put("respuesta","");
+                        if(existe)
+                            Toast.makeText(Foro.this, "La pregunta ya existe, vaya a ver su respuesta", Toast.LENGTH_SHORT).show();
+                        else{
+                            int cont=Integer.parseInt(id)+1;
+                            HashMap<String,Object> pregunta=new HashMap<>();
+                            pregunta.put("id",cont);
+                            pregunta.put("pregunta",editText.getText().toString());
+                            pregunta.put("respuesta","");
 
-                        myRef.child("Mensajes").child("Mensaje"+cont).setValue(pregunta);
-                        lista.setAdapter(null);
-                        rellenaLista(lista);
+                            myRef.child("Mensajes").child("Mensaje"+cont).setValue(pregunta);
+                            lista.setAdapter(null);
+                            rellenaLista(lista);
+                        }
+                        unaVez++;
                     }
                 }
 
