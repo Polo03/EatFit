@@ -34,6 +34,8 @@ public class ConteoCalorias extends AppCompatActivity {
     final private ArrayList<Integer> calorias=new ArrayList<>();
     int index=0;
 
+    final private int[] galeria={R.drawable.aguacate,R.drawable.almendras,R.drawable.atun,R.drawable.avena,R.drawable.brocoli,R.drawable.clarasdehuevo,R.drawable.espinacas,R.drawable.fresas,R.drawable.manzana,R.drawable.pavo,R.drawable.pepino,R.drawable.platano,R.drawable.pollo,R.drawable.queso,R.drawable.quinoa,R.drawable.salmon,R.drawable.sandia,R.drawable.tomate,R.drawable.yogur,R.drawable.zanahorias};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,8 @@ public class ConteoCalorias extends AppCompatActivity {
                     cantidad.add(dataSnapshot.child("nombreAlimento").getValue().toString());
                     calorias.add(Integer.parseInt(dataSnapshot.child("calorias").getValue().toString()));
                 }
-                textSwitcher.setText(alimentos.get(index));
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                imageSwitcher.setImageResource(galeria[index]);
                 myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                     int unaVez=0;
                     int caloriasEstablecidas=0;
@@ -176,7 +179,8 @@ public class ConteoCalorias extends AppCompatActivity {
                 index--;
                 if(index<0)
                     index=alimentos.size()-1;
-                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index));
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                imageSwitcher.setImageResource(galeria[index]);
             }
         });
 
@@ -187,7 +191,8 @@ public class ConteoCalorias extends AppCompatActivity {
                 index++;
                 if(index>=alimentos.size())
                     index=0;
-                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index));
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                imageSwitcher.setImageResource(galeria[index]);
             }
         });
 

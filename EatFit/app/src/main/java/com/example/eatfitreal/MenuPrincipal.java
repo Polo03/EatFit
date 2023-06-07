@@ -134,17 +134,6 @@ public class MenuPrincipal extends AppCompatActivity {
                             if(unaVez==0){
                                 if(caloriasConsumidas>=caloriasTotales){
                                     Toast.makeText(MenuPrincipal.this, "Ya ha consumido todas las calorias que se propuso, las cuales eran "+caloriasTotales+" calorias.", Toast.LENGTH_SHORT).show();
-                                /*if(finalHora >0){
-
-                                    Map<String, Object> calorias = new HashMap<>();
-                                    calorias.put("nick",finalNickStr);
-                                    calorias.put("caloriasDeseadas",0);
-                                    calorias.put("caloriasConsumidas",-1);
-                                    calorias.put("caloriasEstablecidas",0);
-                                    myRef.child("Calorias").child(finalNickStr).setValue(calorias);
-
-                                }
-                                Toast.makeText(MenuPrincipal.this, finalHora+"", Toast.LENGTH_SHORT).show();*/
                                 }else{
                                     Intent intent = new Intent(MenuPrincipal.this, ConteoCalorias.class);
                                     startActivity(intent);
@@ -336,13 +325,4 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent intent = new Intent(MenuPrincipal.this, PopUpDatosPersonales.class);
         startActivity(intent);
     }
-
-    public Integer dameVersion(String nick){
-
-        Log.e("Estado",version+"");
-        return version;
-    }
-
-
-
 }

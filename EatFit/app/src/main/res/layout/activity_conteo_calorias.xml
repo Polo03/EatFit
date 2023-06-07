@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textSwitcherConteo"
-        android:layout_width="217dp"
-        android:layout_height="36dp"
+        android:layout_width="216dp"
+        android:layout_height="55dp"
         android:text="200 Kacl"
         android:textAlignment="center"
         android:textColor="@color/black"
