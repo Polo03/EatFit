@@ -94,11 +94,8 @@ public class MenuPrincipal extends AppCompatActivity {
         String finalNickStr = nickStr;
         int finalHora = hora;
 
-
-
         DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
         myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
-            int unaVez=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -338,6 +335,12 @@ public class MenuPrincipal extends AppCompatActivity {
     public void abrirPopUpDatosPersonales(View v){
         Intent intent = new Intent(MenuPrincipal.this, PopUpDatosPersonales.class);
         startActivity(intent);
+    }
+
+    public Integer dameVersion(String nick){
+
+        Log.e("Estado",version+"");
+        return version;
     }
 
 
