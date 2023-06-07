@@ -51,7 +51,7 @@ public class Foro extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(Foro.this, "PULSADO", Toast.LENGTH_SHORT).show();
                 addPregunta(lista);
-                editText.setText("");
+                //editText.setText("");
             }
         });
     }
@@ -108,7 +108,7 @@ public class Foro extends AppCompatActivity {
                             pregunta.put("pregunta",editText.getText().toString());
                             pregunta.put("respuesta","");
 
-                            myRef.child("Mensajes").child("Mensaje"+cont).setValue(pregunta);
+                            myRef.child("Mensajes").child("Mensaje"+(cont)).setValue(pregunta);
                             lista.setAdapter(null);
                             rellenaLista(lista);
                         }

@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
         //introducePreguntas();
         //introduceCaloriasPersonales();
         //introduceAlimentos();
+        //introduceMensajes();
         //cuestionarioRoot();
 
         Calendar calendario = Calendar.getInstance();
@@ -333,6 +334,18 @@ public class Login extends AppCompatActivity {
         calorias.put("cantidad","1/2 taza");
         calorias.put("calorias",82);
         myRef.child("Alimentos").child("Queso cottage bajo en grasa").setValue(calorias);
+
+    }
+
+    public void introduceMensajes(){
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> mensaje = new HashMap<>();
+        mensaje.put("id","1");
+        mensaje.put("pregunta","Pregunta1");
+        mensaje.put("respuesta","Respues1");
+        myRef.child("Mensajes").child("Mensaje1").setValue(mensaje);
 
     }
 
