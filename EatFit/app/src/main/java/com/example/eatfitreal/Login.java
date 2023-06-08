@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
+    private static final Object URL = "";
     static EditText nick;
     private boolean isActivateRadioButton,esVisible;
     private SharedPreferences preferences;
@@ -69,14 +71,6 @@ public class Login extends AppCompatActivity {
         int hora = fecha.getHours();
         int min=fecha.getMinutes();
         int seg=fecha.getSeconds();
-
-        //if(hora==14){
-            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                    .setContentTitle("Conteo")
-                    .setContentText("Es hora de que haga su conteo diario de calorias")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);*/
-            //Toast.makeText(this, "a", Toast.LENGTH_SHORT).show();
-        //}
 
         //Validamos si hay alguna sesion abierta, es decir, si hay algun usuario ya logueado ha querido mantener su sesión abierta
         validarSesion();
@@ -220,6 +214,10 @@ public class Login extends AppCompatActivity {
     public void mostrarVentanaOlvidarContrasena(View v){
         Intent intent = new Intent(Login.this, OlvidoDeContrasena.class);
         startActivity(intent);
+    }
+
+    public void pruebaAsyncTask(){
+
     }
 
     public void introduceRutinas(){

@@ -55,7 +55,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
         int ancho=medidasVentana.widthPixels;
         int alto=medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
+        getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.55));
 
         //getWindow().setBackgroundDrawable(new BitmapDrawable());
         // Closes the popup window when touch outside.
@@ -87,22 +87,18 @@ public class OlvidoDeContrasena extends AppCompatActivity{
             public void onClick(View view) {
                 boolean[] unaVez={false};
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-
                 myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                         if(!unaVez[0]){
                             Login l=new Login();
                             String phone="";
-
                             for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                                 if(dataSnapshot.child("nick").getValue().toString().equals(editText.getText().toString()) || dataSnapshot.child("email").getValue().toString().equals(editText.getText().toString())){
                                     nick[0]=dataSnapshot.child("nick").getValue().toString();
                                     phone=dataSnapshot.child("phone").getValue().toString();
                                 }
                             }
-
                             if(!phone.equals("")){
 
                                 Toast.makeText(OlvidoDeContrasena.this, "El codigo enviado es:"+codigo, Toast.LENGTH_LONG).show();
@@ -136,14 +132,14 @@ public class OlvidoDeContrasena extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if(codigo.equals(editText.getText().toString())){
-                    Toast.makeText(OlvidoDeContrasena.this, "VAMOOO", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(OlvidoDeContrasena.this, "VAMOOO", Toast.LENGTH_SHORT).show();
                     texto.setText("Introduzca la nueva contraseña");
                     editText.setHint("Nueva Contraseña");
                     editText.setText("");
                     recibirCodigo.setVisibility(View.INVISIBLE);
                     cambiarPwd.setVisibility(View.VISIBLE);
                 }else
-                    Toast.makeText(OlvidoDeContrasena.this, "NO VAMOOO", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OlvidoDeContrasena.this, "ESE CÓDIGO NO ES EL QUE LE HEMOS ENVIADO", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -163,8 +159,9 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         String phone="";
                         String altura="";
                         String fechaNac="";
-                        String numRutina="";
+                        //String numRutina="";
                         String vecesLogeado="";
+                        int version=0;
                         for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                             if(dataSnapshot.child("nick").getValue().toString().equals(nick[0].toString()) || dataSnapshot.child("email").getValue().toString().equals(nick[0].toString())){
                                 phone=dataSnapshot.child("phone").getValue().toString();
@@ -174,11 +171,11 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                                 altura=dataSnapshot.child("altura").getValue().toString();
                                 DNI=dataSnapshot.child("DNI").getValue().toString();
                                 fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                numRutina=dataSnapshot.child("numRutina").getValue().toString();
+                                //numRutina=dataSnapshot.child("numRutina").getValue().toString();
                                 vecesLogeado=dataSnapshot.child("vecesLogeado").getValue().toString();
+                                version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                             }
                         }
-
                         Map<String, Object> datosUser = new HashMap<>();
                         datosUser.put("nick",nick[0]);
                         datosUser.put("password",editText.getText().toString());
@@ -189,9 +186,8 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         datosUser.put("fechaNac",fechaNac);
                         datosUser.put("phone",phone);
                         datosUser.put("vecesLogeado",vecesLogeado);
-                        datosUser.put("numRutina",numRutina);
-
-                        //myRef.child("Usuarios").updateChildren(datosUser);
+                        //datosUser.put("numRutina",numRutina);
+                        datosUser.put("version",version);
                         myRef.child("Usuarios").child(nick[0]).setValue(datosUser);
 
                         if(!unaVez2[0]){
@@ -199,9 +195,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                             startActivity(intent);
                             unaVez2[0]=true;
                         }
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 

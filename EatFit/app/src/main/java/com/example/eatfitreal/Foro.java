@@ -49,9 +49,7 @@ public class Foro extends AppCompatActivity {
         botonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(Foro.this, "PULSADO", Toast.LENGTH_SHORT).show();
                 addPregunta(lista);
-                //editText.setText("");
             }
         });
     }
@@ -86,6 +84,8 @@ public class Foro extends AppCompatActivity {
             myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
                 int unaVez=0;
                 boolean existe=false;
+
+                ArrayList<Integer> ids=new ArrayList<>();
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(unaVez==0){
@@ -93,7 +93,15 @@ public class Foro extends AppCompatActivity {
                         for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                             datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
                             id=dataSnapshot.child("id").getValue().toString();
+                            ids.add(Integer.parseInt(id));
                         }
+                        int max=0;
+
+                        for(int i=0;i<ids.size();i++){
+                            if(ids.get(i)>max)
+                                max=ids.get(i);
+                        }
+
                         for(POJOForo dato: datos){
                             if(dato.getTexto1().equals(editText.getText().toString()))
                                 existe=true;
@@ -102,17 +110,18 @@ public class Foro extends AppCompatActivity {
                         if(existe)
                             Toast.makeText(Foro.this, "La pregunta ya existe, vaya a ver su respuesta", Toast.LENGTH_SHORT).show();
                         else{
-                            int cont=Integer.parseInt(id)+1;
+                            int nextId=max+1;
                             HashMap<String,Object> pregunta=new HashMap<>();
-                            pregunta.put("id",cont);
+                            pregunta.put("id",nextId);
                             pregunta.put("pregunta",editText.getText().toString());
                             pregunta.put("respuesta","");
 
-                            myRef.child("Mensajes").child("Mensaje"+(cont)).setValue(pregunta);
+                            myRef.child("Mensajes").child("Mensaje"+(nextId)).setValue(pregunta);
                             lista.setAdapter(null);
                             rellenaLista(lista);
                         }
                         unaVez++;
+                        editText.setText("");
                     }
                 }
 

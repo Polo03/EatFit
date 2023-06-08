@@ -40,36 +40,37 @@
         android:layout_height="236dp"
         android:background="@drawable/bordeactivity"
         android:textAlignment="center"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"></TextView>
+        app:layout_constraintVertical_bias="0.474"/>
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="255dp"
         android:layout_height="37dp"
         android:text="Desayuno"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/yellow"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.309" />
 
     <TextView
         android:id="@+id/textViewDiaDietas"
-        android:layout_width="242dp"
-        android:layout_height="55dp"
+        android:layout_width="307dp"
+        android:layout_height="61dp"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

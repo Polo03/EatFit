@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +26,10 @@ public class Dietas extends AppCompatActivity {
 
     SharedPreferences preferences;
     int index=0;
-    int[] nums={6,3,0,1,2,5,4};
+    //int[] nums={6,3,0,1,2,5,4};
+    int[] nums={0,4,1,2,3,6,5};
     String[] horas={"Desayuno","Media Mañana","Comida","Merienda","Cena"};
-    int galeria[]={R.drawable.lunes,R.drawable.martes,R.drawable.miercoles,R.drawable.jueves,R.drawable.viernes,R.drawable.sabado,R.drawable.domingo};
+    String dias[]={"Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"};
 
     String galeriaTexto[][]=new String[7][5];
     @Override
@@ -52,10 +54,11 @@ public class Dietas extends AppCompatActivity {
         long ahora = System.currentTimeMillis();
         calendario.setTimeInMillis(ahora);
         Date fecha = new Date(ahora);
-        int dia=calendario.get(Calendar.DAY_OF_MONTH);
-        String diaStr=dia+"";
+        int dia=calendario.get(Calendar.DAY_OF_WEEK);
+        int diaNum=calendario.get(Calendar.DAY_OF_MONTH);
+        String diaStr=diaNum+"";
         if(diaStr.length()==1)
-            diaStr="0"+dia;
+            diaStr="0"+diaNum;
         int month=calendario.get(Calendar.MONTH)+1;
         String monthStr=month+"";
         if(monthStr.length()==1)
@@ -77,11 +80,12 @@ public class Dietas extends AppCompatActivity {
         else
             index=4;
 
-        //ImageView imagenDia=findViewById(R.id.imageViewDia);
-        //imagenDia.setImageResource(galeria[dia-1]);
-
         TextView textViewDia=findViewById(R.id.textViewDiaDietas);
-        textViewDia.setText((diaStr)+"/"+(monthStr)+"/"+(year));
+        //Toast.makeText(this, Calendar.DAY_OF_WEEK+"", Toast.LENGTH_SHORT).show();
+        if(dia==0)
+            textViewDia.setText(dias[6]+" "+(diaStr)+"/"+(monthStr)+"/"+(year));
+        else
+            textViewDia.setText(dias[dia-1]+" "+(diaStr)+"/"+(monthStr)+"/"+(year));
 
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
 
@@ -143,7 +147,7 @@ public class Dietas extends AppCompatActivity {
                                         cadena += c + "\n";
                                         c="";
                                     }else {
-                                        c += galeriaTexto[dia - 1][index].charAt(i);
+                                        c += galeriaTexto[dia-1][index].charAt(i);
                                     }
                                 }
                                 if(c.length()==galeriaTexto[dia-1][index].length())
@@ -187,6 +191,8 @@ public class Dietas extends AppCompatActivity {
                                 if(c.length()==galeriaTexto[6][index].length())
                                     cadena=c;
                             }else{
+
+                                //Toast.makeText(Dietas.this, dia+"", Toast.LENGTH_SHORT).show();
                                 for(int i=0;i<galeriaTexto[dia-1][index].length();i++){
                                     if(galeriaTexto[dia-1][index].charAt(i)=='_') {
                                         cadena += c + "\n";

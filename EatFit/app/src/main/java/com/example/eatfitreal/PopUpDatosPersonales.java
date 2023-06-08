@@ -42,7 +42,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private DatabaseReference myRef;
-    private boolean esVisible;
+    private int version=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,6 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
         Login l=new Login();
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
-        ArrayList<String> allEmails=new ArrayList<>();
-        ArrayList<String> allDNIS=new ArrayList<>();
 
         //Para las medidas de la ventana del pop up
         DisplayMetrics medidasVentana=new DisplayMetrics();
@@ -119,6 +117,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                         altura=dataSnapshot.child("altura").getValue().toString();
                         fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
                         numTelefono=dataSnapshot.child("phone").getValue().toString();
+                        version=Integer.parseInt(dataSnapshot.child("phone").getValue().toString());
                     }
                 }
                 textViewNick.setText(nick);
@@ -145,61 +144,41 @@ public class PopUpDatosPersonales extends AppCompatActivity {
             String dniActual="";
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    if(!dataSnapshot.child("nick").getValue().toString().equals(textViewNick.getText()))
-                        allDNIS.add(dataSnapshot.child("DNI").getValue().toString());
-                }
                 botonSiguiente.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
-                        int j=0;
-                        boolean existeDNI=false;
-                        for(int i=0;i<allDNIS.size();i++){
-                            if(allDNIS.get(i).equals(textViewDNI.getText().toString()))
-                                existeDNI=true;
-                        }
-                        Pattern patronDNI=Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]");
-                        Matcher matcherDNI=patronDNI.matcher(textViewDNI.getText().toString());
-                        if(matcherDNI.matches()){
-                            if(!existeDNI){
-                                AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
-                                builder.setTitle("ALERTA");
-                                builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
-                                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Map<String, Object> datosRoot = new HashMap<>();
-                                        datosRoot.put("nick",textViewNick.getText().toString());
-                                        datosRoot.put("password",textViewPwd.getText().toString());
-                                        datosRoot.put("email",textViewEmail.getText().toString());
-                                        datosRoot.put("DNI",textViewDNI.getText().toString());
-                                        datosRoot.put("peso",textViewPeso.getText().toString());
-                                        datosRoot.put("altura",textViewAltura.getText().toString());
-                                        datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
-                                        datosRoot.put("phone",textViewNumTelefono.getText().toString());
-                                        datosRoot.put("vecesLogeado",1);
-                                        //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
-                                        myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
-                                        //Para terminar la actividad en la cual introduces el comando
-                                        finish();
-                                    }
-                                });
-                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }else{
-                                Toast.makeText(PopUpDatosPersonales.this, "Ese DNI ya existe", Toast.LENGTH_SHORT).show();
-                            } 
-                        }else{
-                            Toast.makeText(PopUpDatosPersonales.this, "Revise el formato de su nuevo DNI", Toast.LENGTH_SHORT).show();
-                        }
-                        
-
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                        builder.setTitle("ALERTA");
+                        builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
+                        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Map<String, Object> datosRoot = new HashMap<>();
+                                datosRoot.put("nick",textViewNick.getText().toString());
+                                datosRoot.put("password",textViewPwd.getText().toString());
+                                datosRoot.put("email",textViewEmail.getText().toString());
+                                datosRoot.put("DNI",textViewDNI.getText().toString());
+                                datosRoot.put("peso",textViewPeso.getText().toString());
+                                datosRoot.put("altura",textViewAltura.getText().toString());
+                                datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
+                                datosRoot.put("phone",textViewNumTelefono.getText().toString());
+                                datosRoot.put("vecesLogeado",1);
+                                datosRoot.put("version",version);
+                                //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+                                myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
+                                //Para terminar la actividad en la cual introduces el comando
+                                finish();
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
                 });
             }
@@ -218,14 +197,12 @@ public class PopUpDatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
                 botonConfig.setVisibility(View.INVISIBLE);
                 textViewEmail.setEnabled(true);
-                textViewDNI.setEnabled(true);
                 textViewPeso.setEnabled(true);
                 textViewAltura.setEnabled(true);
                 textViewFechaNac.setEnabled(true);
                 textViewNumTelefono.setEnabled(true);
                 botonSiguiente.setVisibility(View.VISIBLE);
                 textViewEmail.getBackground().setTint(Color.WHITE);
-                textViewDNI.getBackground().setTint(Color.WHITE);
                 textViewPeso.getBackground().setTint(Color.WHITE);
                 textViewAltura.getBackground().setTint(Color.WHITE);
                 textViewFechaNac.getBackground().setTint(Color.WHITE);

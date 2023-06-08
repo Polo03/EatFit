@@ -69,15 +69,6 @@ public class MenuPrincipal extends AppCompatActivity {
         int min= fecha.getMinutes();
         int seg= fecha.getSeconds();
 
-        ImageButton buttonBefore = findViewById(R.id.imageButtonBefore1);
-        buttonBefore.setVisibility(View.INVISIBLE);
-        ImageButton buttonAfter = findViewById(R.id.imageButtonAfter1);
-        buttonAfter.setVisibility(View.INVISIBLE);
-        TextView t1 = findViewById(R.id.textViewBrazoYPecho);
-        t1.setVisibility(View.INVISIBLE);
-        t1.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        t1.setText(niveles[index]);
-
         //Por si el usuario ha decidido no cerrar sesión, recogemos el nick con
         //las shared preferences.
         String nickStr="";
@@ -304,7 +295,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
             }
         });
-
     }
 
     //Método para cerrar sesión, es decir, para limpiar las shared preferences.
