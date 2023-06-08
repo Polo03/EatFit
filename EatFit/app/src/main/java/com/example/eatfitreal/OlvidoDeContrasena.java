@@ -101,7 +101,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                             }
                             if(!phone.equals("")){
 
-                                Toast.makeText(OlvidoDeContrasena.this, "El codigo enviado es:"+codigo, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(OlvidoDeContrasena.this, "El codigo enviado es:"+codigo, Toast.LENGTH_LONG).show();
                                 SmsManager smsManager=SmsManager.getDefault();
                                 smsManager.sendTextMessage(phone, null, codigo, null, null);
 
