@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.view.RoundedCorner;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
     private SharedPreferences preferences;
     private DatabaseReference myRef;
     private int version=0;
+    private EditText textViewFechaNac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         EditText textViewDNI=findViewById(R.id.textViewDNI);
         EditText textViewPeso=findViewById(R.id.textViewPeso);
         EditText textViewAltura=findViewById(R.id.textViewAltura);
-        EditText textViewFechaNac=findViewById(R.id.textViewFechaNac);
+        textViewFechaNac=findViewById(R.id.textViewFechaNac);
         EditText textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
 
@@ -148,37 +151,56 @@ public class PopUpDatosPersonales extends AppCompatActivity {
 
                     @Override
                     public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
-                        builder.setTitle("ALERTA");
-                        builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
-                        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Map<String, Object> datosRoot = new HashMap<>();
-                                datosRoot.put("nick",textViewNick.getText().toString());
-                                datosRoot.put("password",textViewPwd.getText().toString());
-                                datosRoot.put("email",textViewEmail.getText().toString());
-                                datosRoot.put("DNI",textViewDNI.getText().toString());
-                                datosRoot.put("peso",textViewPeso.getText().toString());
-                                datosRoot.put("altura",textViewAltura.getText().toString());
-                                datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
-                                datosRoot.put("phone",textViewNumTelefono.getText().toString());
-                                datosRoot.put("vecesLogeado",1);
-                                datosRoot.put("version",version);
-                                //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
-                                myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
-                                //Para terminar la actividad en la cual introduces el comando
-                                finish();
-                            }
-                        });
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        Pattern patronEmail=Pattern.compile("[A-Z|a-z|0-9]+@gmail.com");
+                        Pattern patronNumTelefono = Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
+                        Matcher matcherEmail=patronEmail.matcher(textViewEmail.getText().toString());
+                        Matcher matcherNumTelefono=patronNumTelefono.matcher(textViewNumTelefono.getText().toString());
+                        if(!matcherEmail.matches()){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                            builder.setTitle("ERROR");
+                            builder.setMessage("Revise el formato del email");
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }else if(!matcherNumTelefono.matches()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                            builder.setTitle("ERROR");
+                            builder.setMessage("Revise el formato del numero de telefono");
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PopUpDatosPersonales.this);
+                            builder.setTitle("ALERTA");
+                            builder.setMessage("¿Desea confirmar los cambios?");        // add the buttons
+                            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Map<String, Object> datosRoot = new HashMap<>();
+                                    datosRoot.put("nick",textViewNick.getText().toString());
+                                    datosRoot.put("password",textViewPwd.getText().toString());
+                                    datosRoot.put("email",textViewEmail.getText().toString());
+                                    datosRoot.put("DNI",textViewDNI.getText().toString());
+                                    datosRoot.put("peso",textViewPeso.getText().toString());
+                                    datosRoot.put("altura",textViewAltura.getText().toString());
+                                    datosRoot.put("fechaNac",textViewFechaNac.getText().toString());
+                                    datosRoot.put("phone",textViewNumTelefono.getText().toString());
+                                    datosRoot.put("vecesLogeado",1);
+                                    datosRoot.put("version",version);
+                                    //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
+                                    myRef.child("Usuarios").child(textViewNick.getText().toString()).setValue(datosRoot);
+                                    //Para terminar la actividad en la cual introduces el comando
+                                    finish();
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+
                     }
                 });
             }
@@ -210,6 +232,26 @@ public class PopUpDatosPersonales extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void mostrarCalendario(View v){
+        DatePickerDialog d=new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                if(month+1<10)
+                    if(day<10)
+                        textViewFechaNac.setText("0"+day+"/0"+(month+1)+"/"+year);
+                    else
+                        textViewFechaNac.setText(day+"/0"+(month+1)+"/"+year);
+                else
+                if(day<10)
+                    textViewFechaNac.setText("0"+day+"/"+(month+1)+"/"+year);
+                else
+                    textViewFechaNac.setText(day+"/"+(month+1)+"/"+year);
+            }
+        },2003,0,1);
+        d.setMessage("Seleccione su fecha de nacimiento");
+        d.show();
     }
 
 }

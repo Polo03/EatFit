@@ -69,7 +69,7 @@ public class Dietas extends AppCompatActivity {
         int min= fecha.getMinutes();
         int seg= fecha.getSeconds();
         //Toast.makeText(this, hora+":"+min+":"+seg, Toast.LENGTH_SHORT).show();
-        if(hora>=4 && hora<=10)
+        if(hora>=0 && hora<=10)
             index=0;
         else if(hora>10 && hora<=12)
             index=1;
@@ -77,7 +77,7 @@ public class Dietas extends AppCompatActivity {
             index=2;
         else if(hora>17 && hora<=19)
             index=3;
-        else
+        else if(hora>19 && hora<=23)
             index=4;
 
         TextView textViewDia=findViewById(R.id.textViewDiaDietas);
