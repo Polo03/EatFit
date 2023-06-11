@@ -8,10 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -172,14 +174,25 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //Iniciar sesión con google
-        ImageButton botonGoogle=(ImageButton) findViewById(R.id.imageButtonGoogle);
-        botonGoogle.setOnClickListener(new View.OnClickListener() {
+        ImageButton botonInsta=(ImageButton) findViewById(R.id.imageButtonInsta);
+        botonInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String url = "https://www.instagram.com/eatfitness__/";
+                Uri uri=Uri.parse(url);
+                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+            }
+        });
 
-                //GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("HOLA").requestEmail().build();
-
+        ImageButton botonTwitter=(ImageButton) findViewById(R.id.imageButtonTwitter);
+        botonTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://twitter.com/Eatfitness54645";
+                Uri uri=Uri.parse(url);
+                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
             }
         });
 
@@ -214,10 +227,6 @@ public class Login extends AppCompatActivity {
     public void mostrarVentanaOlvidarContrasena(View v){
         Intent intent = new Intent(Login.this, OlvidoDeContrasena.class);
         startActivity(intent);
-    }
-
-    public void pruebaAsyncTask(){
-
     }
 
     public void introduceRutinas(){

@@ -7,27 +7,16 @@
     android:background="@drawable/fondologin"
     tools:context=".Login">
 
-    <ImageView
-        android:id="@+id/imageView8"
+    <ImageButton
+        android:id="@+id/imageButtonInsta"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="596dp"
+        android:background="@drawable/pngegg__3_"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pngegg__3_" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="596dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pngegg__1_" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -66,7 +55,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Acceder a la sesión con:"
+        android:text="Siguenos en nuestras redes sociales"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -180,11 +169,11 @@
         app:useMaterialThemeColors="false" />
 
     <ImageButton
-        android:id="@+id/imageButtonGoogle"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/imageButtonTwitter"
+        android:layout_width="86dp"
+        android:layout_height="47dp"
         android:layout_marginTop="596dp"
-        android:background="@drawable/pngegg__2_"
+        android:background="@drawable/twitter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
