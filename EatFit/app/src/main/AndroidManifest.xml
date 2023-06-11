@@ -30,9 +30,6 @@
             android:name=".Foro"
             android:exported="false" />
         <activity
-            android:name=".AddPregunta"
-            android:exported="false" />
-        <activity
             android:name=".Dietas"
             android:exported="false"
             android:theme="@style/AppTheme.TemaPopup" />
