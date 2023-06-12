@@ -105,7 +105,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                                 SmsManager smsManager=SmsManager.getDefault();
                                 smsManager.sendTextMessage(phone, null, codigo, null, null);
 
-                                texto.setText("Introduzca el codigo que le hemos enviado");
+                                texto.setText("Introduzca el código que le hemos enviado");
                                 editText.setHint("Codigo");
                                 editText.setText("");
                                 enviarCodigo.setVisibility(View.INVISIBLE);

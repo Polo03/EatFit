@@ -51,7 +51,7 @@ public class PopUpRespuesta extends AppCompatActivity {
                 }
                 textViewPregunta.setText("Pregunta "+(i+1));
                 if(respuestas.get(i).equals(""))
-                    respuesta.setText("Estamos deliverando si está pregunta es válida para nuestro foro, si es válida, la respuesta será plasmada con las otras preguntas válidas, sino, la pregunta será eliminada de nuestro foro");
+                    respuesta.setText("Estamos deliverando si esta pregunta es válida para nuestro foro, si es válida, la respuesta será plasmada con las otras preguntas válidas, sino, la pregunta será eliminada de nuestro foro");
                 else
                     respuesta.setText(respuestas.get(i));
             }

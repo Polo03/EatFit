@@ -77,7 +77,7 @@ public class ConteoCalorias extends AppCompatActivity {
                     cantidad.add(dataSnapshot.child("nombreAlimento").getValue().toString());
                     calorias.add(Integer.parseInt(dataSnapshot.child("calorias").getValue().toString()));
                 }
-                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
                 imageSwitcher.setImageResource(galeria[index]);
                 myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                     int unaVez=0;
@@ -95,11 +95,11 @@ public class ConteoCalorias extends AppCompatActivity {
                         }
                         if(caloriasEstablecidas==0){
                             AlertDialog.Builder builder = new AlertDialog.Builder(ConteoCalorias.this);
-                            builder.setTitle("Informacion");
-                            builder.setMessage("¿Cuantas calorias quiere consumir hoy?");        // add the buttons
+                            builder.setTitle("Información");
+                            builder.setMessage("¿Cuantas calorías quiere consumir hoy?");        // add the buttons
                             final EditText textCalorias=new EditText(ConteoCalorias.this);
                             textCalorias.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            textCalorias.setHint("Calorias Diarias");
+                            textCalorias.setHint("Calorías Diarias");
                             builder.setView(textCalorias);
                             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
@@ -121,8 +121,8 @@ public class ConteoCalorias extends AppCompatActivity {
                         }
                         int caloriasRestantes=caloriasTotales-caloriasConsumidas;
                         //textView.setText("Las calorias totales que quiere consumir son "+caloriasTotales+", las calorias consumidas actualmente son "+caloriasConsumidas+", las calorias restantes actualmente son "+caloriasRestantes);
-                        textView.setText("Calorias deseadas:"+caloriasTotales+"");
-                        textView2.setText("Calorias consumidas:"+caloriasConsumidas+"");
+                        textView.setText("Calorías deseadas:"+caloriasTotales+"");
+                        textView2.setText("Calorías consumidas:"+caloriasConsumidas+"");
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -179,7 +179,7 @@ public class ConteoCalorias extends AppCompatActivity {
                 index--;
                 if(index<0)
                     index=alimentos.size()-1;
-                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
                 imageSwitcher.setImageResource(galeria[index]);
             }
         });
@@ -191,7 +191,7 @@ public class ConteoCalorias extends AppCompatActivity {
                 index++;
                 if(index>=alimentos.size())
                     index=0;
-                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorias");
+                textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
                 imageSwitcher.setImageResource(galeria[index]);
             }
         });

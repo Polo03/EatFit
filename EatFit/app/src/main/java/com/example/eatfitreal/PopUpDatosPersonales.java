@@ -120,7 +120,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                         altura=dataSnapshot.child("altura").getValue().toString();
                         fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
                         numTelefono=dataSnapshot.child("phone").getValue().toString();
-                        version=Integer.parseInt(dataSnapshot.child("phone").getValue().toString());
+                        version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                     }
                 }
                 textViewNick.setText(nick);

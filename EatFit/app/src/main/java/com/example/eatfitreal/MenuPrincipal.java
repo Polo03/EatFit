@@ -104,7 +104,7 @@ public class MenuPrincipal extends AppCompatActivity {
         conteoCalorico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(version>=2){
+                if(version==1){
                     DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
                     myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                         int unaVez=0;
@@ -287,7 +287,7 @@ public class MenuPrincipal extends AppCompatActivity {
         botonDietas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(version>=1){
+                if(version==1){
                     Intent intent = new Intent(MenuPrincipal.this, Dietas.class);
                     startActivity(intent);
                 }else
