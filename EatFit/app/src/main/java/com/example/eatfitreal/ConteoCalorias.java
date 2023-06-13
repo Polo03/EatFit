@@ -60,6 +60,7 @@ public class ConteoCalorias extends AppCompatActivity {
         ImageView imageSwitcher=findViewById(R.id.imageViewConteo);
         TextView textView2=findViewById(R.id.textViewCaloriasTotales3);
 
+        //Si ha decidido no cerrar sesión o no
         String nickStr="";
         if(preferences.getString("nick", null)==null)
             nickStr=l.ultimoUsuarioLogeado();
@@ -79,6 +80,7 @@ public class ConteoCalorias extends AppCompatActivity {
                 }
                 textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
                 imageSwitcher.setImageResource(galeria[index]);
+                //Buscamos en la "tabla" Calorias
                 myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                     int unaVez=0;
                     int caloriasEstablecidas=0;
@@ -93,17 +95,22 @@ public class ConteoCalorias extends AppCompatActivity {
                                 caloriasConsumidas=Integer.parseInt(dataSnapshot.child("caloriasConsumidas").getValue().toString());
                             }
                         }
+                        //Si no ha establecido las calorias
                         if(caloriasEstablecidas==0){
+                            //Mostramos una alerta para que decida si las calorias que quiere consumir ese dia
                             AlertDialog.Builder builder = new AlertDialog.Builder(ConteoCalorias.this);
                             builder.setTitle("Información");
                             builder.setMessage("¿Cuantas calorías quiere consumir hoy?");        // add the buttons
+                            //Implementamos un editText a esa alerta para que establezca las calorias
                             final EditText textCalorias=new EditText(ConteoCalorias.this);
                             textCalorias.setInputType(InputType.TYPE_CLASS_NUMBER);
                             textCalorias.setHint("Calorías Diarias");
                             builder.setView(textCalorias);
+                            //Para establecer un botón a la alerta
                             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    //Introduce las calorias totales en la base de datos
                                     DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
                                     myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -119,8 +126,6 @@ public class ConteoCalorias extends AppCompatActivity {
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         }
-                        int caloriasRestantes=caloriasTotales-caloriasConsumidas;
-                        //textView.setText("Las calorias totales que quiere consumir son "+caloriasTotales+", las calorias consumidas actualmente son "+caloriasConsumidas+", las calorias restantes actualmente son "+caloriasRestantes);
                         textView.setText("Calorías deseadas:"+caloriasTotales+"");
                         textView2.setText("Calorías consumidas:"+caloriasConsumidas+"");
                     }
@@ -155,9 +160,12 @@ public class ConteoCalorias extends AppCompatActivity {
                                 caloriasConsumidas=Integer.parseInt(dataSnapshot.child("caloriasConsumidas").getValue().toString());
                             }
                         }
+                        //Para que no de la vuelta dos veces al onDataChange
                         if(unaVez==0){
                             unaVez++;
                             actualizaCalorias(finalNickStr,caloriasTotales,caloriasConsumidas,calorias.get(index));
+                            //Si las calorias consumidas es mayor o igual a las calorias establecidas
+                            //se cierra el activity
                             if(caloriasConsumidas+calorias.get(index)>=caloriasTotales){
                                 finish();
                             }
@@ -177,6 +185,8 @@ public class ConteoCalorias extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 index--;
+                //Si la variable index es menor o igual a 0,
+                //la variable index pasa a valer la cantidad de alimentos.
                 if(index<0)
                     index=alimentos.size()-1;
                 textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
@@ -189,6 +199,8 @@ public class ConteoCalorias extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 index++;
+                //Si la variable index es mayor o igual a la cantidad de alimentos,
+                //la variable index pasa a valer 0.
                 if(index>=alimentos.size())
                     index=0;
                 textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
@@ -199,6 +211,7 @@ public class ConteoCalorias extends AppCompatActivity {
 
     }
 
+    //Método para actualizar las calorias de la base de datos.
     public static void actualizaCalorias(String nick, int caloriasTotales, int caloriasConsumidas, int cal){
         DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
         Map<String, Object> calorias = new HashMap<>();

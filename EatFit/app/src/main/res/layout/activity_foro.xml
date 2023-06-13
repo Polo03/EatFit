@@ -12,6 +12,7 @@
         android:layout_height="53dp"
         android:ems="10"
         android:hint="Add Question"
+        android:textColorHint="@color/black"
         android:inputType="textPersonName"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
