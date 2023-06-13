@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,6 +36,7 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        //Declaramos las variables
         EditText editTextUser=(EditText) findViewById(R.id.editTextUserCreate);
         EditText editTextPwd=(EditText) findViewById(R.id.editTextPwdCreate);
         EditText editTextDni=(EditText) findViewById(R.id.editTextDNI);
@@ -53,11 +55,12 @@ public class CreateAccount extends AppCompatActivity {
                 String[] email={""};
                 String[] dni={""};
                 boolean[] unaVez={false};
-                //Si el nick contiene la cadena "@gmail.com", mostramos mensaje de que no puede tener esa cadena
+                //Referenciamos la base de datos de FireBase
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //Para que no de dos veces la vuelta al metodo
                         if(!unaVez[0]){
                             //List<String> nicks=new ArrayList<>();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -66,6 +69,7 @@ public class CreateAccount extends AppCompatActivity {
                                 if(dataSnapshot.child("DNI").getValue().toString().equals(editTextDni.getText().toString()))
                                     dni[0]=dataSnapshot.child("DNI").getValue().toString();
                             }
+                            //Si el nick, contiene el caracter @
                             if(editTextUser.getText().toString().contains("@")){
 
                                 Context context = getApplicationContext();
@@ -74,7 +78,7 @@ public class CreateAccount extends AppCompatActivity {
 
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
-                                //Si existe el nick, mostramos mensaje de que el nick ya esta en uso
+                            //Si el nick se ha encontrado
                             }else if(!nick[0].equals("")){
 
                                 Context context = getApplicationContext();
@@ -83,7 +87,7 @@ public class CreateAccount extends AppCompatActivity {
 
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
-                                //Si existe el email, mostramos mensaje de que el email ya esta en uso
+                            //Si el DNI ya esta en uso
                             }else if(!dni[0].equals("")){
 
                                 Context context = getApplicationContext();
@@ -103,6 +107,7 @@ public class CreateAccount extends AppCompatActivity {
                                 String fechaNacString=editTextFechaNacimiento.getText().toString();
                                 String numTelefonoString=editTextNumTelefono.getText().toString();
 
+                                //Establecemos patrones para el email, dni y numero de telefono
                                 Pattern patronDNI=Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]");
                                 Pattern patronEmail=Pattern.compile("[A-Z|a-z|0-9]+@gmail.com");
                                 Pattern patronNumTelefono = Pattern.compile("[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
@@ -122,6 +127,9 @@ public class CreateAccount extends AppCompatActivity {
                                     //Sino, insertamos en la base de datos el nuevo usuario, con todos sus datos
                                 }else{
 
+                                    //Insertamos en la base de datos de FireBase los datos que ha introducido
+                                    //al crear la cuenta.
+                                    Random ale=new Random();
                                     Map<String, Object> datosUser = new HashMap<>();
                                     datosUser.put("nick",nickString);
                                     datosUser.put("password",pwdString);
@@ -132,7 +140,8 @@ public class CreateAccount extends AppCompatActivity {
                                     datosUser.put("fechaNac",fechaNacString);
                                     datosUser.put("phone",numTelefonoString);
                                     datosUser.put("vecesLogeado",0);
-                                    datosUser.put("version",1);
+                                    //Para generar una version aleatoria
+                                    datosUser.put("version",ale.nextInt(1));
                                     myRef.child("Usuarios").child(nickString).setValue(datosUser);
 
                                     Intent intent = new Intent(CreateAccount.this, Login.class);

@@ -50,15 +50,17 @@ public class Cuestionario extends AppCompatActivity {
 
         //Tercer Spinner
         Spinner tercerDesplegable=findViewById(R.id.spinnerTerceraPregunta);
-
+        //Hacemos un arrayAdapter con los datos del primerDesplegable
         ArrayAdapter<CharSequence> adapterTerceraPregunta=ArrayAdapter.createFromResource(getApplicationContext(), R.array.tercerDesplegable, android.R.layout.simple_spinner_item);
         adapterTerceraPregunta.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
+        //Asociamos el adaptador al desplegable
         tercerDesplegable.setAdapter(adapterTerceraPregunta);
 
         tercerDesplegable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //Recogemos el texto de la posición que ha seleccionado en el desplegable
                 respuesta3[0] =tercerDesplegable.getItemAtPosition(i).toString();
             }
 
@@ -101,7 +103,7 @@ public class Cuestionario extends AppCompatActivity {
                 EditText primerapregunta=(EditText) findViewById(R.id.editextprimerapregunta);
                 EditText segundapregunta=(EditText) findViewById(R.id.editTextsegunda);
                 EditText quintapregunta=(EditText) findViewById(R.id.editTextQuitapregunta);
-                //String pesoAConseguirString=pesoAConseguir.getText().toString();
+                //Si el editText del peso no es vacio, parsea a double la cantidad
                 if(!pesoAConseguir.getText().toString().equals("")) {
                     double pesoAConseguirDouble = Double.parseDouble(pesoAConseguir.getText().toString());
                     respuesta6[0] = pesoAConseguirDouble;
@@ -109,6 +111,7 @@ public class Cuestionario extends AppCompatActivity {
                 respuesta1[0]=primerapregunta.getText().toString();
                 respuesta2[0]=segundapregunta.getText().toString();
                 respuesta5[0]=quintapregunta.getText().toString();
+                //Si alguna respuesta esta vacia
                 if(respuesta1[0].equals("") || respuesta2[0].equals("") || respuesta3[0].equals("") || respuesta4[0].equals("") || respuesta5[0].equals("") || pesoAConseguir.getText().toString().equals("")){
                     Toast.makeText(Cuestionario.this, "Todos los campso deben estar rellenados", Toast.LENGTH_SHORT).show();
                 }else{
@@ -141,6 +144,7 @@ public class Cuestionario extends AppCompatActivity {
                 String numTelefono="";
                 int version=0;
                 String nickStr=l.ultimoUsuarioLogeado();
+                //Recogemos los datos de la ruta establecida anteriormente, es decir, de la tabla Usuarios.
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
                         nick=dataSnapshot.child("nick").getValue().toString();
@@ -154,8 +158,10 @@ public class Cuestionario extends AppCompatActivity {
                         version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                     }
                 }
+                //Los datos recogidas anteriormente, los plasmamos de nuevo en la base de datos, ya que para
+                //Firebase no existe el actualizar
                 Map<String, Object> datosUser = new HashMap<>();
-                datosUser.put("nick",nick);
+                datosUser.put("nick",nickStr);
                 datosUser.put("password",pwd);
                 datosUser.put("email",email);
                 datosUser.put("DNI",dni);
@@ -165,17 +171,18 @@ public class Cuestionario extends AppCompatActivity {
                 datosUser.put("phone",numTelefono);
                 datosUser.put("vecesLogeado",1);
                 datosUser.put("version",version);
-                myRef.child("Usuarios").child(nick).setValue(datosUser);
+                myRef.child("Usuarios").child(nickStr).setValue(datosUser);
 
+                //Introducimos los datos que ha introducido en el cuestionario
                 Map<String, Object> datosUserCuest = new HashMap<>();
-                datosUserCuest.put("nick",nick);
+                datosUserCuest.put("nick",nickStr);
                 datosUserCuest.put("objetivo1",respuesta1);
                 datosUserCuest.put("objetivo2",respuesta2);
                 datosUserCuest.put("objetivo3",respuesta3);
                 datosUserCuest.put("objetivo4",respuesta4);
                 datosUserCuest.put("objetivo5",respuesta5);
                 datosUserCuest.put("objetivo6",respuesta6);
-                myRef.child("Cuestionario").child(nick).setValue(datosUserCuest);
+                myRef.child("Cuestionario").child(nickStr).setValue(datosUserCuest);
             }
 
             @Override

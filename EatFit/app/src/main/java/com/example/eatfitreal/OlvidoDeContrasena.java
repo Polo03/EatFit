@@ -94,7 +94,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                             Login l=new Login();
                             String phone="";
                             for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                                if(dataSnapshot.child("nick").getValue().toString().equals(editText.getText().toString()) || dataSnapshot.child("email").getValue().toString().equals(editText.getText().toString())){
+                                if(dataSnapshot.child("nick").getValue().toString().equals(editText.getText().toString())){
                                     nick[0]=dataSnapshot.child("nick").getValue().toString();
                                     phone=dataSnapshot.child("phone").getValue().toString();
                                 }
@@ -131,6 +131,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
         recibirCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Toast.makeText(OlvidoDeContrasena.this, nick[0]+"", Toast.LENGTH_SHORT).show();
                 if(codigo.equals(editText.getText().toString())){
                     //Toast.makeText(OlvidoDeContrasena.this, "VAMOOO", Toast.LENGTH_SHORT).show();
                     texto.setText("Introduzca la nueva contraseña");
@@ -152,6 +153,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                        String nickStr="";
                         String pwd="";
                         String email="";
                         String DNI="";
@@ -163,7 +165,8 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         String vecesLogeado="";
                         int version=0;
                         for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nick[0].toString()) || dataSnapshot.child("email").getValue().toString().equals(nick[0].toString())){
+                            if(dataSnapshot.child("nick").getValue().toString().equals(nick[0].toString())){
+                                nickStr=dataSnapshot.child("nick").getValue().toString();
                                 phone=dataSnapshot.child("phone").getValue().toString();
                                 //pwd=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();
@@ -177,7 +180,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                             }
                         }
                         Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nick[0]);
+                        datosUser.put("nick",nickStr);
                         datosUser.put("password",editText.getText().toString());
                         datosUser.put("email",email);
                         datosUser.put("DNI",DNI);
@@ -188,7 +191,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         datosUser.put("vecesLogeado",vecesLogeado);
                         //datosUser.put("numRutina",numRutina);
                         datosUser.put("version",version);
-                        myRef.child("Usuarios").child(nick[0]).setValue(datosUser);
+                        myRef.child("Usuarios").child(nickStr).setValue(datosUser);
 
                         if(!unaVez2[0]){
                             Intent intent = new Intent(OlvidoDeContrasena.this, Login.class);
@@ -203,6 +206,7 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                 });
             }
         });
+
     }
 
 

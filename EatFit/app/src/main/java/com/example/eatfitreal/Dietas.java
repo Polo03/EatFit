@@ -50,6 +50,7 @@ public class Dietas extends AppCompatActivity {
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.70));
 
+        //Recogemos el tiempo actual.
         Calendar calendario = Calendar.getInstance();
         long ahora = System.currentTimeMillis();
         calendario.setTimeInMillis(ahora);
