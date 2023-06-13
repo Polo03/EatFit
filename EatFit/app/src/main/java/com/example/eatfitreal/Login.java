@@ -57,9 +57,10 @@ public class Login extends AppCompatActivity {
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        myRef = FirebaseDatabase.getInstance().getReference();
         //eliminarRoot();
         //introduceRutinas();
-        //introduceUserRoot();
+        introduceUserRoot();
         //introduceDietas();
         //introducePreguntas();
         //introduceCaloriasPersonales();
@@ -280,7 +281,7 @@ public class Login extends AppCompatActivity {
         datosRoot.put("fechaNac","17/10/2003");
         datosRoot.put("phone","601361984");
         datosRoot.put("vecesLogeado",1);
-        datosRoot.put("version",2);
+        datosRoot.put("version",1);
         //El .child es como una especie de ruta, en este caso, usuarios seria la tabla y el registro es Root.
         myRef.child("Usuarios").child("Root").setValue(datosRoot);
 

@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.782" />
 
     <EditText
-        android:id="@+id/editTextPesoAConseguir"
+        android:id="@+id/editTextRespuesta6"
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:ems="10"

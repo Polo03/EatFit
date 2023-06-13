@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -96,22 +97,27 @@ public class Cuestionario extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                EditText pesoAConseguir=(EditText) findViewById(R.id.editTextPesoAConseguir);
+                EditText pesoAConseguir=(EditText) findViewById(R.id.editTextRespuesta6);
                 EditText primerapregunta=(EditText) findViewById(R.id.editextprimerapregunta);
                 EditText segundapregunta=(EditText) findViewById(R.id.editTextsegunda);
                 EditText quintapregunta=(EditText) findViewById(R.id.editTextQuitapregunta);
-                String pesoAConseguirString=pesoAConseguir.getText().toString();
-                if(!pesoAConseguirString.equals("")) {
-                    double pesoAConseguirDouble = Double.parseDouble(pesoAConseguirString);
+                //String pesoAConseguirString=pesoAConseguir.getText().toString();
+                if(!pesoAConseguir.getText().toString().equals("")) {
+                    double pesoAConseguirDouble = Double.parseDouble(pesoAConseguir.getText().toString());
                     respuesta6[0] = pesoAConseguirDouble;
                 }
                 respuesta1[0]=primerapregunta.getText().toString();
                 respuesta2[0]=segundapregunta.getText().toString();
                 respuesta5[0]=quintapregunta.getText().toString();
-                actualizarBD(respuesta1[0],respuesta2[0],respuesta3[0],respuesta4[0],respuesta5[0],respuesta6[0]);
+                if(respuesta1[0].equals("") || respuesta2[0].equals("") || respuesta3[0].equals("") || respuesta4[0].equals("") || respuesta5[0].equals("") || pesoAConseguir.getText().toString().equals("")){
+                    Toast.makeText(Cuestionario.this, "Todos los campso deben estar rellenados", Toast.LENGTH_SHORT).show();
+                }else{
+                    actualizarBD(respuesta1[0],respuesta2[0],respuesta3[0],respuesta4[0],respuesta5[0],respuesta6[0]);
 
-                Intent intent = new Intent(Cuestionario.this, MenuPrincipal.class);
-                startActivity(intent);
+                    Intent intent = new Intent(Cuestionario.this, MenuPrincipal.class);
+                    startActivity(intent);
+                }
+
             }
         });
     }
@@ -133,6 +139,7 @@ public class Cuestionario extends AppCompatActivity {
                 String altura="";
                 String fechaNac="";
                 String numTelefono="";
+                int version=0;
                 String nickStr=l.ultimoUsuarioLogeado();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
@@ -144,6 +151,7 @@ public class Cuestionario extends AppCompatActivity {
                         altura=dataSnapshot.child("altura").getValue().toString();
                         fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
                         numTelefono=dataSnapshot.child("phone").getValue().toString();
+                        version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                     }
                 }
                 Map<String, Object> datosUser = new HashMap<>();
@@ -156,6 +164,7 @@ public class Cuestionario extends AppCompatActivity {
                 datosUser.put("fechaNac",fechaNac);
                 datosUser.put("phone",numTelefono);
                 datosUser.put("vecesLogeado",1);
+                datosUser.put("version",version);
                 myRef.child("Usuarios").child(nick).setValue(datosUser);
 
                 Map<String, Object> datosUserCuest = new HashMap<>();
@@ -175,13 +184,6 @@ public class Cuestionario extends AppCompatActivity {
             }
         });
 
-    }
-
-    private boolean noCierraSesion(){
-        if(preferences.getString("nick",null)!=null){
-            return true;
-        }
-        return false;
     }
 
 }
