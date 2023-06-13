@@ -138,7 +138,6 @@ public class CreateAccount extends AppCompatActivity {
                                     Intent intent = new Intent(CreateAccount.this, Login.class);
                                     startActivity(intent);
                                 }
-
                             }
                             unaVez[0]=true;
                         }

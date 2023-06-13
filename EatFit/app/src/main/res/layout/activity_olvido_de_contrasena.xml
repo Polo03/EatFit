@@ -10,8 +10,8 @@
 
   <Button
       android:id="@+id/buttonCambiarPwd"
-      android:layout_width="136dp"
-      android:layout_height="57dp"
+      android:layout_width="232dp"
+      android:layout_height="59dp"
       android:background="@drawable/botonredondo"
       android:text="Siguiente"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -23,8 +23,8 @@
 
   <Button
       android:id="@+id/buttonConfirmarCambioPassword"
-      android:layout_width="136dp"
-      android:layout_height="57dp"
+      android:layout_width="232dp"
+      android:layout_height="59dp"
       android:background="@drawable/botonredondo"
       android:text="Enviar SMS"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +36,8 @@
 
   <Button
       android:id="@+id/buttonContinuar"
-      android:layout_width="136dp"
-      android:layout_height="57dp"
+      android:layout_width="232dp"
+      android:layout_height="59dp"
       android:background="@drawable/botonredondo"
       android:text="Continuar"
       app:layout_constraintBottom_toBottomOf="parent"
