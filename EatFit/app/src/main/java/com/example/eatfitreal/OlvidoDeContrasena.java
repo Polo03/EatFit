@@ -161,42 +161,44 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         String phone="";
                         String altura="";
                         String fechaNac="";
-                        //String numRutina="";
                         String vecesLogeado="";
                         int version=0;
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nick[0].toString())){
-                                nickStr=dataSnapshot.child("nick").getValue().toString();
-                                phone=dataSnapshot.child("phone").getValue().toString();
-                                //pwd=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                peso=dataSnapshot.child("peso").getValue().toString();
-                                altura=dataSnapshot.child("altura").getValue().toString();
-                                DNI=dataSnapshot.child("DNI").getValue().toString();
-                                fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                                //numRutina=dataSnapshot.child("numRutina").getValue().toString();
-                                vecesLogeado=dataSnapshot.child("vecesLogeado").getValue().toString();
-                                version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
+                        //Toast.makeText(OlvidoDeContrasena.this, nick[0]+"", Toast.LENGTH_SHORT).show();
+                        if(!nick[0].equals("")){
+                            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                if(dataSnapshot.child("nick").getValue().toString().equals(nick[0])){
+                                    nickStr=dataSnapshot.child("nick").getValue().toString();
+                                    phone=dataSnapshot.child("phone").getValue().toString();
+                                    //pwd=dataSnapshot.child("password").getValue().toString();
+                                    email=dataSnapshot.child("email").getValue().toString();
+                                    peso=dataSnapshot.child("peso").getValue().toString();
+                                    altura=dataSnapshot.child("altura").getValue().toString();
+                                    DNI=dataSnapshot.child("DNI").getValue().toString();
+                                    fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                                    //numRutina=dataSnapshot.child("numRutina").getValue().toString();
+                                    vecesLogeado=dataSnapshot.child("vecesLogeado").getValue().toString();
+                                    version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
+                                }
                             }
-                        }
-                        Map<String, Object> datosUser = new HashMap<>();
-                        datosUser.put("nick",nickStr);
-                        datosUser.put("password",editText.getText().toString());
-                        datosUser.put("email",email);
-                        datosUser.put("DNI",DNI);
-                        datosUser.put("peso",peso);
-                        datosUser.put("altura",altura);
-                        datosUser.put("fechaNac",fechaNac);
-                        datosUser.put("phone",phone);
-                        datosUser.put("vecesLogeado",vecesLogeado);
-                        //datosUser.put("numRutina",numRutina);
-                        datosUser.put("version",version);
-                        myRef.child("Usuarios").child(nickStr).setValue(datosUser);
+                            if(!unaVez2[0]){
+                                Map<String, Object> datosUser = new HashMap<>();
+                                datosUser.put("nick",nickStr);
+                                datosUser.put("password",editText.getText().toString());
+                                datosUser.put("email",email);
+                                datosUser.put("DNI",DNI);
+                                datosUser.put("peso",peso);
+                                datosUser.put("altura",altura);
+                                datosUser.put("fechaNac",fechaNac);
+                                datosUser.put("phone",phone);
+                                datosUser.put("vecesLogeado",vecesLogeado);
+                                //datosUser.put("numRutina",numRutina);
+                                datosUser.put("version",version);
+                                myRef.child("Usuarios").child(nickStr).updateChildren(datosUser);
 
-                        if(!unaVez2[0]){
-                            Intent intent = new Intent(OlvidoDeContrasena.this, Login.class);
-                            startActivity(intent);
-                            unaVez2[0]=true;
+                                Intent intent = new Intent(OlvidoDeContrasena.this, Login.class);
+                                startActivity(intent);
+                                unaVez2[0]=true;
+                            }
                         }
                     }
                     @Override

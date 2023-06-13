@@ -66,7 +66,7 @@ public class Dietas extends AppCompatActivity {
             monthStr="0"+month;
         int year=calendario.get(Calendar.YEAR);
         int hora = fecha.getHours();
-        hora=hora+2;
+        //hora=hora+2;
         int min= fecha.getMinutes();
         int seg= fecha.getSeconds();
         //Toast.makeText(this, hora+":"+min+":"+seg, Toast.LENGTH_SHORT).show();
