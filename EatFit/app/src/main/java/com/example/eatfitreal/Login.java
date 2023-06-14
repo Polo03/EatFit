@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -119,12 +120,12 @@ public class Login extends AppCompatActivity {
                     String password="";
                     String email="";
                     int vecesLogeado=0;
+                    int unaVez=0;
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        int unaVez=0;
-
                         if(unaVez==0){
+                            Log.e("Estado","Ha pasado");
                             unaVez++;
                             for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                                 if(dataSnapshot.child("nick").getValue().toString().equals(nick.getText().toString())){

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -131,61 +132,67 @@ public class Cuestionario extends AppCompatActivity {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
         myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
+            int unaVez=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Login l=new Login();
-                String nick="";
-                String pwd="";
-                String email="";
-                String dni="";
-                String peso="";
-                String altura="";
-                String fechaNac="";
-                String numTelefono="";
-                int version=0;
-                String nickStr=l.ultimoUsuarioLogeado();
-                //Recogemos los datos de la ruta establecida anteriormente, es decir, de la tabla Usuarios.
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
-                        nick=dataSnapshot.child("nick").getValue().toString();
-                        pwd=dataSnapshot.child("password").getValue().toString();
-                        email=dataSnapshot.child("email").getValue().toString();
-                        dni=dataSnapshot.child("DNI").getValue().toString();
-                        peso=dataSnapshot.child("peso").getValue().toString();
-                        altura=dataSnapshot.child("altura").getValue().toString();
-                        fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
-                        numTelefono=dataSnapshot.child("phone").getValue().toString();
-                        version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
+                if(unaVez==0){
+                    unaVez++;
+                    Log.e("Estado","ha pasado2");
+                    Login l=new Login();
+                    String nick="";
+                    String pwd="";
+                    String email="";
+                    String dni="";
+                    String peso="";
+                    String altura="";
+                    String fechaNac="";
+                    String numTelefono="";
+                    int version=0;
+                    String nickStr=l.ultimoUsuarioLogeado();
+                    //Recogemos los datos de la ruta establecida anteriormente, es decir, de la tabla Usuarios.
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
+                            nick=dataSnapshot.child("nick").getValue().toString();
+                            pwd=dataSnapshot.child("password").getValue().toString();
+                            email=dataSnapshot.child("email").getValue().toString();
+                            dni=dataSnapshot.child("DNI").getValue().toString();
+                            peso=dataSnapshot.child("peso").getValue().toString();
+                            altura=dataSnapshot.child("altura").getValue().toString();
+                            fechaNac=dataSnapshot.child("fechaNac").getValue().toString();
+                            numTelefono=dataSnapshot.child("phone").getValue().toString();
+                            version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
+                        }
                     }
-                }
-                //Los datos recogidas anteriormente, los plasmamos de nuevo en la base de datos, ya que para
-                //Firebase no existe el actualizar
-                DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
-                Map<String, Object> datosUser = new HashMap<>();
-                datosUser.put("nick",nickStr);
-                datosUser.put("password",pwd);
-                datosUser.put("email",email);
-                datosUser.put("DNI",dni);
-                datosUser.put("peso",peso);
-                datosUser.put("altura",altura);
-                datosUser.put("fechaNac",fechaNac);
-                datosUser.put("phone",numTelefono);
-                datosUser.put("vecesLogeado",1);
-                datosUser.put("version",version);
-                myRef2.child("Usuarios").child(nickStr).setValue(datosUser);
+                    //Los datos recogidas anteriormente, los plasmamos de nuevo en la base de datos, ya que para
+                    //Firebase no existe el actualizar
+                    DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
+                    Map<String, Object> datosUser = new HashMap<>();
+                    datosUser.put("nick",nickStr);
+                    datosUser.put("password",pwd);
+                    datosUser.put("email",email);
+                    datosUser.put("DNI",dni);
+                    datosUser.put("peso",peso);
+                    datosUser.put("altura",altura);
+                    datosUser.put("fechaNac",fechaNac);
+                    datosUser.put("phone",numTelefono);
+                    datosUser.put("vecesLogeado",1);
+                    datosUser.put("version",version);
+                    myRef2.child("Usuarios").child(nickStr).setValue(datosUser);
 
-                DatabaseReference myRef3 = FirebaseDatabase.getInstance().getReference();
-                //Introducimos los datos que ha introducido en el cuestionario
-                Map<String, Object> datosUserCuest = new HashMap<>();
-                datosUserCuest.put("nick",nickStr);
-                datosUserCuest.put("objetivo1",respuesta1);
-                datosUserCuest.put("objetivo2",respuesta2);
-                datosUserCuest.put("objetivo3",respuesta3);
-                datosUserCuest.put("objetivo4",respuesta4);
-                datosUserCuest.put("objetivo5",respuesta5);
-                datosUserCuest.put("objetivo6",respuesta6);
-                myRef3.child("Cuestionario").child(nickStr).setValue(datosUserCuest);
-                //Toast.makeText(Cuestionario.this, nickStr+"", Toast.LENGTH_SHORT).show();
+                    DatabaseReference myRef3 = FirebaseDatabase.getInstance().getReference();
+                    //Introducimos los datos que ha introducido en el cuestionario
+                    Map<String, Object> datosUserCuest = new HashMap<>();
+                    datosUserCuest.put("nick",nickStr);
+                    datosUserCuest.put("objetivo1",respuesta1);
+                    datosUserCuest.put("objetivo2",respuesta2);
+                    datosUserCuest.put("objetivo3",respuesta3);
+                    datosUserCuest.put("objetivo4",respuesta4);
+                    datosUserCuest.put("objetivo5",respuesta5);
+                    datosUserCuest.put("objetivo6",respuesta6);
+                    myRef3.child("Cuestionario").child(nickStr).setValue(datosUserCuest);
+                    //Toast.makeText(Cuestionario.this, nickStr+"", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override

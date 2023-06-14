@@ -85,7 +85,6 @@ public class MenuPrincipal extends AppCompatActivity {
         String finalNickStr = nickStr;
         int finalHora = hora;
 
-        Toast.makeText(this, "nick", Toast.LENGTH_SHORT).show();
 
         DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
 
@@ -113,9 +112,10 @@ public class MenuPrincipal extends AppCompatActivity {
         });*/
 
         boolean existe=true;
-        if(finalNickStr.equals("")){
+        if(finalNickStr.equals("") || finalNickStr==null){
             existe=false;
         }
+        //Toast.makeText(this, finalNickStr+"", Toast.LENGTH_SHORT).show();
         if(!existe){
             Intent intent = new Intent(MenuPrincipal.this, Login.class);
             startActivity(intent);

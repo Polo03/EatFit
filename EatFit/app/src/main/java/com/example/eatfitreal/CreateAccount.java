@@ -134,6 +134,7 @@ public class CreateAccount extends AppCompatActivity {
 
                                         //Insertamos en la base de datos de FireBase los datos que ha introducido
                                         //al crear la cuenta.
+
                                         Random ale=new Random();
                                         Map<String, Object> datosUser = new HashMap<>();
                                         datosUser.put("nick",nickString);
@@ -158,6 +159,8 @@ public class CreateAccount extends AppCompatActivity {
 
                                         Intent intent = new Intent(CreateAccount.this, Login.class);
                                         startActivity(intent);
+
+
                                     }
 
 
