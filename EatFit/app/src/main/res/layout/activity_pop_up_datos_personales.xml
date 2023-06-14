@@ -144,21 +144,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.184" />
 
-    <TextView
+    <EditText
         android:id="@+id/textViewPwd"
-        android:layout_width="185dp"
-        android:layout_height="34dp"
+        android:layout_width="179dp"
+        android:layout_height="40dp"
         android:backgroundTint="@android:color/transparent"
-        android:inputType="textPassword"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.257" />
 
     <EditText
         android:id="@+id/textViewEmail"

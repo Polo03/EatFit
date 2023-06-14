@@ -52,7 +52,6 @@ public class Login extends AppCompatActivity {
         nick=(EditText) findViewById(R.id.editTextUsuario);
         EditText pwd=(EditText) findViewById(R.id.editTextPwd);
         RadioButton radioButtonSesion=(RadioButton)findViewById(R.id.radioButtonSesion);
-        TextView textViewOlvidarPwd=(TextView) findViewById(R.id.textViewMostrarPregunta);
         ImageButton vision=(ImageButton) findViewById(R.id.imageButtonVision);
 
         preferences=getSharedPreferences("Preferences",MODE_PRIVATE);
@@ -223,11 +222,6 @@ public class Login extends AppCompatActivity {
     //Devuelve el ultimo usuario logeado
     public String ultimoUsuarioLogeado(){
         return nick.getText().toString();
-    }
-
-    public void mostrarVentanaOlvidarContrasena(View v){
-        Intent intent = new Intent(Login.this, OlvidoDeContrasena.class);
-        startActivity(intent);
     }
 
     public void introduceRutinas(){

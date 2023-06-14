@@ -64,10 +64,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OlvidoDeContrasena"
-            android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup" />
-        <activity
             android:name=".Cuestionario"
             android:exported="false" />
         <activity

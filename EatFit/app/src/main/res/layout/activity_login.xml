@@ -7,17 +7,6 @@
     android:background="@drawable/fondologin"
     tools:context=".Login">
 
-    <ImageButton
-        android:id="@+id/imageButtonInsta"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="596dp"
-        android:background="@drawable/pngegg__3_"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.736"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -35,23 +24,6 @@
         app:layout_constraintVertical_bias="0.977" />
 
     <TextView
-        android:id="@+id/textViewMostrarPregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="mostrarVentanaOlvidarContrasena"
-        android:text="Restablecer Contraseña"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.821"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
-
-    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,10 +34,31 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.673" />
+
+    <ImageButton
+        android:id="@+id/imageButtonInsta"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="552dp"
+        android:background="@drawable/pngegg__3_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonTwitter"
+        android:layout_width="86dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="552dp"
+        android:background="@drawable/twitter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonInicioSesion"
@@ -158,26 +151,15 @@
         android:id="@+id/radioButtonSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="304dp"
+        android:layout_marginBottom="332dp"
         android:text="Recuérdame"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="parent"
         app:useMaterialThemeColors="false" />
-
-    <ImageButton
-        android:id="@+id/imageButtonTwitter"
-        android:layout_width="86dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="596dp"
-        android:background="@drawable/twitter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonVision"

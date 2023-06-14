@@ -67,7 +67,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.7));
 
         TextView textViewNick=findViewById(R.id.textViewNick);
-        TextView textViewPwd=findViewById(R.id.textViewPwd);
+        EditText textViewPwd=findViewById(R.id.textViewPwd);
         EditText textViewEmail=findViewById(R.id.textViewEmail);
         EditText textViewDNI=findViewById(R.id.textViewDNI);
         EditText textViewPeso=findViewById(R.id.textViewPeso);
@@ -76,6 +76,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
         EditText textViewNumTelefono=findViewById(R.id.textViewNumTelefono);
 
 
+        textViewPwd.setEnabled(false);
         textViewEmail.setEnabled(false);
         textViewDNI.setEnabled(false);
         textViewPeso.setEnabled(false);
@@ -123,6 +124,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                         version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                     }
                 }
+
                 textViewNick.setText(nick);
                 textViewPwd.setText(pwd);
                 textViewEmail.setText(email);
@@ -218,12 +220,14 @@ public class PopUpDatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 botonConfig.setVisibility(View.INVISIBLE);
+                textViewPwd.setEnabled(true);
                 textViewEmail.setEnabled(true);
                 textViewPeso.setEnabled(true);
                 textViewAltura.setEnabled(true);
                 textViewFechaNac.setEnabled(true);
                 textViewNumTelefono.setEnabled(true);
                 botonSiguiente.setVisibility(View.VISIBLE);
+                textViewPwd.getBackground().setTint(Color.WHITE);
                 textViewEmail.getBackground().setTint(Color.WHITE);
                 textViewPeso.getBackground().setTint(Color.WHITE);
                 textViewAltura.getBackground().setTint(Color.WHITE);
