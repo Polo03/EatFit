@@ -148,6 +148,13 @@ public class CreateAccount extends AppCompatActivity {
                                         datosUser.put("version",ale.nextInt(2));
                                         myRef.child("Usuarios").child(nickString).setValue(datosUser);
 
+                                        Map<String, Object> caloriasUser = new HashMap<>();
+                                        caloriasUser.put("nick",nickString);
+                                        caloriasUser.put("caloriasConsumidas",0);
+                                        caloriasUser.put("caloriasDeseadas",500);
+                                        caloriasUser.put("caloriasEstablecidas",0);
+                                        myRef.child("Calorias").child(nickString).setValue(caloriasUser);
+
                                         Intent intent = new Intent(CreateAccount.this, Login.class);
                                         startActivity(intent);
                                     }

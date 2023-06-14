@@ -18,7 +18,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977" />
@@ -36,24 +35,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <ImageButton
         android:id="@+id/imageButtonInsta"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="552dp"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="544dp"
         android:background="@drawable/pngegg__3_"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonTwitter"
-        android:layout_width="86dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="552dp"
+        android:layout_width="98dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="544dp"
         android:background="@drawable/twitter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.261"
@@ -71,10 +70,10 @@
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
+        app:layout_constraintVertical_bias="0.927"
         app:rippleColor="#FFFFFF"
         app:strokeColor="#FFFFFF" />
 
@@ -92,7 +91,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
+        app:layout_constraintVertical_bias="0.928"
         app:rippleColor="#FFFFFF"
         app:strokeColor="#FFFFFF" />
 
@@ -151,7 +150,7 @@
         android:id="@+id/radioButtonSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="332dp"
+        android:layout_marginBottom="368dp"
         android:text="Recuérdame"
         android:textColor="@color/white"
         android:textStyle="bold"

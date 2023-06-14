@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Foro extends AppCompatActivity {
-
+    ArrayList<POJOForo> datos=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,36 +35,37 @@ public class Foro extends AppCompatActivity {
         Button botonAdd=findViewById(R.id.button_add);
         EditText editText=findViewById(R.id.editTextAddPregunta);
 
-        rellenaLista(lista);
-
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(Foro.this, PopUpRespuesta.class);
-                intent.putExtra("posicion",i);
-                startActivity(intent);
-            }
-        });
-
-        botonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addPregunta(lista);
-            }
-        });
-    }
-
-    public void rellenaLista(ListView lista){
         DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
-        ArrayList<POJOForo> datos=new ArrayList<>();
+
         myRef.child("Mensajes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int unaVez=0;
+                datos.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     datos.add(new POJOForo(dataSnapshot.child("pregunta").getValue().toString()));
                 }
+
                 AdaptadorForo miAdaptador = new AdaptadorForo(getApplicationContext(), datos);
                 lista.setAdapter(miAdaptador);
+
+                lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(Foro.this, PopUpRespuesta.class);
+                        intent.putExtra("posicion",i);
+                        startActivity(intent);
+                    }
+                });
+
+                botonAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        datos.clear();
+                        addPregunta(lista);
+                    }
+                });
+
             }
 
             @Override
@@ -72,6 +73,8 @@ public class Foro extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     public void addPregunta(ListView lista){
@@ -118,8 +121,9 @@ public class Foro extends AppCompatActivity {
 
                             myRef.child("Mensajes").child("Mensaje"+(nextId)).setValue(pregunta);
                             lista.setAdapter(null);
-                            rellenaLista(lista);
+
                         }
+                        //rellenaLista(lista);
                         unaVez++;
                         editText.setText("");
                     }

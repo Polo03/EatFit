@@ -69,7 +69,7 @@
     <TextView
         android:id="@+id/textViewDiaDietas"
         android:layout_width="307dp"
-        android:layout_height="61dp"
+        android:layout_height="82dp"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/white"

@@ -112,7 +112,7 @@ public class PopUpDatosPersonales extends AppCompatActivity {
                 String nickStr2= finalNickStr;
 
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    if(dataSnapshot.child("nick").getValue().toString().equals(finalNickStr) || dataSnapshot.child("email").getValue().toString().equals(finalNickStr)){
+                    if(dataSnapshot.child("nick").getValue().toString().equals(finalNickStr)){
                         nick=dataSnapshot.child("nick").getValue().toString();
                         pwd=dataSnapshot.child("password").getValue().toString();
                         email=dataSnapshot.child("email").getValue().toString();

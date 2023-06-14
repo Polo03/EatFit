@@ -122,36 +122,40 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int unaVez=0;
 
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nick.getText().toString())){
-                                nickString=dataSnapshot.child("nick").getValue().toString();
-                                password=dataSnapshot.child("password").getValue().toString();
-                                email=dataSnapshot.child("email").getValue().toString();
-                                vecesLogeado=Integer.parseInt(dataSnapshot.child("vecesLogeado").getValue().toString());
+                        if(unaVez==0){
+                            unaVez++;
+                            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                if(dataSnapshot.child("nick").getValue().toString().equals(nick.getText().toString())){
+                                    nickString=dataSnapshot.child("nick").getValue().toString();
+                                    password=dataSnapshot.child("password").getValue().toString();
+                                    email=dataSnapshot.child("email").getValue().toString();
+                                    vecesLogeado=Integer.parseInt(dataSnapshot.child("vecesLogeado").getValue().toString());
+                                }
+                            }
+
+                            if(password.equals(pwd.getText().toString()) && !password.replaceAll("  ", " ").trim().equals("") && !nickString.replaceAll("  " , " ").trim().equals("")) {
+                                //Toast.makeText(Login.this, "Usuario Valido", Toast.LENGTH_SHORT).show();
+                                if (isActivateRadioButton) {
+                                    editor.putString("nick", nickString);
+                                    editor.putString("password", pwd.getText().toString());
+                                    editor.commit();
+                                }
+
+                                //Si es la primera vez que se logea, se muestra un cuestionario
+                                if (vecesLogeado == 0) {
+                                    Intent intent = new Intent(Login.this, Cuestionario.class);
+                                    startActivity(intent);
+                                    //Sino, se muestra el menu principal
+                                } else {
+                                    Intent intent = new Intent(Login.this, MenuPrincipal.class);
+                                    startActivity(intent);
+                                }
                             }
                         }
 
-                        if(password.equals(pwd.getText().toString()) && !password.replaceAll("  ", " ").trim().equals("") && !nickString.replaceAll("  " , " ").trim().equals("")){
-                            //Toast.makeText(Login.this, "Usuario Valido", Toast.LENGTH_SHORT).show();
-                            if(isActivateRadioButton) {
-                                editor.putString("nick", nickString);
-                                editor.putString("password", pwd.getText().toString());
-                                editor.commit();
-                            }
 
-                            //Si es la primera vez que se logea, se muestra un cuestionario
-                            if(vecesLogeado==0){
-                                Intent intent = new Intent(Login.this, Cuestionario.class);
-                                startActivity(intent);
-                                //Sino, se muestra el menu principal
-                            }else{
-                                Intent intent = new Intent(Login.this, MenuPrincipal.class);
-                                startActivity(intent);
-                            }
-                        }else{
-                            Toast.makeText(Login.this, "Usuario Invalido", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
