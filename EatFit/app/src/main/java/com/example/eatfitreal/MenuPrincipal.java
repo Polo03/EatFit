@@ -108,7 +108,6 @@ public class MenuPrincipal extends AppCompatActivity {
                     DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
                     myRef.child("Calorias").addValueEventListener(new ValueEventListener() {
                         int unaVez=0;
-
                         int caloriasEstablecidas=0;
                         int caloriasTotales=0;
                         int caloriasConsumidas=0;
@@ -148,7 +147,7 @@ public class MenuPrincipal extends AppCompatActivity {
         botonSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
                 builder.setTitle("ALERTA");
                 builder.setMessage("¿Desea cerrar sesión?");        // add the buttons
                 builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
@@ -157,6 +156,8 @@ public class MenuPrincipal extends AppCompatActivity {
                         cerrarSesion();
                         Intent intent = new Intent(MenuPrincipal.this, Login.class);
                         startActivity(intent);
+                        finishAndRemoveTask();
+
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -166,7 +167,10 @@ public class MenuPrincipal extends AppCompatActivity {
                     }
                 });
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
+
+                finishAffinity();
+                preferences.edit().clear().apply();
 
             }
         });
@@ -299,7 +303,9 @@ public class MenuPrincipal extends AppCompatActivity {
 
     //Método para cerrar sesión, es decir, para limpiar las shared preferences.
     private void cerrarSesion() {
-        preferences.edit().clear().apply();
+        //super.onDestroy();
+        finish();
+        //preferences.edit().clear().apply();
     }
 
     public int getButtonvalor()
