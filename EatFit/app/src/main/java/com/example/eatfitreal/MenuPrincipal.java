@@ -85,32 +85,6 @@ public class MenuPrincipal extends AppCompatActivity {
         String finalNickStr = nickStr;
         int finalHora = hora;
 
-
-        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
-
-        /*myRef2.child("Cuestionario").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean existe=true;
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.child("nick").getValue().toString().equals("")){
-                        existe=false;
-                    }
-                }
-                if(!existe){
-                    Intent intent = new Intent(MenuPrincipal.this, Login.class);
-                    startActivity(intent);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         boolean existe=true;
         if(finalNickStr.equals("") || finalNickStr==null){
             existe=false;
@@ -184,7 +158,7 @@ public class MenuPrincipal extends AppCompatActivity {
         botonSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
                 builder.setTitle("ALERTA");
                 builder.setMessage("¿Desea cerrar sesión?");        // add the buttons
                 builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
@@ -193,8 +167,6 @@ public class MenuPrincipal extends AppCompatActivity {
                         cerrarSesion();
                         Intent intent = new Intent(MenuPrincipal.this, Login.class);
                         startActivity(intent);
-                        finishAndRemoveTask();
-
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -204,11 +176,8 @@ public class MenuPrincipal extends AppCompatActivity {
                     }
                 });
                 AlertDialog dialog = builder.create();
-                dialog.show();*/
-
-                finishAffinity();
-                preferences.edit().clear().apply();
-
+                dialog.show();
+                
             }
         });
 
@@ -340,9 +309,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     //Método para cerrar sesión, es decir, para limpiar las shared preferences.
     private void cerrarSesion() {
-        //super.onDestroy();
-        finish();
-        //preferences.edit().clear().apply();
+        preferences.edit().clear().apply();
     }
 
     public int getButtonvalor()

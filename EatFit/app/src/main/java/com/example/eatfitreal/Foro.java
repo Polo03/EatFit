@@ -61,7 +61,7 @@ public class Foro extends AppCompatActivity {
                 botonAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        datos.clear();
+                        //datos.clear();
                         addPregunta(lista);
                     }
                 });
@@ -116,7 +116,7 @@ public class Foro extends AppCompatActivity {
                             int nextId=max+1;
                             HashMap<String,Object> pregunta=new HashMap<>();
                             pregunta.put("id",nextId);
-                            pregunta.put("pregunta",editText.getText().toString());
+                            pregunta.put("pregunta",editText.getText().toString().toLowerCase());
                             pregunta.put("respuesta","");
 
                             myRef.child("Mensajes").child("Mensaje"+(nextId)).setValue(pregunta);
