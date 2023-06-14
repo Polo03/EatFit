@@ -47,7 +47,6 @@ public class CreateAccount extends AppCompatActivity {
         EditText editTextNumTelefono=(EditText) findViewById(R.id.editTextNumTelefono);
         Button botonCrearCuenta=(Button) findViewById(R.id.buttonCrearCuenta);
 
-        //DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
         botonCrearCuenta.setOnClickListener(new View.OnClickListener() {
 

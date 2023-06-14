@@ -85,6 +85,43 @@ public class MenuPrincipal extends AppCompatActivity {
         String finalNickStr = nickStr;
         int finalHora = hora;
 
+        Toast.makeText(this, "nick", Toast.LENGTH_SHORT).show();
+
+        DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
+
+        /*myRef2.child("Cuestionario").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean existe=true;
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    if(dataSnapshot.child("nick").getValue().toString().equals("")){
+                        existe=false;
+                    }
+                }
+                if(!existe){
+                    Intent intent = new Intent(MenuPrincipal.this, Login.class);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
+        boolean existe=true;
+        if(finalNickStr.equals("")){
+            existe=false;
+        }
+        if(!existe){
+            Intent intent = new Intent(MenuPrincipal.this, Login.class);
+            startActivity(intent);
+        }
+
+
         DatabaseReference myRef=FirebaseDatabase.getInstance().getReference();
         myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
             @Override
