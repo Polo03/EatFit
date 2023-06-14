@@ -145,7 +145,7 @@ public class CreateAccount extends AppCompatActivity {
                                         datosUser.put("phone",numTelefonoString);
                                         datosUser.put("vecesLogeado",0);
                                         //Para generar una version aleatoria
-                                        datosUser.put("version",ale.nextInt(1));
+                                        datosUser.put("version",ale.nextInt(2));
                                         myRef.child("Usuarios").child(nickString).setValue(datosUser);
 
                                         Intent intent = new Intent(CreateAccount.this, Login.class);
