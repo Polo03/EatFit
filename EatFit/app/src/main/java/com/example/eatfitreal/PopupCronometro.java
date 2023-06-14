@@ -86,6 +86,10 @@ public class PopupCronometro extends AppCompatActivity {
 
     private void restartChronometro() {
         cronometro.setBase(SystemClock.elapsedRealtime());
+        cronometro.stop();
+        correr=false;
         deternerse=0;
+        buttonpause.setVisibility(View.INVISIBLE);
+        buttonstart.setVisibility(View.VISIBLE);
     }
 }

@@ -57,13 +57,6 @@ public class OlvidoDeContrasena extends AppCompatActivity{
 
         getWindow().setLayout((int)(ancho * 0.85), (int) (alto * 0.55));
 
-        //getWindow().setBackgroundDrawable(new BitmapDrawable());
-        // Closes the popup window when touch outside.
-        //getWindow().setOutsideTouchable(true);
-        //getWindow().setFocusable(true);
-        // Removes default background.
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         Random ale=new Random();
         String codigo=ale.nextInt(10)+""+ale.nextInt(10)+""+ale.nextInt(10)+""+ale.nextInt(10)+""+ale.nextInt(10)+""+ale.nextInt(10);
 
@@ -147,13 +140,13 @@ public class OlvidoDeContrasena extends AppCompatActivity{
         cambiarPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean[] unaVez2={false};
+
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 myRef.child("Usuarios").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        String nickStr="";
+                        int unaVez2=0;
+                        String nickStr=nick[0];
                         String pwd="";
                         String email="";
                         String DNI="";
@@ -164,9 +157,8 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                         String vecesLogeado="";
                         int version=0;
                         //Toast.makeText(OlvidoDeContrasena.this, nick[0]+"", Toast.LENGTH_SHORT).show();
-                        if(!nick[0].equals("")){
                             for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                                if(dataSnapshot.child("nick").getValue().toString().equals(nick[0])){
+                                if(dataSnapshot.child("nick").getValue().toString().equals(nickStr)){
                                     nickStr=dataSnapshot.child("nick").getValue().toString();
                                     phone=dataSnapshot.child("phone").getValue().toString();
                                     //pwd=dataSnapshot.child("password").getValue().toString();
@@ -180,7 +172,13 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                                     version=Integer.parseInt(dataSnapshot.child("version").getValue().toString());
                                 }
                             }
-                            if(!unaVez2[0]){
+                            if(unaVez2==0){
+
+                                DatabaseReference mDatabase =FirebaseDatabase.getInstance().getReference();
+                                DatabaseReference currentUserBD = mDatabase.child("Usuarios").child(nickStr);
+                                currentUserBD.removeValue();
+
+                                DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
                                 Map<String, Object> datosUser = new HashMap<>();
                                 datosUser.put("nick",nickStr);
                                 datosUser.put("password",editText.getText().toString());
@@ -193,13 +191,16 @@ public class OlvidoDeContrasena extends AppCompatActivity{
                                 datosUser.put("vecesLogeado",vecesLogeado);
                                 //datosUser.put("numRutina",numRutina);
                                 datosUser.put("version",version);
-                                myRef.child("Usuarios").child(nickStr).updateChildren(datosUser);
+                                myRef2.child("Usuarios").child(nickStr).setValue(datosUser);
+
+
+                                Toast.makeText(OlvidoDeContrasena.this, nickStr+"a", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(OlvidoDeContrasena.this, Login.class);
                                 startActivity(intent);
-                                unaVez2[0]=true;
+                                unaVez2++;
                             }
-                        }
+
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

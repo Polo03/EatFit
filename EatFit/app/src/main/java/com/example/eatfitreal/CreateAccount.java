@@ -115,38 +115,46 @@ public class CreateAccount extends AppCompatActivity {
                                 Matcher matcherDNI=patronDNI.matcher(dniString);
                                 Matcher matcherEmail=patronEmail.matcher(emailString);
                                 Matcher matcherNumTelefono=patronNumTelefono.matcher(numTelefonoString);
-                                //Si algun formato de email, dni o telefono no es el adecuado
-                                if(!matcherEmail.matches() || !matcherDNI.matches() || !matcherNumTelefono.matches()){
-                                    //Mostramos un mensaje de error
-                                    Context context = getApplicationContext();
-                                    CharSequence text = "Revise los campos";
-                                    int duration = Toast.LENGTH_LONG;
+                                if(editTextUser.getText().toString().equals("") || editTextPwd.getText().toString().equals("") || editTextEmail.getText().toString().equals("") || editTextDni.getText().toString().equals("") || editTextPeso.getText().toString().equals("") || editTextAltura.getText().toString().equals("") || editTextFechaNacimiento.getText().toString().equals("") || editTextNumTelefono.getText().toString().equals("")){
+                                    Toast.makeText(CreateAccount.this, "TODOS LOS CAMPOS DEBERÁN ESTAR RELLENADOS", Toast.LENGTH_SHORT).show();
+                                }else {
 
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                    //Sino, insertamos en la base de datos el nuevo usuario, con todos sus datos
-                                }else{
+                                    //Si algun formato de email, dni o telefono no es el adecuado
+                                    if(!matcherEmail.matches() || !matcherDNI.matches() || !matcherNumTelefono.matches()){
+                                        //Mostramos un mensaje de error
+                                        Context context = getApplicationContext();
+                                        CharSequence text = "Revise los campos";
+                                        int duration = Toast.LENGTH_LONG;
 
-                                    //Insertamos en la base de datos de FireBase los datos que ha introducido
-                                    //al crear la cuenta.
-                                    Random ale=new Random();
-                                    Map<String, Object> datosUser = new HashMap<>();
-                                    datosUser.put("nick",nickString);
-                                    datosUser.put("password",pwdString);
-                                    datosUser.put("email",emailString);
-                                    datosUser.put("DNI",dniString);
-                                    datosUser.put("peso",pesoDouble);
-                                    datosUser.put("altura",alturaDouble);
-                                    datosUser.put("fechaNac",fechaNacString);
-                                    datosUser.put("phone",numTelefonoString);
-                                    datosUser.put("vecesLogeado",0);
-                                    //Para generar una version aleatoria
-                                    datosUser.put("version",ale.nextInt(1));
-                                    myRef.child("Usuarios").child(nickString).setValue(datosUser);
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                        //Sino, insertamos en la base de datos el nuevo usuario, con todos sus datos
+                                    }else{
 
-                                    Intent intent = new Intent(CreateAccount.this, Login.class);
-                                    startActivity(intent);
+                                        //Insertamos en la base de datos de FireBase los datos que ha introducido
+                                        //al crear la cuenta.
+                                        Random ale=new Random();
+                                        Map<String, Object> datosUser = new HashMap<>();
+                                        datosUser.put("nick",nickString);
+                                        datosUser.put("password",pwdString);
+                                        datosUser.put("email",emailString);
+                                        datosUser.put("DNI",dniString);
+                                        datosUser.put("peso",pesoDouble);
+                                        datosUser.put("altura",alturaDouble);
+                                        datosUser.put("fechaNac",fechaNacString);
+                                        datosUser.put("phone",numTelefonoString);
+                                        datosUser.put("vecesLogeado",0);
+                                        //Para generar una version aleatoria
+                                        datosUser.put("version",ale.nextInt(1));
+                                        myRef.child("Usuarios").child(nickString).setValue(datosUser);
+
+                                        Intent intent = new Intent(CreateAccount.this, Login.class);
+                                        startActivity(intent);
+                                    }
+
+
                                 }
+
                             }
                             unaVez[0]=true;
                         }

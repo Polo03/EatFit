@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                            if(dataSnapshot.child("nick").getValue().toString().equals(nick.getText().toString()) || dataSnapshot.child("email").getValue().toString().equals(nick.getText().toString())){
+                            if(dataSnapshot.child("nick").getValue().toString().equals(nick.getText().toString())){
                                 nickString=dataSnapshot.child("nick").getValue().toString();
                                 password=dataSnapshot.child("password").getValue().toString();
                                 email=dataSnapshot.child("email").getValue().toString();

@@ -160,6 +160,7 @@ public class Cuestionario extends AppCompatActivity {
                 }
                 //Los datos recogidas anteriormente, los plasmamos de nuevo en la base de datos, ya que para
                 //Firebase no existe el actualizar
+                DatabaseReference myRef2 = FirebaseDatabase.getInstance().getReference();
                 Map<String, Object> datosUser = new HashMap<>();
                 datosUser.put("nick",nickStr);
                 datosUser.put("password",pwd);
@@ -171,8 +172,9 @@ public class Cuestionario extends AppCompatActivity {
                 datosUser.put("phone",numTelefono);
                 datosUser.put("vecesLogeado",1);
                 datosUser.put("version",version);
-                myRef.child("Usuarios").child(nickStr).setValue(datosUser);
+                myRef2.child("Usuarios").child(nickStr).setValue(datosUser);
 
+                DatabaseReference myRef3 = FirebaseDatabase.getInstance().getReference();
                 //Introducimos los datos que ha introducido en el cuestionario
                 Map<String, Object> datosUserCuest = new HashMap<>();
                 datosUserCuest.put("nick",nickStr);
@@ -182,7 +184,8 @@ public class Cuestionario extends AppCompatActivity {
                 datosUserCuest.put("objetivo4",respuesta4);
                 datosUserCuest.put("objetivo5",respuesta5);
                 datosUserCuest.put("objetivo6",respuesta6);
-                myRef.child("Cuestionario").child(nickStr).setValue(datosUserCuest);
+                myRef3.child("Cuestionario").child(nickStr).setValue(datosUserCuest);
+                //Toast.makeText(Cuestionario.this, nickStr+"", Toast.LENGTH_SHORT).show();
             }
 
             @Override
