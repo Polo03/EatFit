@@ -61,12 +61,10 @@ public class Login extends AppCompatActivity {
         //eliminarRoot();
         //introduceRutinas();
         introduceUserRoot();
-        //introduceDietas();
         //introducePreguntas();
         //introduceCaloriasPersonales();
-        //introduceAlimentos();
         //introduceMensajes();
-        //cuestionarioRoot();
+        cuestionarioRoot();
 
         Calendar calendario = Calendar.getInstance();
         long ahora = System.currentTimeMillis();
@@ -297,12 +295,12 @@ public class Login extends AppCompatActivity {
 
         Map<String, Object> datosUserCuest = new HashMap<>();
         datosUserCuest.put("nick","Root");
-        datosUserCuest.put("objetivo1","1");
-        datosUserCuest.put("objetivo2","2");
-        datosUserCuest.put("objetivo3","3");
+        datosUserCuest.put("objetivo1","5");
+        datosUserCuest.put("objetivo2","6");
+        datosUserCuest.put("objetivo3","Alto");
         datosUserCuest.put("objetivo4","Adelgazar");
         datosUserCuest.put("objetivo5","5");
-        datosUserCuest.put("objetivo6","6");
+        datosUserCuest.put("objetivo6","70");
         myRef.child("Cuestionario").child("Root").setValue(datosUserCuest);
     }
     public void introduceDietas(){

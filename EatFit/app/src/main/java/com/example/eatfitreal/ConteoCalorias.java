@@ -75,7 +75,7 @@ public class ConteoCalorias extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     alimentos.add(dataSnapshot.child("nombreAlimento").getValue().toString());
-                    cantidad.add(dataSnapshot.child("nombreAlimento").getValue().toString());
+                    cantidad.add(dataSnapshot.child("cantidad").getValue().toString());
                     calorias.add(Integer.parseInt(dataSnapshot.child("calorias").getValue().toString()));
                 }
                 textSwitcher.setText(alimentos.get(index)+"-->"+calorias.get(index)+" calorías");
@@ -110,17 +110,23 @@ public class ConteoCalorias extends AppCompatActivity {
                             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //Introduce las calorias totales en la base de datos
-                                    DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
-                                    myRef = FirebaseDatabase.getInstance().getReference();
+                                    if(!textCalorias.getText().toString().equals("")){
+                                        //Introduce las calorias totales en la base de datos
+                                        DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
+                                        myRef = FirebaseDatabase.getInstance().getReference();
 
-                                    Map<String, Object> calorias = new HashMap<>();
-                                    calorias.put("nick",finalNickStr);
-                                    calorias.put("caloriasDeseadas",Integer.parseInt(textCalorias.getText().toString()));
-                                    calorias.put("caloriasConsumidas",0);
-                                    calorias.put("caloriasEstablecidas",1);
-                                    myRef.child("Calorias").child(finalNickStr).setValue(calorias);
-                                    dialog.dismiss();
+                                        Map<String, Object> calorias = new HashMap<>();
+                                        calorias.put("nick",finalNickStr);
+                                        calorias.put("caloriasDeseadas",Integer.parseInt(textCalorias.getText().toString()));
+                                        calorias.put("caloriasConsumidas",0);
+                                        calorias.put("caloriasEstablecidas",1);
+                                        myRef.child("Calorias").child(finalNickStr).setValue(calorias);
+                                        dialog.dismiss();
+                                    }else{
+                                        Toast.makeText(ConteoCalorias.this, "DEBE INTRODUCIR ALGUN NÚMERO DE CALORIAS DIARIAS", Toast.LENGTH_SHORT).show();
+                                        textCalorias.setText("");
+                                        finish();
+                                    }
                                 }
                             });
                             AlertDialog dialog = builder.create();
